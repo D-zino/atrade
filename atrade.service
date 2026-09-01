@@ -1,0 +1,28 @@
+# A-Trade systemd unit for a 24/7 server or Raspberry Pi.
+#
+# Install:
+#   sudo cp deploy/atrade.service /etc/systemd/system/atrade.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now atrade
+#
+# Adjust the paths below to where you placed the project (no trailing slash
+# on WorkingDirectory). EnvironmentFile points at atrade/.env so the Alpaca
+# paper keys stay out of the unit file.
+[Unit]
+Description=A-Trade autonomous paper-trading agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/USERNAME/atrade
+ExecStart=/usr/bin/python3 -m atrade.cli watch --interval 60
+EnvironmentFile=/home/USERNAME/atrade/.env
+Restart=on-failure
+RestartSec=60
+# Keep logs bounded
+StandardOutput=append:/home/USERNAME/atrade/logs/watch.log
+StandardError=append:/home/USERNAME/atrade/logs/watch.log
+
+[Install]
+WantedBy=multi-user.target

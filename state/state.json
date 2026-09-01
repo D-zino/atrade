@@ -1,0 +1,160 @@
+{
+  "created_at": "2026-09-01T13:33:20+00:00",
+  "baseline": {
+    "captured_at": "2026-09-01T13:35:47+00:00",
+    "initial_equity": 100000.0,
+    "benchmarks": {
+      "SPY": {
+        "price": 762.3049926757812
+      },
+      "QQQ": {
+        "price": 707.739990234375
+      }
+    },
+    "note": "Frozen baseline: every run is graded vs SPY buy&hold from this point."
+  },
+  "ledger": [
+    {
+      "trade_id": "USO-2026-09-01T13:35:47+00:00",
+      "symbol": "USO",
+      "side": "long",
+      "qty": 34,
+      "warmup_factor": 0.4,
+      "opened_at": "2026-09-01T13:35:47+00:00",
+      "entry_price": 137.22000122070312,
+      "order_id": "5be0d843-2b07-42e7-acb1-c79a6d3d88df",
+      "hypothesis": {
+        "thesis": "Go long USO today: WTI crude +2.9%; USO technical bullish; USO daily move +2.6%. Bull vs bear evidence: 1.90 vs 0.00.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "USO gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.84,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "USO technical bullish",
+            "summary": "USO: 5d mom +8.8%; above SMA20; above SMA50. close 137.22.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "commodities",
+            "title": "WTI crude +2.9%",
+            "summary": "WTI +2.94% to $88.28. Supply risk / demand strength.",
+            "direction": 1.0,
+            "strength": 0.6850743078633204,
+            "source": "yahoo",
+            "fresh": 1.0
+          },
+          {
+            "category": "technical",
+            "title": "USO daily move +2.6%",
+            "summary": "USO +2.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.5106210532718916,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLE-2026-09-01T13:35:47+00:00",
+      "symbol": "XLE",
+      "side": "long",
+      "qty": 74,
+      "warmup_factor": 0.4,
+      "opened_at": "2026-09-01T13:35:47+00:00",
+      "entry_price": 64.58000183105469,
+      "order_id": "a3f5825f-e9bf-4387-8443-92b83844e0ca",
+      "hypothesis": {
+        "thesis": "Go long XLE today: WTI crude +2.9%; XLE technical bullish; XLE daily move +1.0%. Bull vs bear evidence: 1.76 vs 0.00.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XLE gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.826,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "XLE technical bullish",
+            "summary": "XLE: 5d mom +4.1%; above SMA20; above SMA50. close 64.58.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "commodities",
+            "title": "WTI crude +2.9%",
+            "summary": "WTI +2.94% to $88.28. Supply risk / demand strength.",
+            "direction": 1.0,
+            "strength": 0.6850743078633204,
+            "source": "yahoo",
+            "fresh": 1.0
+          },
+          {
+            "category": "technical",
+            "title": "XLE daily move +1.0%",
+            "summary": "XLE +0.97% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.37754881243987376,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    }
+  ],
+  "score_history": [],
+  "streaks": {},
+  "thinking_history": [],
+  "discovered_indicators": [],
+  "resume": {
+    "paused": false,
+    "reason": null,
+    "resumed_at": null
+  },
+  "runs": [
+    {
+      "type": "open",
+      "at": "2026-09-01T13:35:47+00:00",
+      "opened": 2,
+      "hypotheses": 26,
+      "mode": "alpaca_paper"
+    }
+  ],
+  "last_open": {
+    "at": "2026-09-01T13:35:47+00:00",
+    "opened": [
+      "USO",
+      "XLE"
+    ],
+    "skipped": [],
+    "hypotheses": 26,
+    "mode": "alpaca_paper"
+  }
+}

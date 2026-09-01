@@ -1,0 +1,24 @@
+[2026-09-01T13:33:20Z] [DEBUG] Telegram not configured — skipping notification
+[2026-09-01T13:33:20Z] [INFO] Research pass starting...
+[2026-09-01T13:33:41Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10: The read operation timed out
+[2026-09-01T13:34:01Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2: The read operation timed out
+[2026-09-01T13:34:21Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS: The read operation timed out
+[2026-09-01T13:34:41Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE: The read operation timed out
+[2026-09-01T13:35:01Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL: The read operation timed out
+[2026-09-01T13:35:21Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=PPIFID: The read operation timed out
+[2026-09-01T13:35:21Z] [INFO] FRED: 0 series -> 0 notes
+[2026-09-01T13:35:37Z] [INFO] prices: 32/32 symbols (yahoo+stooq)
+[2026-09-01T13:35:43Z] [INFO] RSS: 28 items
+[2026-09-01T13:35:46Z] [INFO] SEC: 17 filings -> 17 notes
+[2026-09-01T13:35:46Z] [INFO] inbox: 11 notes
+[2026-09-01T13:35:46Z] [INFO] Research pass done: 62 notes -> summary_2026-09-01.json
+[2026-09-01T13:35:46Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-09-01T13:35:46Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-09-01T13:35:46Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-09-01T13:35:47Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-09-01T13:35:47Z] [INFO] Baseline captured: SPY @ 762.3049926757812, QQQ @ 707.739990234375
+[2026-09-01T13:35:47Z] [INFO] WARM-UP: 0/12 trades → sizing at 40% of normal
+[2026-09-01T13:35:47Z] [INFO] OPEN LONG 34 USO @ 137.22 (conf 0.84, $4775)
+[2026-09-01T13:35:47Z] [INFO] OPEN LONG 74 XLE @ 64.58 (conf 0.83, $4779)
+[2026-09-01T13:35:47Z] [DEBUG] Telegram not configured — skipping notification
+[2026-09-01T13:35:47Z] [INFO] OPEN RUN done: 2 opened, 26 hypotheses. Report: open_2026-09-01.md

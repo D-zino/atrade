@@ -145,6 +145,17 @@
       "opened": 2,
       "hypotheses": 26,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "preview",
+      "at": "2026-09-01T13:36:10+00:00",
+      "hypotheses": 14
+    },
+    {
+      "type": "week_ahead",
+      "at": "2026-09-01T13:36:11+00:00",
+      "hypotheses": 14,
+      "week_start": "2026-09-07"
     }
   ],
   "last_open": {

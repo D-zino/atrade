@@ -22,3 +22,7 @@
 [2026-09-01T13:35:47Z] [INFO] OPEN LONG 74 XLE @ 64.58 (conf 0.83, $4779)
 [2026-09-01T13:35:47Z] [DEBUG] Telegram not configured — skipping notification
 [2026-09-01T13:35:47Z] [INFO] OPEN RUN done: 2 opened, 26 hypotheses. Report: open_2026-09-01.md
+[2026-09-01T13:36:10Z] [DEBUG] Telegram not configured — skipping notification
+[2026-09-01T13:36:10Z] [INFO] PREVIEW done: 14 hypotheses for 2026-09-02
+[2026-09-01T13:36:11Z] [DEBUG] Telegram not configured — skipping notification
+[2026-09-01T13:36:11Z] [INFO] WEEK-AHEAD done: 14 hypotheses for week of 2026-09-07

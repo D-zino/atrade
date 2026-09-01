@@ -1,0 +1,223 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-Trade — Telegram day simulation</title><style>
+* { box-sizing: border-box; }
+body { margin:0; background:#0e1621; color:#fff; font-family:-apple-system,'Segoe UI',
+       Roboto,Helvetica,Arial,sans-serif; }
+.pagehead { max-width:760px; margin:0 auto; padding:26px 18px 6px; }
+.pagehead h1 { font-size:20px; margin:0 0 6px; }
+.pagehead p { color:#8ea1b3; font-size:13px; margin:4px 0; line-height:1.5; }
+.legend { display:flex; gap:8px; margin:10px 0 4px; flex-wrap:wrap; }
+.pill { font-size:11px; padding:3px 10px; border-radius:20px; }
+.pill.now { background:#16281c; color:#64d98b; border:1px solid #2d5a3f; }
+.pill.opt { background:#2d2305; color:#e8b53a; border:1px solid #6b5517; }
+.chat { max-width:760px; margin:0 auto; padding:14px 18px 40px; }
+.daydiv { text-align:center; margin:18px 0; }
+.daydiv span { background:#182533; color:#8ea1b3; font-size:11px; letter-spacing:1px;
+       padding:4px 12px; border-radius:12px; text-transform:uppercase; }
+.msg { display:flex; gap:10px; margin:14px 0; }
+.avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#2b5278,#1f3a55);
+       display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+.bubble { background:#182533; border-radius:14px; padding:8px 12px 6px; max-width:85%;
+       font-size:13.5px; line-height:1.55; white-space:pre-wrap; overflow-wrap:anywhere; }
+.sender { color:#53b4f4; font-size:12.5px; font-weight:600; margin-bottom:2px; }
+.bubble b { font-weight:700; }
+.time { color:#6f8294; font-size:11px; text-align:right; margin-top:4px; }
+.tag { float:right; margin:6px 0 0 8px; font-size:9.5px; padding:2px 7px; border-radius:10px; }
+.tag.now { background:#16381f; color:#64d98b; }
+.tag.opt { background:#3a2c05; color:#e8b53a; }
+.note { max-width:760px; margin:0 auto; padding:0 18px 30px; color:#8ea1b3; font-size:12.5px; line-height:1.6; }
+.note code { background:#182533; padding:1px 6px; border-radius:6px; color:#e6edf3; }
+</style></head>
+<body>
+<div class="pagehead">
+  <h1>📱 A-Trade Telegram — a typical trading day, simulated</h1>
+  <p>This is exactly what the bot sends — generated with the <b>real message
+     formatters</b> from the code, using realistic sample data for a Tuesday
+     (2026-09-01). <b>All six messages ship automatically</b> once you add your
+     Telegram keys: four daily (09:25, 10:30, 15:50, 20:00 ET), the Sunday
+     17:00 ET week-ahead digest, plus the pause alert if the agent stalls.</p>
+</div>
+<div class="chat">
+
+  <div class="daydiv"><span>Tue · Sep 1 · Morning</span></div>
+  <div class="msg">
+  <div class="avatar">🤖</div>
+  <div style="flex:1">
+    <div class="bubble"><span class="tag now">SHIPS NOW</span><div class="sender">A-Trade Bot</div><b>🟢 A-TRADE — OPEN RUN</b>
+<i>Tue Sep 1, 2026 · 09:25 ET (pre-market research) · alpaca_paper mode</i>
+
+<b>Opened today:</b>
+  • NVDA <b>LONG</b> 150 sh @ $1,250.40 (conf 87%)
+  • AMD <b>LONG</b> 120 sh @ $172.15 (conf 78%)
+<i>   skipped: max positions (2) reached — TSLA short, MSFT long; exposure cap — XLE long</i>
+
+<b>Scanning 30 symbols</b> + FRED macro (yields/CPI/PPI/jobs) + SEC filings (insider Form 4s) + news + FX
+
+<b>Active hypotheses / watchlist (ranked by confidence):</b>
+  • NVDA <b>LONG</b> — conf 87% · earnings
+  • AMD <b>LONG</b> — conf 78% · earnings
+  • TSLA <b>SHORT</b> — conf 72% · sentiment
+  • MSFT <b>LONG</b> — conf 68% · tech
+  • XLE <b>LONG</b> — conf 63% · commodities
+  • SPY <b>LONG</b> — conf 61% · macro
+  • QQQ <b>LONG</b> — conf 60% · macro
+  • GLD <b>LONG</b> — conf 58% · commodities
+
+<i>Falsifies if: NVDA gaps/breaks against thesis (more than ~0.8% adverse move)</i>
+      <div class="time">09:25</div></div>
+  </div>
+</div>
+
+  <div class="msg">
+  <div class="avatar">🤖</div>
+  <div style="flex:1">
+    <div class="bubble"><span class="tag now">SHIPS NOW</span><div class="sender">A-Trade Bot</div><b>🟡 A-TRADE — MID-SESSION CHECK-IN</b>
+<i>Tue Sep 1 · 10:30 ET</i>
+
+<b>Open positions:</b>
+  • NVDA <b>LONG</b> 150 sh — +1.2% (+$2,253) 🟢
+  • AMD <b>LONG</b> 120 sh — -0.6% (-$124) 🔴
+
+<b>Events in play:</b>
+  • Fed's Williams speaking 10:00 ET — hawkish tone would pressure tech
+  • 30-yr Treasury auction 13:00 ET
+  • OPEC+ monthly report due
+
+<i>Day-trade policy: positions are held to the close run. No action needed now.</i>
+      <div class="time">10:30</div></div>
+  </div>
+</div>
+
+  <div class="daydiv"><span>Tue · Sep 1 · Evening</span></div>
+  <div class="msg">
+  <div class="avatar">🤖</div>
+  <div style="flex:1">
+    <div class="bubble"><span class="tag now">SHIPS NOW</span><div class="sender">A-Trade Bot</div><b>🔴 A-TRADE — CLOSE RUN</b>
+<i>Tue Sep 1, 2026 · 15:50 ET (after close) · alpaca_paper mode</i>
+
+<b>Day trades closed:</b>
+  • NVDA <b>LONG</b> +1,284.00 (+0.68%) ✅
+  • AMD <b>LONG</b> -412.30 (-1.95%) ❌
+
+<b>Composite score:</b> 0.612 🎉 improved (new best)
+<b>Realized P&amp;L:</b> +871.70
+
+<b>Lessons learned:</b>
+  • Winning trades clustered around 'earnings' evidence (1 of 1 winners) — this signal category is earning its prior.
+  • Losers were dominated by 'analyst' (1 of 1) — reducing prior weight for that category until it demonstrates edge.
+  • NVDA: long move of +0.68% (vindicated) a 87%-confidence thesis.
+  • AMD: long move of -1.95% (against) a 78%-confidence thesis. Falsifier used: AMD broke day range after downgrade headline.
+
+<b>Signal tracker (learned edge):</b>
+  • earnings: n=8 win=75%
+  • macro: n=5 win=60%
+  • commodities: n=2 win=50%
+  • technical: n=10 win=40%
+  • analyst: n=3 win=33%
+
+<b>Watchlist for tomorrow / next session:</b>
+  • NVDA <b>LONG</b> — conf 87% · earnings
+  • AMD <b>LONG</b> — conf 78% · earnings
+  • TSLA <b>SHORT</b> — conf 72% · sentiment
+  • MSFT <b>LONG</b> — conf 68% · tech
+  • XLE <b>LONG</b> — conf 63% · commodities
+  • SPY <b>LONG</b> — conf 61% · macro
+
+<i>See PLAYBOOK.md for the full updated playbook.</i>
+      <div class="time">15:50</div></div>
+  </div>
+</div>
+
+  <div class="msg">
+  <div class="avatar">🤖</div>
+  <div style="flex:1">
+    <div class="bubble"><span class="tag now">SHIPS NOW</span><div class="sender">A-Trade Bot</div><b>🌙 A-TRADE — TOMORROW PREVIEW</b>
+<i>Tue Sep 1 · 20:00 ET</i>
+
+<b>Tomorrow (Wed Sep 2) on the calendar:</b>
+  • 08:30 ET — Initial Jobless Claims
+  • 10:00 ET — Fed's Waller speech
+  • 13:00 ET — 10-yr note auction
+
+<b>Watchlist with confidence (already prior-adjusted from today's grading):</b>
+  • NVDA <b>LONG</b> — 81% (earnings drift still paying)
+  • TSLA <b>SHORT</b> — 68% (delivery fears; sentiment bearish)
+  • MSFT <b>LONG</b> — 65% (Azure momentum)
+  • XLE <b>LONG</b> — 63% (oil must hold $70)
+  • AMD <b>LONG</b> — 62% (downgrade pressure; needs reversal)
+
+<b>Theses would change if:</b>
+  • NVDA: any AI-capex-cut headline from hyperscalers
+  • TSLA: delivery beat or China approval news
+  • XLE: OPEC+ surprise output increase
+  • AMD: upgrade/PT raise or strong short-covering tape
+
+<i>These are experiments — every thesis lists its falsifiers in the full reports.</i>
+      <div class="time">20:00</div></div>
+  </div>
+</div>
+
+  <div class="daydiv"><span>Sun · Sep 6 · Weekly</span></div>
+  <div class="msg">
+  <div class="avatar">🤖</div>
+  <div style="flex:1">
+    <div class="bubble"><span class="tag now">SHIPS NOW</span><div class="sender">A-Trade Bot</div><b>📅 A-TRADE — WEEK-AHEAD PREVIEW</b>
+<i>Sun Sep 6, 2026 · 17:00 ET</i>
+
+<b>Next trading week:</b> 2026-09-07 → 2026-09-11
+
+<b>Macro backdrop:</b>
+  • 10Y yield 4.52%
+  • 2Y yield 3.98%
+  • Fed funds 3.75%
+
+<b>Calendar highlights:</b>
+  • Thu Sep 10 — 08:30 ET Jobless Claims
+  • Fri Sep 11 — no major releases; watch Fed speakers
+  • CPI likely this week (BLS mid-month window, 08:30 ET)
+
+<b>Week watchlist (conf = prior-adjusted):</b>
+  • NVDA <b>LONG</b> — 87% (earnings)
+  • AMD <b>LONG</b> — 78% (earnings)
+  • TSLA <b>SHORT</b> — 72% (sentiment)
+  • MSFT <b>LONG</b> — 68% (tech)
+  • XLE <b>LONG</b> — 63% (commodities)
+  • SPY <b>LONG</b> — 61% (macro)
+  • QQQ <b>LONG</b> — 60% (macro)
+  • GLD <b>LONG</b> — 58% (commodities)
+
+<b>Biggest falsifier risks this week:</b>
+  • NVDA: NVDA gaps/breaks against thesis (more than ~0.8% adverse move)
+  • AMD: AMD breaks day range against thesis after any downgrade headline
+  • TSLA: retail sentiment flips; delivery beat or China approval news
+
+<i>Weekly setup; the daily 09:25 / 10:30 / 15:50 / 20:00 ET messages refine it day by day.</i>
+      <div class="time">17:00</div></div>
+  </div>
+</div>
+
+  <div class="daydiv"><span>Only if the agent auto-pauses</span></div>
+  <div class="msg">
+  <div class="avatar">🤖</div>
+  <div style="flex:1">
+    <div class="bubble"><span class="tag now">SHIPS NOW</span><div class="sender">A-Trade Bot</div><b>⏸ A-TRADE — AUTO-PAUSED</b>
+
+no_improve_streak=6 | failed_measure=0
+
+score 0.5230 | best 0.6120
+
+Trading is halted. Review, then resume with: python3 -m atrade.cli resume
+      <div class="time">16:05</div></div>
+  </div>
+</div>
+
+</div>
+<div class="note">
+  <b>How to turn this into reality:</b> put <code>TELEGRAM_BOT_TOKEN</code> and
+  <code>TELEGRAM_CHAT_ID</code> in <code>atrade/.env</code> (or repo secrets on
+  GitHub Actions), then <code>python3 -m atrade.cli notify</code> to test.
+  On GitHub Actions the workflow runs all four sessions automatically; you can
+  also trigger any of them instantly from the <b>Run workflow</b> menu.
+</div>
+</body></html>

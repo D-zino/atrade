@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-Trade — autonomous paper-trading agent</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+         background:#010409; color:#e6edf3; line-height:1.5; }
+  header { padding:22px 26px; background:linear-gradient(135deg,#0d1117,#161b22);
+           border-bottom:1px solid #21262d; }
+  header h1 { margin:0; font-size:22px; }
+  header .sub { color:#8b949e; font-size:13px; margin-top:4px; }
+  .badges { margin-top:10px; }
+  .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:12px;
+           margin-right:8px; border:1px solid #30363d; }
+  .badge.green { background:#12261a; color:#3fb950; border-color:#238636; }
+  .badge.amber { background:#2d1b05; color:#d29922; border-color:#9e6a03; }
+  .badge.red { background:#3d0c0c; color:#f85149; border-color:#da3633; }
+  .badge.blue { background:#0d1d33; color:#58a6ff; border-color:#1f6feb; }
+  main { max-width:1100px; margin:0 auto; padding:24px 26px; }
+  h2 { font-size:16px; border-bottom:1px solid #21262d; padding-bottom:8px; margin-top:34px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+  .card { background:#0d1117; border:1px solid #21262d; border-radius:10px; padding:14px; }
+  a.card { color:inherit; text-decoration:none; display:block; }
+  .kpi .v { font-size:24px; font-weight:700; }
+  .kpi .l { font-size:12px; color:#8b949e; margin-top:2px; }
+  table { width:100%; border-collapse:collapse; background:#0d1117; border-radius:10px;
+          overflow:hidden; font-size:13px; }
+  th, td { padding:8px 10px; text-align:left; border-bottom:1px solid #21262d; }
+  th { background:#161b22; color:#8b949e; font-weight:600; font-size:12px; text-transform:uppercase; }
+  .pos { color:#3fb950; } .neg { color:#f85149; } .muted { color:#8b949e; }
+  section { margin-top:26px; }
+  .playbook { background:#0d1117; border:1px solid #21262d; border-radius:10px; padding:18px 22px; font-size:14px; }
+  .playbook h1 { font-size:18px; } .playbook h2 { font-size:15px; border:none; margin-top:18px; }
+  .playbook table { margin:10px 0; }
+  ul { padding-left:20px; }
+  footer { color:#484f58; font-size:12px; text-align:center; padding:30px; }
+</style></head><body>
+<header>
+  <h1>🤖 A-Trade — Self-Improving Autonomous Paper-Trading Agent</h1>
+  <div class="sub">Research → hypotheses → simulated day trades → graded experiments → living playbook</div>
+  <div class="badges">
+    <span class="badge green">RUNNING</span>
+    <span class="badge blue">mode: alpaca (paper)</span>
+    <span class="badge">last score: <b>0.4438</b></span>
+    <span class="badge">best: <b>0.5252</b></span>
+    <span class="badge amber">no-improve streak: 3/6</span>
+  </div>
+</header>
+<main>
+  <h2>Portfolio & performance (vs frozen SPY/QQQ baseline)</h2>
+  <div class="grid">
+    <div class="card kpi"><div class="v neg">-261.04</div><div class="l">Realized P&L</div></div>
+    <div class="card kpi"><div class="v">-0.26%</div><div class="l">Portfolio return</div></div>
+    <div class="card kpi"><div class="v">-0.26%</div><div class="l">Alpha vs SPY (baseline 769.3499755859375)</div></div>
+    <div class="card kpi"><div class="v">38%</div><div class="l">Win rate (16 closed)</div></div>
+    <div class="card kpi"><div class="v">0.658</div><div class="l">Sharpe (annualized)</div></div>
+    <div class="card kpi"><div class="v">0.4438</div><div class="l">Composite (ret 35% / alpha 30% / sharpe 20% / win 15%)</div></div>
+  </div>
+  <div style="margin-top:14px"><svg width='340' height='60' viewBox='0 0 340 60' style='background:#0d1117;border-radius:8px'><polyline points='10,21 56,20 101,23 147,19 193,12 239,18 284,22 330,18' fill='none' stroke='#58a6ff' stroke-width='2'/></svg><div class="muted" style="font-size:12px">composite score over close runs</div></div>
+
+  <h2>Open positions</h2>
+  <table><tr><th>Symbol</th><th>Qty</th></tr><tr><td colspan='2' class='muted'>none (flat)</td></tr></table>
+
+  <h2>Trades ledger (16)</h2>
+  <table><tr><th>Symbol</th><th>Side</th><th>Qty</th><th>Entry</th><th>Exit</th><th>P&L</th><th>Conf</th><th>Correct?</th><th>Signal cat</th></tr>
+  <tr><td>PLTR</td><td>long</td><td>25</td><td>185.9376</td><td>184.9365</td><td class="neg">-25.03</td><td>84%</td><td>❌</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>14</td><td>323.6443</td><td>321.9281</td><td class="neg">-24.03</td><td>83%</td><td>❌</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>32</td><td>183.7875</td><td>184.4312</td><td class="pos">+20.60</td><td>80%</td><td>✅</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>18</td><td>319.9544</td><td>321.0609</td><td class="pos">+19.92</td><td>80%</td><td>✅</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>38</td><td>188.6465</td><td>187.6464</td><td class="neg">-38.00</td><td>84%</td><td>❌</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>22</td><td>319.0876</td><td>317.3696</td><td class="neg">-37.80</td><td>83%</td><td>❌</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>44</td><td>186.4964</td><td>185.4955</td><td class="neg">-44.04</td><td>82%</td><td>❌</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>25</td><td>315.3977</td><td>322.8874</td><td class="pos">+187.24</td><td>81%</td><td>✅</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>51</td><td>184.3463</td><td>188.8427</td><td class="pos">+229.32</td><td>82%</td><td>✅</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>29</td><td>320.9133</td><td>319.4224</td><td class="neg">-43.24</td><td>81%</td><td>❌</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>57</td><td>187.6921</td><td>186.6917</td><td class="neg">-57.02</td><td>82%</td><td>❌</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>33</td><td>317.4498</td><td>315.7311</td><td class="neg">-56.72</td><td>81%</td><td>❌</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>64</td><td>185.542</td><td>184.5407</td><td class="neg">-64.08</td><td>81%</td><td>❌</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>37</td><td>322.9654</td><td>321.2489</td><td class="neg">-63.51</td><td>80%</td><td>❌</td><td>technical</td></tr><tr><td>PLTR</td><td>long</td><td>64</td><td>188.756</td><td>183.9986</td><td class="neg">-304.47</td><td>80%</td><td>❌</td><td>technical</td></tr><tr><td>AAPL</td><td>long</td><td>36</td><td>319.2755</td><td>320.3817</td><td class="pos">+39.82</td><td>79%</td><td>✅</td><td>technical</td></tr></table>
+
+  <h2>Signal tracker (self-learned evidence priors)</h2>
+  <table><tr><th>Category</th><th>n</th><th>Win rate</th><th>Edge/trade</th></tr><tr><td>technical</td><td>16</td><td>31%</td><td>$-16</td></tr></table>
+
+  <h2>Why my thinking changed</h2>
+  <ul><li><b>2026-08-30</b>: After 2 graded trades (1 wins), the 'technical' signal family refuted my edge. Composite score 0.432 (improved). I will discount 'technical' evidence tomorrow.</li><li><b>2026-08-30</b>: After 2 graded trades (1 wins), the 'technical' signal family refuted my edge. Composite score 0.525 (improved). I will discount 'technical' evidence tomorrow.</li><li><b>2026-08-30</b>: After 2 graded trades (0 wins), the 'technical' signal family refuted my edge. Composite score 0.447 (did not improve). I will discount 'technical' evidence tomorrow.</li><li><b>2026-08-30</b>: After 2 graded trades (0 wins), the 'technical' signal family refuted my edge. Composite score 0.389 (did not improve). I will discount 'technical' evidence tomorrow.</li><li><b>2026-08-30</b>: After 2 graded trades (1 wins), the 'technical' signal family refuted my edge. Composite score 0.444 (did not improve). I will discount 'technical' evidence tomorrow.</li></ul>
+
+  <h2>Run reports</h2>
+  <div class="grid"><p class='muted'>no reports yet</p></div>
+
+  <h2>📘 Living playbook (rewritten after every close run)</h2>
+  <div class="playbook"><h1>📘 A-Trade Playbook — living trading rules & signal tracker</h1>
+<p>*Last updated: 2026-08-30T18:26:55+00:00*</p>
+<p>This file is rewritten after every close run by the self-improvement loop. It is <b>not</b> a fixed rulebook — rules here are provisional hypotheses about what the market rewards, updated from evidence.</p>
+<h2>How the loop works</h2>
+<p>1. Research → hypotheses with confidence (priors from this tracker).</p>
+<p>2. Trade day (paper only).</p>
+<p>3. Grade: was each hypothesis right? Which evidence mattered vs noise?</p>
+<p>4. Update tracker → rewrite this file → next day's priors change.</p>
+<h2>Current signal tracker (recency-weighted win rates)</h2>
+<table><tr><th>Signal category</th><th>n</th><th>Wins</th><th>Win rate</th><th>Recency w.r.</th><th>Edge $/trade</th><th>Priority</th><th>Trust</th></tr>
+<tr><td>technical</td><td>16</td><td>5</td><td>31.20%</td><td>30.20%</td><td>-16.32</td><td>-0.39</td><td>HIGH</td></tr>
+</table>
+<p><b>Trust levels</b> (anti-overfitting rule): <b>LOW</b> (<6 samples — treated as noise, prior heavily shrunk), <b>MED</b> (6–14 — partial weight), <b>HIGH</b> (15+ — full prior). Do not trust a category until it reaches HIGH.</p>
+<h2>Rules in force (evolving)</h2>
+<p>1. Only trade hypotheses with confidence ≥ 60% (configurable).</p>
+<p>2. Day trades only: every position opened at the open run is flattened at the close run.</p>
+<p>3. Max 2 concurrent positions; max ~24% of equity deployed.</p>
+<p>4. Intraday stop: ~1.4% adverse move → defensive close (stop_hit recorded).</p>
+<p>5. Sizing scales with confidence: 60% → 6%, 70% → 9%, 80%+ → 12% of equity.</p>
+<p>6. Pause trading after 6 consecutive runs with no composite-score improvement, or 3 consecutive failed measurements.</p>
+<p>7. Benchmark = SPY buy & hold from the frozen baseline capture.</p>
+<h2>Lessons learned this run</h2>
+<ul>
+<li>Bootstrap: no graded trades yet — signal tracker is empty until the first close run produces outcomes.</li>
+<h2>What mattered vs what was noise (evidence attribution)</h2>
+<li><b>technical</b>: when evidence direction agreed with the trade, avg P&L -74.94 vs +0.00 when it contradicted (3 agree / 0 contra). → evidence direction agreement favored contradiction by 74.94/trade.</li>
+<h2>Discovered indicators / relationships</h2>
+<li>technical: evidence direction agreement favored contradiction by 24.36/trade (n=3)</li>
+<li>technical: evidence direction agreement favored agreement by 20.15/trade (n=3)</li>
+<li>technical: evidence direction agreement favored contradiction by 37.87/trade (n=3)</li>
+<li>technical: evidence direction agreement favored agreement by 110.15/trade (n=3)</li>
+<li>technical: evidence direction agreement favored agreement by 47.61/trade (n=3)</li>
+<li>technical: evidence direction agreement favored contradiction by 56.82/trade (n=3)</li>
+<li>technical: evidence direction agreement favored contradiction by 63.70/trade (n=3)</li>
+<li>technical: evidence direction agreement favored contradiction by 74.94/trade (n=3)</li>
+<h2>Open questions & falsifiable predictions</h2>
+<li>Does 'macro' evidence (yields/CPI) beat 'news' noise in day trades? Tracker will tell us.</li>
+<li>Are high-confidence (≥0.75) setups worth the bigger size? Check win rate vs conf bucket.</li>
+<li>Short trades: do they lose more often in a liquidity-rich tape? Track separately.</li>
+</ul>
+<p>---</p>
+<p>⚠️ Paper trading only. No live orders are ever placed. This playbook is a research artifact, not investment advice.</p></div>
+</main>
+<footer>⚠️ Paper trading only — no live orders. Research artifact, not investment advice.</footer>
+</body></html>

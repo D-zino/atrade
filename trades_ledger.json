@@ -1,0 +1,797 @@
+{
+  "generated_at": "2026-08-30T18:27:16+00:00",
+  "mode": "alpaca",
+  "baseline": {
+    "captured_at": "2026-08-30T18:26:55+00:00",
+    "initial_equity": 100000.0,
+    "benchmarks": {
+      "SPY": {
+        "price": 769.3499755859375
+      },
+      "QQQ": {
+        "price": 716.4299926757812
+      }
+    },
+    "note": "Frozen baseline: every run is graded vs SPY buy&hold from this point."
+  },
+  "last_score": 0.4438,
+  "best_score": 0.5252,
+  "trades": [
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 25,
+      "warmup_factor": 0.4,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 185.9376,
+      "order_id": "mock-1788114415466631507",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.84,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -25.03,
+      "pnl_pct": -0.0054,
+      "exit_price": 184.9365,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -25.03,
+      "lesson": "PLTR long -25.03 (-0.54%) conf=0.84 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 14,
+      "warmup_factor": 0.4,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 323.6443,
+      "order_id": "mock-1788114415467017397",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.83,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -24.03,
+      "pnl_pct": -0.0053,
+      "exit_price": 321.9281,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -24.03,
+      "lesson": "AAPL long -24.03 (-0.53%) conf=0.83 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 32,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 183.7875,
+      "order_id": "mock-1788114415486924978",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 0% win rate over 2 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.805,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": 20.6,
+      "pnl_pct": 0.0035,
+      "exit_price": 184.4312,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 20.6,
+      "lesson": "PLTR long +20.60 (+0.35%) conf=0.81 \u2192 CONFIRMED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 18,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 319.9544,
+      "order_id": "mock-1788114415487270626",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 0% win rate over 2 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.795,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": 19.92,
+      "pnl_pct": 0.0035,
+      "exit_price": 321.0609,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 19.92,
+      "lesson": "AAPL long +19.92 (+0.35%) conf=0.80 \u2192 CONFIRMED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 38,
+      "warmup_factor": 0.6,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 188.6465,
+      "order_id": "mock-1788114415512250379",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 50% win rate over 4 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.84,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -38.0,
+      "pnl_pct": -0.0053,
+      "exit_price": 187.6464,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -38.0,
+      "lesson": "PLTR long -38.00 (-0.53%) conf=0.84 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 22,
+      "warmup_factor": 0.6,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 319.0876,
+      "order_id": "mock-1788114415512742869",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 50% win rate over 4 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.83,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -37.8,
+      "pnl_pct": -0.0054,
+      "exit_price": 317.3696,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -37.8,
+      "lesson": "AAPL long -37.80 (-0.54%) conf=0.83 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 44,
+      "warmup_factor": 0.7,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 186.4964,
+      "order_id": "mock-1788114415533516296",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 33% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.818,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -44.04,
+      "pnl_pct": -0.0054,
+      "exit_price": 185.4955,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -44.04,
+      "lesson": "PLTR long -44.04 (-0.54%) conf=0.82 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 25,
+      "warmup_factor": 0.7,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 315.3977,
+      "order_id": "mock-1788114415533838621",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 33% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.807,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": 187.24,
+      "pnl_pct": 0.0237,
+      "exit_price": 322.8874,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 187.24,
+      "lesson": "AAPL long +187.24 (+2.37%) conf=0.81 \u2192 CONFIRMED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 51,
+      "warmup_factor": 0.8,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 184.3463,
+      "order_id": "mock-1788114415554362161",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 38% win rate over 8 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.821,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": 229.32,
+      "pnl_pct": 0.0244,
+      "exit_price": 188.8427,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 229.32,
+      "lesson": "PLTR long +229.32 (+2.44%) conf=0.82 \u2192 CONFIRMED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 29,
+      "warmup_factor": 0.8,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 320.9133,
+      "order_id": "mock-1788114415554680313",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 38% win rate over 8 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.811,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -43.24,
+      "pnl_pct": -0.0046,
+      "exit_price": 319.4224,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -43.24,
+      "lesson": "AAPL long -43.24 (-0.46%) conf=0.81 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 57,
+      "warmup_factor": 0.9,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 187.6921,
+      "order_id": "mock-1788114415575951997",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 40% win rate over 10 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.824,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -57.02,
+      "pnl_pct": -0.0053,
+      "exit_price": 186.6917,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -57.02,
+      "lesson": "PLTR long -57.02 (-0.53%) conf=0.82 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 33,
+      "warmup_factor": 0.9,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 317.4498,
+      "order_id": "mock-1788114415576296632",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 40% win rate over 10 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.813,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -56.72,
+      "pnl_pct": -0.0054,
+      "exit_price": 315.7311,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -56.72,
+      "lesson": "AAPL long -56.72 (-0.54%) conf=0.81 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 64,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 185.542,
+      "order_id": "mock-1788114415607312646",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 33% win rate over 12 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.811,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -64.08,
+      "pnl_pct": -0.0054,
+      "exit_price": 184.5407,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -64.08,
+      "lesson": "PLTR long -64.08 (-0.54%) conf=0.81 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 37,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 322.9654,
+      "order_id": "mock-1788114415608308935",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 33% win rate over 12 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.801,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -63.51,
+      "pnl_pct": -0.0053,
+      "exit_price": 321.2489,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -63.51,
+      "lesson": "AAPL long -63.51 (-0.53%) conf=0.80 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "PLTR-2026-08-30T18:26:55+00:00",
+      "symbol": "PLTR",
+      "side": "long",
+      "qty": 64,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 188.756,
+      "order_id": "mock-1788114415635460851",
+      "hypothesis": {
+        "thesis": "Go long PLTR today: PLTR technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 29% win rate over 14 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PLTR gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.801,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PLTR technical bullish",
+            "summary": "PLTR: 5d mom +3.5%; above SMA20; above SMA50. close 186.29.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": -304.47,
+      "pnl_pct": 0.0252,
+      "exit_price": 183.9986,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": true,
+      "notes": [
+        "intraday stop hit (defensive close)"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -304.47,
+      "lesson": "PLTR long -304.47 (+2.52%) conf=0.80 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "AAPL-2026-08-30T18:26:55+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 36,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-08-30T18:26:55+00:00",
+      "entry_price": 319.2755,
+      "order_id": "mock-1788114415635912882",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish; AAPL daily move +1.6%. Bull vs bear evidence: 1.13 vs 0.00. Playbook prior for 'technical' is 29% win rate over 14 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.791,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.3%; above SMA20; above SMA50. close 319.70.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AAPL daily move +1.6%",
+            "summary": "AAPL +1.63% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4302060106379823,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "closed",
+      "pnl": 39.82,
+      "pnl_pct": 0.0035,
+      "exit_price": 320.3817,
+      "closed_at": "2026-08-30T18:26:55+00:00",
+      "stop_hit": false,
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 39.82,
+      "lesson": "AAPL long +39.82 (+0.35%) conf=0.79 \u2192 CONFIRMED hypothesis (technical evidence)"
+    }
+  ]
+}

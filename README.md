@@ -232,9 +232,39 @@ sample sizes (15+ trades per category) — which is exactly what the warm-up pha
   auto-pause logic.
 - **Agent log** — `state/logs/agent.log` for full debug/diagnostics.
 
-## Configuration
-Defaults live in `atrade/config.py`; override any key in `state/config.json`
-(e.g. `{"max_positions": 3, "min_confidence": 0.65}`) or via env `ATRADE_STATE_DIR`.
+## Configuration — trades, sizing & loss limits
+
+Defaults live in `atrade/config.py`; the easy way to change them at runtime:
+
+```bash
+python3 -m atrade.cli config                    # show effective settings
+python3 -m atrade.cli config max_positions 5    # set one value (persists to state/config.json)
+python3 -m atrade.cli config reset              # back to defaults
+```
+
+Key knobs for testing:
+
+| Setting | Default | What it does |
+|---|---|---|
+| `max_positions` | 2 | Max concurrent day trades **opened** per day (scanning is always all 30 symbols) |
+| `max_position_pct` | 0.12 | Per-position size at 80%+ confidence (12% of equity) |
+| `conf_to_size` | {0.60: 6%, 0.70: 9%, 0.80: 12%} | Sizing curve by confidence (interpolated) |
+| `max_portfolio_pct` | 0.24 | Hard cap on total deployed (24% of equity) |
+| `max_trade_value` | 20000 | Dollar cap per single trade |
+| `intraday_stop_pct` | 0.014 | Per-position defensive stop (1.4% adverse) |
+| `daily_loss_limit_pct` | 0.03 | Halts **new** trades for the day if today's P&L < −3% of equity |
+| `max_drawdown_pct` | 0.10 | Auto-pauses if equity falls 10% below its running peak |
+| `min_confidence` | 0.60 | Minimum hypothesis confidence to trade |
+
+Example aggressive test preset (`python3 -m atrade.cli config` one at a time, or
+copy `risk_presets.example.json` → `state/config.json`):
+```
+max_positions 5 · max_position_pct 0.15 · max_portfolio_pct 0.60 ·
+max_trade_value 80000 · intraday_stop_pct 0.02 · daily_loss_limit_pct 0.04 · max_drawdown_pct 0.15
+```
+5 × 15% = 75% is capped by the 60% portfolio cap, so the portfolio cap binds first —
+intentional. On GitHub, create/edit `state/config.json` in the repo (it persists across
+runs via the commit-back step).
 
 ## Safety rails
 - Paper endpoint hard-coded; live endpoints not implemented.

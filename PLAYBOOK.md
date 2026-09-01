@@ -1,6 +1,6 @@
 # 📘 A-Trade Playbook — living trading rules & signal tracker
 
-*Last updated: 2026-09-01T20:02:14+00:00*
+*Last updated: 2026-08-30T18:26:55+00:00*
 
 This file is rewritten after every close run by the self-improvement loop. It is **not** a fixed rulebook — rules here are provisional hypotheses about what the market rewards, updated from evidence.
 
@@ -14,7 +14,7 @@ This file is rewritten after every close run by the self-improvement loop. It is
 
 | Signal category | n | Wins | Win rate | Recency w.r. | Edge $/trade | Priority | Trust |
 |---|---|---|---|---|---|---|---|
-| technical | 2 | 2 | 100.00% | 100.00% | +74.77 | +1.00 | LOW |
+| technical | 16 | 5 | 31.20% | 30.20% | -16.32 | -0.39 | HIGH |
 
 **Trust levels** (anti-overfitting rule): **LOW** (<6 samples — treated as noise, prior heavily shrunk), **MED** (6–14 — partial weight), **HIGH** (15+ — full prior). Do not trust a category until it reaches HIGH.
 
@@ -30,19 +30,22 @@ This file is rewritten after every close run by the self-improvement loop. It is
 
 ## Lessons learned this run
 
-- Winning trades clustered around 'technical' evidence (2 of 2 winners) — this signal category is earning its prior.
-- USO: long move of +2.95% (vindicated) a 84%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis
-- Signal tracker now favors: technical (win rate > 55%).
+- Bootstrap: no graded trades yet — signal tracker is empty until the first close run produces outcomes.
 
 ## What mattered vs what was noise (evidence attribution)
 
-- **technical**: when evidence direction agreed with the trade, avg P&L +74.77 vs +0.00 when it contradicted (4 agree / 0 contra). → evidence direction agreement favored agreement by 74.77/trade.
-- **commodities**: when evidence direction agreed with the trade, avg P&L +74.77 vs +0.00 when it contradicted (2 agree / 0 contra). → evidence direction agreement favored agreement by 74.77/trade.
+- **technical**: when evidence direction agreed with the trade, avg P&L -74.94 vs +0.00 when it contradicted (3 agree / 0 contra). → evidence direction agreement favored contradiction by 74.94/trade.
 
 ## Discovered indicators / relationships
 
-- technical: evidence direction agreement favored agreement by 74.77/trade (n=4)
-- commodities: evidence direction agreement favored agreement by 74.77/trade (n=2)
+- technical: evidence direction agreement favored contradiction by 24.36/trade (n=3)
+- technical: evidence direction agreement favored agreement by 20.15/trade (n=3)
+- technical: evidence direction agreement favored contradiction by 37.87/trade (n=3)
+- technical: evidence direction agreement favored agreement by 110.15/trade (n=3)
+- technical: evidence direction agreement favored agreement by 47.61/trade (n=3)
+- technical: evidence direction agreement favored contradiction by 56.82/trade (n=3)
+- technical: evidence direction agreement favored contradiction by 63.70/trade (n=3)
+- technical: evidence direction agreement favored contradiction by 74.94/trade (n=3)
 
 ## Open questions & falsifiable predictions
 

@@ -1,9 +1,9 @@
 {
-  "asof": "2026-09-01T13:35:46+00:00",
+  "asof": "2026-09-01T20:02:11+00:00",
   "sources": {
     "fred": 0,
     "prices": 36,
-    "rss": 28,
+    "rss": 0,
     "sec": 17,
     "fx": 1,
     "inbox": 11
@@ -14,10 +14,10 @@
       "tickers": [
         "SPY"
       ],
-      "title": "S&P 500 moved -0.6%",
-      "summary": "S&P 500 closed -0.62% to 762.30; broad market regime gauge.",
+      "title": "S&P 500 moved -0.7%",
+      "summary": "S&P 500 closed -0.69% to 761.72; broad market regime gauge.",
       "direction": "bearish",
-      "strength": 0.5371161868929059,
+      "strength": 0.5416923317228369,
       "source": "yahoo",
       "date": "2026-09-01"
     },
@@ -27,9 +27,9 @@
         "QQQ"
       ],
       "title": "Nasdaq-100 moved -1.3%",
-      "summary": "Nasdaq-100 closed -1.26% to 707.74; growth/tech regime gauge.",
+      "summary": "Nasdaq-100 closed -1.27% to 707.64; growth/tech regime gauge.",
       "direction": "bearish",
-      "strength": 0.5755066081395875,
+      "strength": 0.5763435040426126,
       "source": "yahoo",
       "date": "2026-09-01"
     },
@@ -38,10 +38,10 @@
       "tickers": [
         "IWM"
       ],
-      "title": "Russell 2000 moved -0.7%",
-      "summary": "Russell 2000 closed -0.66% to 292.00; small caps / risk appetite regime gauge.",
+      "title": "Russell 2000 moved -1.1%",
+      "summary": "Russell 2000 closed -1.12% to 290.63; small caps / risk appetite regime gauge.",
       "direction": "bearish",
-      "strength": 0.5393969868446217,
+      "strength": 0.5673627300758407,
       "source": "yahoo",
       "date": "2026-09-01"
     },
@@ -50,10 +50,10 @@
       "tickers": [
         "GLD"
       ],
-      "title": "Gold -1.0%",
+      "title": "Gold -1.2%",
       "direction": "bearish",
-      "summary": "Gold -1.02% to $4386. Risk appetite.",
-      "strength": 0.5314246515082878,
+      "summary": "Gold -1.24% to $4376. Risk appetite.",
+      "strength": 0.5491174221007344,
       "source": "yahoo",
       "date": "2026-09-01"
     },
@@ -63,10 +63,10 @@
         "USO",
         "XLE"
       ],
-      "title": "WTI crude +2.9%",
+      "title": "WTI crude +5.6%",
       "direction": "bullish",
-      "summary": "WTI +2.94% to $88.28. Supply risk / demand strength.",
-      "strength": 0.6850743078633204,
+      "summary": "WTI +5.59% to $90.55. Supply risk / demand strength.",
+      "strength": 0.75,
       "source": "yahoo",
       "date": "2026-09-01"
     },
@@ -76,320 +76,12 @@
         "SPY",
         "QQQ"
       ],
-      "title": "EUR/USD 1.1596",
-      "summary": "EUR/USD \u2248 1.1596. Dollar weak; tailwind for multinational earnings / commodities.",
+      "title": "EUR/USD 1.1590",
+      "summary": "EUR/USD \u2248 1.1590. Dollar weak; tailwind for multinational earnings / commodities.",
       "direction": "bullish",
       "strength": 0.3,
       "source": "frankfurter",
-      "date": "2026-08-31"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "The Long and the Short of It: The Term Structure of Interest Rates - The American Action Forum",
-      "summary": "The Long and the Short of It: The Term Structure of Interest Rates - The American Action Forum",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:The American Action Forum",
-      "date": "Tue, 01 Sep 2026",
-      "query": "Federal Reserve interest rates"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "WATCH: Trump says Fed Chair Warsh will 'do what he has to do' on possible rate hikes - PBS",
-      "summary": "WATCH: Trump says Fed Chair Warsh will 'do what he has to do' on possible rate hikes - PBS",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:PBS",
-      "date": "Mon, 31 Aug 2026",
-      "query": "Federal Reserve interest rates"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Markets see Warsh endorsing a rate hike in September. Not everyone is convinced - CNBC",
-      "summary": "Markets see Warsh endorsing a rate hike in September. Not everyone is convinced - CNBC",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:CNBC",
-      "date": "Mon, 31 Aug 2026",
-      "query": "Federal Reserve interest rates"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Why interest rate expectations are pointing north - marketplace.org",
-      "summary": "Why interest rate expectations are pointing north - marketplace.org",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:marketplace.org",
-      "date": "Mon, 31 Aug 2026",
-      "query": "Federal Reserve interest rates"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Economic calendar: US JOLTS and ISM Manufacturing in focus \ud83d\uddfd What will Eurozone CPI show? - XTB.com",
-      "summary": "Economic calendar: US JOLTS and ISM Manufacturing in focus \ud83d\uddfd What will Eurozone CPI show? - XTB.com",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:XTB.com",
-      "date": "Tue, 01 Sep 2026",
-      "query": "CPI inflation report"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Netherlands Inflation Rate August 2026 | CBS Flash Estimate - News and Statistics - IndexBox",
-      "summary": "Netherlands Inflation Rate August 2026 | CBS Flash Estimate - News and Statistics - IndexBox",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:IndexBox",
-      "date": "Tue, 01 Sep 2026",
-      "query": "CPI inflation report"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Warsh Sounds Hawkish, but Will There Be a September Rate Hike in the US? - Morningstar",
-      "summary": "Warsh Sounds Hawkish, but Will There Be a September Rate Hike in the US? - Morningstar",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Morningstar",
-      "date": "Mon, 31 Aug 2026",
-      "query": "CPI inflation report"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Fed Interest Rate Forecast: Jobs and CPI to Drive US Dollar and EUR/USD - FXEmpire",
-      "summary": "Fed Interest Rate Forecast: Jobs and CPI to Drive US Dollar and EUR/USD - FXEmpire",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:FXEmpire",
-      "date": "Sun, 30 Aug 2026",
-      "query": "CPI inflation report"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Weekly market commentary - BlackRock",
-      "summary": "Weekly market commentary - BlackRock",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:BlackRock",
-      "date": "Tue, 01 Sep 2026",
-      "query": "stock market today"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "US Stock Market Today: S&P 500 Futures Edge Lower As Inflation Concerns Resurface - Yahoo Finance",
-      "summary": "US Stock Market Today: S&P 500 Futures Edge Lower As Inflation Concerns Resurface - Yahoo Finance",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Yahoo Finance",
-      "date": "Tue, 01 Sep 2026",
-      "query": "stock market today"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Stock Market: Will S&P 500 Open Up or Down Today? - Benzinga",
-      "summary": "Stock Market: Will S&P 500 Open Up or Down Today? - Benzinga",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Benzinga",
-      "date": "Tue, 01 Sep 2026",
-      "query": "stock market today"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Dow Jones Futures: Trump's Iran Warning Sparks Stock Market Losses; Elon Musk-Led SpaceX, Tesla Rally - Investor's Business Daily",
-      "summary": "Dow Jones Futures: Trump's Iran Warning Sparks Stock Market Losses; Elon Musk-Led SpaceX, Tesla Rally - Investor's Business Daily",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Investor's Business Daily",
-      "date": "Tue, 01 Sep 2026",
-      "query": "stock market today"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Looking for Earnings Beat? Buy These 5 Top-Ranked Stocks - Yahoo Finance",
-      "summary": "Looking for Earnings Beat? Buy These 5 Top-Ranked Stocks - Yahoo Finance",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Yahoo Finance",
-      "date": "Mon, 31 Aug 2026",
-      "query": "earnings surprise"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "CXMT's Earnings Surprise Tests Samsung, SK Hynix - \uc870\uc120\uc77c\ubcf4",
-      "summary": "CXMT's Earnings Surprise Tests Samsung, SK Hynix - \uc870\uc120\uc77c\ubcf4",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:\uc870\uc120\uc77c\ubcf4",
-      "date": "Mon, 31 Aug 2026",
-      "query": "earnings surprise"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Should You Buy, Sell, or Hold SNOW Stock Before Q2 Earnings Release? - The Globe and Mail",
-      "summary": "Should You Buy, Sell, or Hold SNOW Stock Before Q2 Earnings Release? - The Globe and Mail",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:The Globe and Mail",
-      "date": "Mon, 31 Aug 2026",
-      "query": "earnings surprise"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Adamas Trust (NASDAQ:ADAMN) Surges on Earnings Momentum and Accelerating Growth - ChartMill",
-      "summary": "Adamas Trust (NASDAQ:ADAMN) Surges on Earnings Momentum and Accelerating Growth - ChartMill",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:ChartMill",
-      "date": "Mon, 31 Aug 2026",
-      "query": "earnings surprise"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "RANKED: The Top Crude Oil Producers in 2025 \u2013 Visual Capitalist \u2013 See How Countries Rank - EnergyNow.com",
-      "summary": "RANKED: The Top Crude Oil Producers in 2025 \u2013 Visual Capitalist \u2013 See How Countries Rank - EnergyNow.com",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:EnergyNow.com",
-      "date": "Tue, 01 Sep 2026",
-      "query": "crude oil OPEC"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Trump on possible Venezuela departure from OPEC: 'It's up to them' - Reuters",
-      "summary": "Trump on possible Venezuela departure from OPEC: 'It's up to them' - Reuters",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Reuters",
-      "date": "Mon, 31 Aug 2026",
-      "query": "crude oil OPEC"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Trump\u2019s \u2018American Opec\u2019 is a challenge to the Gulf - Arabian Gulf Business Insight | AGBI",
-      "summary": "Trump\u2019s \u2018American Opec\u2019 is a challenge to the Gulf - Arabian Gulf Business Insight | AGBI",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Arabian Gulf Business Insight | AGBI",
-      "date": "Tue, 01 Sep 2026",
-      "query": "crude oil OPEC"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Current price of oil as of Aug. 31, 2026 - Fortune",
-      "summary": "Current price of oil as of Aug. 31, 2026 - Fortune",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Fortune",
-      "date": "Tue, 01 Sep 2026",
-      "query": "crude oil OPEC"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Gold prices today, Tuesday, September 1, 2026: Gold moves lower as rate-hike expectations grow - Yahoo Finance",
-      "summary": "Gold prices today, Tuesday, September 1, 2026: Gold moves lower as rate-hike expectations grow - Yahoo Finance",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Yahoo Finance",
-      "date": "Tue, 01 Sep 2026",
-      "query": "gold price"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Current price of gold as of September 1, 2026 - Fortune",
-      "summary": "Current price of gold as of September 1, 2026 - Fortune",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Fortune",
-      "date": "Tue, 01 Sep 2026",
-      "query": "gold price"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Gold Price Hits 10-Day Low as Rising Yields Test Support - FXEmpire",
-      "summary": "Gold Price Hits 10-Day Low as Rising Yields Test Support - FXEmpire",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:FXEmpire",
-      "date": "Tue, 01 Sep 2026",
-      "query": "gold price"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Gold price hits two-week low as Warsh repricing, oil shock lift yields - Kitco AM Report - KITCO",
-      "summary": "Gold price hits two-week low as Warsh repricing, oil shock lift yields - Kitco AM Report - KITCO",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:KITCO",
-      "date": "Tue, 01 Sep 2026",
-      "query": "gold price"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "European Equities Largely Lower Though AI Stocks Gain - WSJ",
-      "summary": "European Equities Largely Lower Though AI Stocks Gain - WSJ",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:WSJ",
-      "date": "Tue, 01 Sep 2026",
-      "query": "AI chip stocks"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Best Artificial Intelligence (AI) Stocks to Buy Now August 2026 - Zacks Investment Research",
-      "summary": "Best Artificial Intelligence (AI) Stocks to Buy Now August 2026 - Zacks Investment Research",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:Zacks Investment Research",
-      "date": "Tue, 01 Sep 2026",
-      "query": "AI chip stocks"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Qualcomm rival MediaTek jumps 10% after $3.5 billion Nvidia AI chip deal - CNBC",
-      "summary": "Qualcomm rival MediaTek jumps 10% after $3.5 billion Nvidia AI chip deal - CNBC",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:CNBC",
-      "date": "Tue, 01 Sep 2026",
-      "query": "AI chip stocks"
-    },
-    {
-      "category": "news",
-      "tickers": [],
-      "title": "Forget Nvidia. This AI Stock Is Selling the Storage Behind the Boom - 24/7 Wall St.",
-      "summary": "Forget Nvidia. This AI Stock Is Selling the Storage Behind the Boom - 24/7 Wall St.",
-      "direction": "neutral",
-      "strength": 0.35,
-      "source": "rss:24/7 Wall St.",
-      "date": "Tue, 01 Sep 2026",
-      "query": "AI chip stocks"
+      "date": "2026-09-01"
     },
     {
       "category": "sec_filings",
@@ -755,366 +447,358 @@
     "SPY": {
       "symbol": "SPY",
       "date": "2026-09-01",
-      "open": 767.3300170898438,
-      "high": 762.3049926757812,
-      "low": 761.1699829101562,
-      "close": 762.3049926757812,
-      "volume": 2459488,
+      "open": 762.010009765625,
+      "high": 764.6699829101562,
+      "low": 759.47998046875,
+      "close": 761.719970703125,
+      "volume": 35097486,
       "prev_close": 767.0499877929688,
-      "chg_pct": -0.006186031148817646
+      "chg_pct": -0.006948721953806161
     },
     "QQQ": {
       "symbol": "QQQ",
       "date": "2026-09-01",
       "open": 707.4299926757812,
-      "high": 707.780517578125,
-      "low": 706.2100219726562,
-      "close": 707.739990234375,
-      "volume": 3395592,
+      "high": 712.2999877929688,
+      "low": 704.6599731445312,
+      "close": 707.6400146484375,
+      "volume": 31446012,
       "prev_close": 716.760009765625,
-      "chg_pct": -0.01258443468993126
+      "chg_pct": -0.012723917340435424
     },
     "IWM": {
       "symbol": "IWM",
       "date": "2026-09-01",
-      "open": 295.0899963378906,
+      "open": 291.9800109863281,
       "high": 292.94000244140625,
-      "low": 291.7900085449219,
-      "close": 292.0,
-      "volume": 1895354,
+      "low": 289.9750061035156,
+      "close": 290.6300048828125,
+      "volume": 20943590,
       "prev_close": 293.92999267578125,
-      "chg_pct": -0.006566164474103613
+      "chg_pct": -0.011227121679306791
     },
     "AAPL": {
       "symbol": "AAPL",
       "date": "2026-09-01",
       "open": 316.9800109863281,
-      "high": 317.3800048828125,
+      "high": 327.29998779296875,
       "low": 314.73699951171875,
-      "close": 315.9859924316406,
-      "volume": 1961811,
+      "close": 325.1300048828125,
+      "volume": 50793068,
       "prev_close": 316.8500061035156,
-      "chg_pct": -0.0027268854512589934
+      "chg_pct": 0.026132234873909962
     },
     "MSFT": {
       "symbol": "MSFT",
       "date": "2026-09-01",
       "open": 498.010009765625,
-      "high": 500.5,
+      "high": 505.9700012207031,
       "low": 496.7799987792969,
-      "close": 498.9858093261719,
-      "volume": 2571434,
+      "close": 501.0199890136719,
+      "volume": 17754528,
       "prev_close": 507.2900085449219,
-      "chg_pct": -0.016369727530351392
+      "chg_pct": -0.012359832493516918
     },
     "NVDA": {
       "symbol": "NVDA",
       "date": "2026-09-01",
       "open": 216.61000061035156,
-      "high": 217.3000030517578,
+      "high": 220.41000366210938,
       "low": 215.10000610351562,
-      "close": 216.10000610351562,
-      "volume": 9900923,
+      "close": 217.44000244140625,
+      "volume": 99321017,
       "prev_close": 220.77999877929688,
-      "chg_pct": -0.021197539186779385
+      "chg_pct": -0.015128165397036071
     },
     "TSLA": {
       "symbol": "TSLA",
       "date": "2026-09-01",
       "open": 360.8550109863281,
       "high": 362.70001220703125,
-      "low": 355.6600036621094,
-      "close": 356.7598876953125,
-      "volume": 3863782,
+      "low": 352.9599914550781,
+      "close": 356.0899963378906,
+      "volume": 34877274,
       "prev_close": 367.95001220703125,
-      "chg_pct": -0.030412078109736545
+      "chg_pct": -0.03223268236356914
     },
     "AMD": {
       "symbol": "AMD",
       "date": "2026-09-01",
       "open": 459.29998779296875,
-      "high": 460.7200012207031,
-      "low": 455.57000732421875,
-      "close": 458.19500732421875,
-      "volume": 1342180,
+      "high": 461.5,
+      "low": 452.29998779296875,
+      "close": 459.6099853515625,
+      "volume": 15608228,
       "prev_close": 470.7200012207031,
-      "chg_pct": -0.026608161675738675
+      "chg_pct": -0.023602175051685454
     },
     "META": {
       "symbol": "META",
       "date": "2026-09-01",
       "open": 557.7999877929688,
-      "high": 563.7999877929688,
+      "high": 584.9000244140625,
       "low": 556.2899780273438,
-      "close": 562.6799926757812,
-      "volume": 1409790,
+      "close": 578.5399780273438,
+      "volume": 14542120,
       "prev_close": 572.3400268554688,
-      "chg_pct": -0.016878138390497226
+      "chg_pct": 0.010832635987279383
     },
     "AMZN": {
       "symbol": "AMZN",
       "date": "2026-09-01",
       "open": 254.8300018310547,
-      "high": 255.3800048828125,
+      "high": 255.82000732421875,
       "low": 251.92999267578125,
-      "close": 255.1584014892578,
-      "volume": 3688171,
+      "close": 254.9199981689453,
+      "volume": 28562976,
       "prev_close": 259.7699890136719,
-      "chg_pct": -0.017752580049465803
+      "chg_pct": -0.01867032778937102
     },
     "GOOGL": {
       "symbol": "GOOGL",
       "date": "2026-09-01",
       "open": 336.0,
-      "high": 336.1000061035156,
+      "high": 337.20001220703125,
       "low": 333.05999755859375,
-      "close": 335.0299987792969,
-      "volume": 1997588,
+      "close": 335.0199890136719,
+      "volume": 19713745,
       "prev_close": 339.3500061035156,
-      "chg_pct": -0.012730240891467588
+      "chg_pct": -0.012759737769160133
     },
     "JPM": {
       "symbol": "JPM",
       "date": "2026-09-01",
-      "open": 355.8999938964844,
-      "high": 356.3399963378906,
-      "low": 354.2300109863281,
-      "close": 355.55499267578125,
-      "volume": 223117,
+      "open": 355.7300109863281,
+      "high": 359.9200134277344,
+      "low": 354.1199951171875,
+      "close": 354.9798889160156,
+      "volume": 3646371,
       "prev_close": 356.0199890136719,
-      "chg_pct": -0.001306096152575209
+      "chg_pct": -0.0029214654506837484
     },
     "XOM": {
       "symbol": "XOM",
       "date": "2026-09-01",
-      "open": 159.94000244140625,
-      "high": 164.11329650878906,
-      "low": 162.8800048828125,
-      "close": 163.20689392089844,
-      "volume": 877751,
+      "open": 163.60000610351562,
+      "high": 164.6999969482422,
+      "low": 162.21499633789062,
+      "close": 164.55999755859375,
+      "volume": 8461804,
       "prev_close": 160.9499969482422,
-      "chg_pct": 0.014022348651438721
+      "chg_pct": 0.022429330095063347
     },
     "CVX": {
       "symbol": "CVX",
       "date": "2026-09-01",
-      "open": 206.0800018310547,
-      "high": 209.74000549316406,
-      "low": 208.47000122070312,
-      "close": 208.99000549316406,
-      "volume": 600267,
+      "open": 209.0,
+      "high": 211.07000732421875,
+      "low": 207.8000030517578,
+      "close": 211.0500030517578,
+      "volume": 7213212,
       "prev_close": 206.13999938964844,
-      "chg_pct": 0.013825585097283849
+      "chg_pct": 0.02381878178251288
     },
     "GLD": {
       "symbol": "GLD",
       "date": "2026-09-01",
-      "open": 407.760009765625,
-      "high": 399.4200134277344,
-      "low": 398.0799865722656,
-      "close": 399.1300048828125,
-      "volume": 1537536,
+      "open": 398.2850036621094,
+      "high": 401.25,
+      "low": 396.45001220703125,
+      "close": 396.8399963378906,
+      "volume": 11605005,
       "prev_close": 408.4200134277344,
-      "chg_pct": -0.022746212818891758
+      "chg_pct": -0.028353206770296315
     },
     "SLV": {
       "symbol": "SLV",
       "date": "2026-09-01",
-      "open": 60.38999938964844,
-      "high": 58.599998474121094,
-      "low": 58.2401008605957,
-      "close": 58.51499938964844,
-      "volume": 3076278,
+      "open": 58.38999938964844,
+      "high": 59.06209945678711,
+      "low": 57.849998474121094,
+      "close": 57.91999816894531,
+      "volume": 17175296,
       "prev_close": 60.130001068115234,
-      "chg_pct": -0.0268585007447002
+      "chg_pct": -0.03675374787814209
     },
     "USO": {
       "symbol": "USO",
       "date": "2026-09-01",
-      "open": 133.00999450683594,
-      "high": 137.25,
-      "low": 136.89100646972656,
-      "close": 137.22000122070312,
-      "volume": 850447,
+      "open": 137.19000244140625,
+      "high": 141.0399932861328,
+      "low": 136.08999633789062,
+      "close": 140.9199981689453,
+      "volume": 7751998,
       "prev_close": 133.6999969482422,
-      "chg_pct": 0.026327631658986484
+      "chg_pct": 0.05400150624908484
     },
     "TLT": {
       "symbol": "TLT",
       "date": "2026-09-01",
       "open": 81.8949966430664,
-      "high": 82.01899719238281,
-      "low": 81.88999938964844,
-      "close": 81.99500274658203,
-      "volume": 2309850,
+      "high": 82.3499984741211,
+      "low": 81.77999877929688,
+      "close": 81.87000274658203,
+      "volume": 25120533,
       "prev_close": 82.5199966430664,
-      "chg_pct": -0.006362020332540654
+      "chg_pct": -0.00787680468887888
     },
     "XLE": {
       "symbol": "XLE",
       "date": "2026-09-01",
-      "open": 63.79999923706055,
+      "open": 64.87000274658203,
       "high": 64.94999694824219,
-      "low": 64.46499633789062,
-      "close": 64.58000183105469,
-      "volume": 2107470,
+      "low": 64.05000305175781,
+      "close": 64.77999877929688,
+      "volume": 30527530,
       "prev_close": 63.959999084472656,
-      "chg_pct": 0.009693601554984187
+      "chg_pct": 0.01282050823267268
     },
     "XLF": {
       "symbol": "XLF",
       "date": "2026-09-01",
-      "open": 57.86000061035156,
-      "high": 57.59000015258789,
-      "low": 57.400001525878906,
-      "close": 57.59000015258789,
-      "volume": 1203936,
+      "open": 57.61000061035156,
+      "high": 57.97999954223633,
+      "low": 57.130001068115234,
+      "close": 57.209999084472656,
+      "volume": 28912954,
       "prev_close": 57.709999084472656,
-      "chg_pct": -0.002079343853551582
+      "chg_pct": -0.008664009841139108
     },
     "XLK": {
       "symbol": "XLK",
       "date": "2026-09-01",
-      "open": 185.77499389648438,
-      "high": 183.8695068359375,
-      "low": 183.27999877929688,
-      "close": 183.7449951171875,
-      "volume": 349573,
+      "open": 183.6999969482422,
+      "high": 184.9199981689453,
+      "low": 182.6300048828125,
+      "close": 183.67999267578125,
+      "volume": 7271912,
       "prev_close": 186.5,
-      "chg_pct": -0.014772144143766756
+      "chg_pct": -0.01512068270358579
     },
     "XLY": {
       "symbol": "XLY",
       "date": "2026-09-01",
-      "open": 116.55999755859375,
-      "high": 115.5199966430664,
-      "low": 114.8499984741211,
-      "close": 115.06999969482422,
-      "volume": 323486,
+      "open": 115.41999816894531,
+      "high": 115.61499786376953,
+      "low": 114.31999969482422,
+      "close": 114.58000183105469,
+      "volume": 5641885,
       "prev_close": 116.58999633789062,
-      "chg_pct": -0.013037110308000087
+      "chg_pct": -0.0172398539323284
     },
     "XLV": {
       "symbol": "XLV",
       "date": "2026-09-01",
-      "open": 170.25,
+      "open": 172.6199951171875,
       "high": 173.52520751953125,
-      "low": 172.3699951171875,
-      "close": 172.97000122070312,
-      "volume": 544636,
+      "low": 171.02999877929688,
+      "close": 171.66000366210938,
+      "volume": 7216844,
       "prev_close": 170.5399932861328,
-      "chg_pct": 0.014248903660346894
+      "chg_pct": 0.0065674353234985985
     },
     "XLI": {
       "symbol": "XLI",
       "date": "2026-09-01",
-      "open": 176.08999633789062,
+      "open": 174.33999633789062,
       "high": 175.44000244140625,
-      "low": 174.1999969482422,
-      "close": 174.69000244140625,
-      "volume": 355812,
+      "low": 172.14500427246094,
+      "close": 172.74000549316406,
+      "volume": 8708436,
       "prev_close": 175.1300048828125,
-      "chg_pct": -0.002512433216116654
+      "chg_pct": -0.013647001216311822
     },
     "XLB": {
       "symbol": "XLB",
       "date": "2026-09-01",
-      "open": 53.15999984741211,
+      "open": 52.439998626708984,
       "high": 52.459999084472656,
-      "low": 52.27000045776367,
-      "close": 52.279998779296875,
-      "volume": 521580,
+      "low": 52.02000045776367,
+      "close": 52.09000015258789,
+      "volume": 13826995,
       "prev_close": 52.689998626708984,
-      "chg_pct": -0.0077813599942718
+      "chg_pct": -0.011387331367607015
     },
     "XLU": {
       "symbol": "XLU",
       "date": "2026-09-01",
-      "open": 42.0,
-      "high": 42.560001373291016,
-      "low": 42.27000045776367,
-      "close": 42.35499954223633,
-      "volume": 1379906,
+      "open": 42.29999923706055,
+      "high": 42.61000061035156,
+      "low": 42.09000015258789,
+      "close": 42.57500076293945,
+      "volume": 28481037,
       "prev_close": 42.22999954223633,
-      "chg_pct": 0.002959981088206768
+      "chg_pct": 0.008169576709515994
     },
     "XLP": {
       "symbol": "XLP",
       "date": "2026-09-01",
-      "open": 85.3499984741211,
-      "high": 85.91999816894531,
-      "low": 85.26000213623047,
-      "close": 85.69999694824219,
-      "volume": 737385,
+      "open": 85.51000213623047,
+      "high": 86.16000366210938,
+      "low": 85.15229797363281,
+      "close": 85.2699966430664,
+      "volume": 8973359,
       "prev_close": 84.9800033569336,
-      "chg_pct": 0.0084725060351489
+      "chg_pct": 0.0034124885229149817
     },
     "XLC": {
       "symbol": "XLC",
       "date": "2026-09-01",
-      "open": 112.4800033569336,
-      "high": 110.81999969482422,
+      "open": 110.55999755859375,
+      "high": 111.62999725341797,
       "low": 110.30999755859375,
-      "close": 110.81999969482422,
-      "volume": 120193,
+      "close": 110.88999938964844,
+      "volume": 5041247,
       "prev_close": 111.45999908447266,
-      "chg_pct": -0.005741964784724236
+      "chg_pct": -0.005113939525445633
     },
     "PLTR": {
       "symbol": "PLTR",
       "date": "2026-09-01",
       "open": 182.75,
-      "high": 183.99000549316406,
-      "low": 181.3000030517578,
-      "close": 183.8000030517578,
-      "volume": 2079217,
+      "high": 186.5500030517578,
+      "low": 179.75,
+      "close": 179.9199981689453,
+      "volume": 23826751,
       "prev_close": 186.3800048828125,
-      "chg_pct": -0.013842696445237666
+      "chg_pct": -0.034660406398899675
     },
     "ORCL": {
       "symbol": "ORCL",
       "date": "2026-09-01",
-      "open": 149.30999755859375,
+      "open": 146.75,
       "high": 146.77000427246094,
-      "low": 143.38999938964844,
-      "close": 145.72000122070312,
-      "volume": 1769914,
+      "low": 139.9499969482422,
+      "close": 141.26100158691406,
+      "volume": 21970680,
       "prev_close": 149.1199951171875,
-      "chg_pct": -0.022800389000901283
+      "chg_pct": -0.052702479798885225
     },
     "GC=F": {
       "symbol": "GC=F",
       "date": "2026-09-01",
       "open": 4498.7001953125,
       "high": 4510.5,
-      "low": 4374.10009765625,
-      "close": 4386.0,
-      "volume": 113416,
+      "low": 4369.7001953125,
+      "close": 4376.2001953125,
+      "volume": 185850,
       "prev_close": 4431.10009765625,
-      "chg_pct": -0.01017808143853597
+      "chg_pct": -0.012389677762591802
     },
     "CL=F": {
       "symbol": "CL=F",
       "date": "2026-09-01",
       "open": 86.30999755859375,
-      "high": 88.37999725341797,
+      "high": 90.63999938964844,
       "low": 86.12999725341797,
-      "close": 88.27999877929688,
-      "volume": 111627,
+      "close": 90.55000305175781,
+      "volume": 286532,
       "prev_close": 85.76000213623047,
-      "chg_pct": 0.02938428848291504
+      "chg_pct": 0.05585355406029944
     }
   },
   "bars": {
     "SPY": [
-      {
-        "t": "2026-06-01",
-        "o": 755.3599853515625,
-        "h": 760.280029296875,
-        "l": 754.6900024414062,
-        "c": 758.5399780273438,
-        "v": 43634900
-      },
       {
         "t": "2026-06-02",
         "o": 757.030029296875,
@@ -1617,26 +1301,18 @@
         "h": 768.0,
         "l": 764.719970703125,
         "c": 767.0499877929688,
-        "v": 38777300
+        "v": 38810800
       },
       {
         "t": "2026-09-01",
-        "o": 767.3300170898438,
-        "h": 762.3049926757812,
-        "l": 761.1699829101562,
-        "c": 762.3049926757812,
-        "v": 2459488
+        "o": 762.010009765625,
+        "h": 764.6699829101562,
+        "l": 759.47998046875,
+        "c": 761.719970703125,
+        "v": 35097486
       }
     ],
     "QQQ": [
-      {
-        "t": "2026-06-01",
-        "o": 737.0399780273438,
-        "h": 745.6500244140625,
-        "l": 735.989990234375,
-        "c": 742.739990234375,
-        "v": 33890600
-      },
       {
         "t": "2026-06-02",
         "o": 742.4000244140625,
@@ -2139,26 +1815,18 @@
         "h": 717.5800170898438,
         "l": 713.1599731445312,
         "c": 716.760009765625,
-        "v": 32160600
+        "v": 32237200
       },
       {
         "t": "2026-09-01",
         "o": 707.4299926757812,
-        "h": 707.780517578125,
-        "l": 706.2100219726562,
-        "c": 707.739990234375,
-        "v": 3395592
+        "h": 712.2999877929688,
+        "l": 704.6599731445312,
+        "c": 707.6400146484375,
+        "v": 31446012
       }
     ],
     "IWM": [
-      {
-        "t": "2026-06-01",
-        "o": 288.3699951171875,
-        "h": 290.6099853515625,
-        "l": 286.2699890136719,
-        "c": 288.9800109863281,
-        "v": 23826100
-      },
       {
         "t": "2026-06-02",
         "o": 288.4599914550781,
@@ -2648,31 +2316,31 @@
         "v": 13658700
       },
       {
+        "t": "2026-08-28",
+        "o": 299.70001220703125,
+        "h": 300.3900146484375,
+        "l": 295.6700134277344,
+        "c": 295.75,
+        "v": 19052800
+      },
+      {
         "t": "2026-08-31",
         "o": 295.0899963378906,
         "h": 295.3500061035156,
         "l": 292.7099914550781,
         "c": 293.92999267578125,
-        "v": 20865000
+        "v": 20883400
       },
       {
         "t": "2026-09-01",
-        "o": 295.0899963378906,
+        "o": 291.9800109863281,
         "h": 292.94000244140625,
-        "l": 291.7900085449219,
-        "c": 292.0,
-        "v": 1895354
+        "l": 289.9750061035156,
+        "c": 290.6300048828125,
+        "v": 20943590
       }
     ],
     "AAPL": [
-      {
-        "t": "2026-06-01",
-        "o": 309.6300048828125,
-        "h": 310.94000244140625,
-        "l": 305.0199890136719,
-        "c": 306.30999755859375,
-        "v": 48849900
-      },
       {
         "t": "2026-06-02",
         "o": 307.4599914550781,
@@ -3175,26 +2843,18 @@
         "h": 321.239990234375,
         "l": 312.79998779296875,
         "c": 316.8500061035156,
-        "v": 41211400
+        "v": 41242700
       },
       {
         "t": "2026-09-01",
         "o": 316.9800109863281,
-        "h": 317.3800048828125,
+        "h": 327.29998779296875,
         "l": 314.73699951171875,
-        "c": 315.9859924316406,
-        "v": 1961811
+        "c": 325.1300048828125,
+        "v": 50793068
       }
     ],
     "MSFT": [
-      {
-        "t": "2026-06-01",
-        "o": 464.8399963378906,
-        "h": 466.32000732421875,
-        "l": 458.2699890136719,
-        "c": 460.5199890136719,
-        "v": 53628900
-      },
       {
         "t": "2026-06-02",
         "o": 446.8800048828125,
@@ -3697,26 +3357,18 @@
         "h": 512.1900024414062,
         "l": 506.3900146484375,
         "c": 507.2900085449219,
-        "v": 27188700
+        "v": 27208900
       },
       {
         "t": "2026-09-01",
         "o": 498.010009765625,
-        "h": 500.5,
+        "h": 505.9700012207031,
         "l": 496.7799987792969,
-        "c": 498.9858093261719,
-        "v": 2571434
+        "c": 501.0199890136719,
+        "v": 17754528
       }
     ],
     "NVDA": [
-      {
-        "t": "2026-06-01",
-        "o": 215.72999572753906,
-        "h": 224.8699951171875,
-        "l": 215.6999969482422,
-        "c": 224.36000061035156,
-        "v": 212850700
-      },
       {
         "t": "2026-06-02",
         "o": 227.17999267578125,
@@ -4219,26 +3871,18 @@
         "h": 221.3000030517578,
         "l": 216.2100067138672,
         "c": 220.77999877929688,
-        "v": 124326400
+        "v": 124702700
       },
       {
         "t": "2026-09-01",
         "o": 216.61000061035156,
-        "h": 217.3000030517578,
+        "h": 220.41000366210938,
         "l": 215.10000610351562,
-        "c": 216.10000610351562,
-        "v": 9900923
+        "c": 217.44000244140625,
+        "v": 99321017
       }
     ],
     "TSLA": [
-      {
-        "t": "2026-06-01",
-        "o": 427.489990234375,
-        "h": 429.6000061035156,
-        "l": 415.42999267578125,
-        "c": 415.8800048828125,
-        "v": 44937900
-      },
       {
         "t": "2026-06-02",
         "o": 418.2200012207031,
@@ -4741,26 +4385,18 @@
         "h": 368.9200134277344,
         "l": 347.1499938964844,
         "c": 367.95001220703125,
-        "v": 61569100
+        "v": 61732300
       },
       {
         "t": "2026-09-01",
         "o": 360.8550109863281,
         "h": 362.70001220703125,
-        "l": 355.6600036621094,
-        "c": 356.7598876953125,
-        "v": 3863782
+        "l": 352.9599914550781,
+        "c": 356.0899963378906,
+        "v": 34877274
       }
     ],
     "AMD": [
-      {
-        "t": "2026-06-01",
-        "o": 500.1600036621094,
-        "h": 517.5,
-        "l": 486.79998779296875,
-        "c": 510.1300048828125,
-        "v": 33309200
-      },
       {
         "t": "2026-06-02",
         "o": 506.29998779296875,
@@ -5263,26 +4899,18 @@
         "h": 475.80999755859375,
         "l": 463.67999267578125,
         "c": 470.7200012207031,
-        "v": 12441000
+        "v": 12463000
       },
       {
         "t": "2026-09-01",
         "o": 459.29998779296875,
-        "h": 460.7200012207031,
-        "l": 455.57000732421875,
-        "c": 458.19500732421875,
-        "v": 1342180
+        "h": 461.5,
+        "l": 452.29998779296875,
+        "c": 459.6099853515625,
+        "v": 15608228
       }
     ],
     "META": [
-      {
-        "t": "2026-06-01",
-        "o": 630.4000244140625,
-        "h": 635.75,
-        "l": 599.530029296875,
-        "c": 600.469970703125,
-        "v": 29138800
-      },
       {
         "t": "2026-06-02",
         "o": 603.239990234375,
@@ -5785,26 +5413,18 @@
         "h": 578.6799926757812,
         "l": 569.1400146484375,
         "c": 572.3400268554688,
-        "v": 13361400
+        "v": 13383800
       },
       {
         "t": "2026-09-01",
         "o": 557.7999877929688,
-        "h": 563.7999877929688,
+        "h": 584.9000244140625,
         "l": 556.2899780273438,
-        "c": 562.6799926757812,
-        "v": 1409790
+        "c": 578.5399780273438,
+        "v": 14542120
       }
     ],
     "AMZN": [
-      {
-        "t": "2026-06-01",
-        "o": 266.2900085449219,
-        "h": 266.6300048828125,
-        "l": 260.70001220703125,
-        "c": 261.260009765625,
-        "v": 53604400
-      },
       {
         "t": "2026-06-02",
         "o": 257.1600036621094,
@@ -6307,26 +5927,18 @@
         "h": 264.3599853515625,
         "l": 257.1199951171875,
         "c": 259.7699890136719,
-        "v": 46005900
+        "v": 46089400
       },
       {
         "t": "2026-09-01",
         "o": 254.8300018310547,
-        "h": 255.3800048828125,
+        "h": 255.82000732421875,
         "l": 251.92999267578125,
-        "c": 255.1584014892578,
-        "v": 3688171
+        "c": 254.9199981689453,
+        "v": 28562976
       }
     ],
     "GOOGL": [
-      {
-        "t": "2026-06-01",
-        "o": 376.5199890136719,
-        "h": 378.55999755859375,
-        "l": 373.5199890136719,
-        "c": 376.3699951171875,
-        "v": 28672100
-      },
       {
         "t": "2026-06-02",
         "o": 366.5899963378906,
@@ -6829,26 +6441,18 @@
         "h": 344.5899963378906,
         "l": 337.1600036621094,
         "c": 339.3500061035156,
-        "v": 33450000
+        "v": 33493600
       },
       {
         "t": "2026-09-01",
         "o": 336.0,
-        "h": 336.1000061035156,
+        "h": 337.20001220703125,
         "l": 333.05999755859375,
-        "c": 335.0299987792969,
-        "v": 1997588
+        "c": 335.0199890136719,
+        "v": 19713745
       }
     ],
     "JPM": [
-      {
-        "t": "2026-06-01",
-        "o": 297.69000244140625,
-        "h": 299.54998779296875,
-        "l": 295.2699890136719,
-        "c": 296.5799865722656,
-        "v": 7930000
-      },
       {
         "t": "2026-06-02",
         "o": 296.5,
@@ -7355,22 +6959,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 355.8999938964844,
-        "h": 356.3399963378906,
-        "l": 354.2300109863281,
-        "c": 355.55499267578125,
-        "v": 223117
+        "o": 355.7300109863281,
+        "h": 359.9200134277344,
+        "l": 354.1199951171875,
+        "c": 354.9798889160156,
+        "v": 3646371
       }
     ],
     "XOM": [
-      {
-        "t": "2026-06-01",
-        "o": 147.02000427246094,
-        "h": 149.64999389648438,
-        "l": 147.0,
-        "c": 149.3800048828125,
-        "v": 16732100
-      },
       {
         "t": "2026-06-02",
         "o": 149.02999877929688,
@@ -7860,6 +7456,14 @@
         "v": 14288500
       },
       {
+        "t": "2026-08-28",
+        "o": 156.60000610351562,
+        "h": 157.4199981689453,
+        "l": 155.32000732421875,
+        "c": 156.7100067138672,
+        "v": 11352600
+      },
+      {
         "t": "2026-08-31",
         "o": 159.94000244140625,
         "h": 161.58999633789062,
@@ -7869,22 +7473,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 159.94000244140625,
-        "h": 164.11329650878906,
-        "l": 162.8800048828125,
-        "c": 163.20689392089844,
-        "v": 877751
+        "o": 163.60000610351562,
+        "h": 164.6999969482422,
+        "l": 162.21499633789062,
+        "c": 164.55999755859375,
+        "v": 8461804
       }
     ],
     "CVX": [
-      {
-        "t": "2026-06-01",
-        "o": 184.3800048828125,
-        "h": 187.94000244140625,
-        "l": 184.02000427246094,
-        "c": 185.8300018310547,
-        "v": 8850500
-      },
       {
         "t": "2026-06-02",
         "o": 184.8800048828125,
@@ -8387,26 +7983,18 @@
         "h": 208.4199981689453,
         "l": 203.83999633789062,
         "c": 206.13999938964844,
-        "v": 12048900
+        "v": 12067400
       },
       {
         "t": "2026-09-01",
-        "o": 206.0800018310547,
-        "h": 209.74000549316406,
-        "l": 208.47000122070312,
-        "c": 208.99000549316406,
-        "v": 600267
+        "o": 209.0,
+        "h": 211.07000732421875,
+        "l": 207.8000030517578,
+        "c": 211.0500030517578,
+        "v": 7213212
       }
     ],
     "GLD": [
-      {
-        "t": "2026-06-01",
-        "o": 409.8599853515625,
-        "h": 412.6099853515625,
-        "l": 408.239990234375,
-        "c": 411.260009765625,
-        "v": 6158900
-      },
       {
         "t": "2026-06-02",
         "o": 414.0799865722656,
@@ -8909,26 +8497,18 @@
         "h": 408.79998779296875,
         "l": 404.8999938964844,
         "c": 408.4200134277344,
-        "v": 9475800
+        "v": 9490000
       },
       {
         "t": "2026-09-01",
-        "o": 407.760009765625,
-        "h": 399.4200134277344,
-        "l": 398.0799865722656,
-        "c": 399.1300048828125,
-        "v": 1537536
+        "o": 398.2850036621094,
+        "h": 401.25,
+        "l": 396.45001220703125,
+        "c": 396.8399963378906,
+        "v": 11605005
       }
     ],
     "SLV": [
-      {
-        "t": "2026-06-01",
-        "o": 67.48999786376953,
-        "h": 68.23999786376953,
-        "l": 66.80000305175781,
-        "c": 67.66999816894531,
-        "v": 16531500
-      },
       {
         "t": "2026-06-02",
         "o": 68.69000244140625,
@@ -9431,26 +9011,18 @@
         "h": 60.41999816894531,
         "l": 59.65999984741211,
         "c": 60.130001068115234,
-        "v": 14703900
+        "v": 14752300
       },
       {
         "t": "2026-09-01",
-        "o": 60.38999938964844,
-        "h": 58.599998474121094,
-        "l": 58.2401008605957,
-        "c": 58.51499938964844,
-        "v": 3076278
+        "o": 58.38999938964844,
+        "h": 59.06209945678711,
+        "l": 57.849998474121094,
+        "c": 57.91999816894531,
+        "v": 17175296
       }
     ],
     "USO": [
-      {
-        "t": "2026-06-01",
-        "o": 135.64999389648438,
-        "h": 138.91000366210938,
-        "l": 133.02000427246094,
-        "c": 135.5,
-        "v": 11053300
-      },
       {
         "t": "2026-06-02",
         "o": 135.07000732421875,
@@ -9953,26 +9525,18 @@
         "h": 134.33999633789062,
         "l": 132.3800048828125,
         "c": 133.6999969482422,
-        "v": 4188500
+        "v": 4205400
       },
       {
         "t": "2026-09-01",
-        "o": 133.00999450683594,
-        "h": 137.25,
-        "l": 136.89100646972656,
-        "c": 137.22000122070312,
-        "v": 850447
+        "o": 137.19000244140625,
+        "h": 141.0399932861328,
+        "l": 136.08999633789062,
+        "c": 140.9199981689453,
+        "v": 7751998
       }
     ],
     "TLT": [
-      {
-        "t": "2026-06-01",
-        "o": 84.93000030517578,
-        "h": 85.54000091552734,
-        "l": 84.80000305175781,
-        "c": 85.47000122070312,
-        "v": 26322400
-      },
       {
         "t": "2026-06-02",
         "o": 85.80000305175781,
@@ -10462,31 +10026,31 @@
         "v": 17361900
       },
       {
+        "t": "2026-08-28",
+        "o": 83.04000091552734,
+        "h": 83.5999984741211,
+        "l": 82.77999877929688,
+        "c": 82.87999725341797,
+        "v": 35804300
+      },
+      {
         "t": "2026-08-31",
         "o": 82.47000122070312,
         "h": 82.52999877929688,
         "l": 82.1500015258789,
         "c": 82.5199966430664,
-        "v": 37294400
+        "v": 37317400
       },
       {
         "t": "2026-09-01",
         "o": 81.8949966430664,
-        "h": 82.01899719238281,
-        "l": 81.88999938964844,
-        "c": 81.99500274658203,
-        "v": 2309850
+        "h": 82.3499984741211,
+        "l": 81.77999877929688,
+        "c": 81.87000274658203,
+        "v": 25120533
       }
     ],
     "XLE": [
-      {
-        "t": "2026-06-01",
-        "o": 57.029998779296875,
-        "h": 57.810001373291016,
-        "l": 56.849998474121094,
-        "c": 57.29999923706055,
-        "v": 55879400
-      },
       {
         "t": "2026-06-02",
         "o": 57.189998626708984,
@@ -10989,26 +10553,18 @@
         "h": 64.44000244140625,
         "l": 63.13999938964844,
         "c": 63.959999084472656,
-        "v": 27118900
+        "v": 27148800
       },
       {
         "t": "2026-09-01",
-        "o": 63.79999923706055,
+        "o": 64.87000274658203,
         "h": 64.94999694824219,
-        "l": 64.46499633789062,
-        "c": 64.58000183105469,
-        "v": 2107470
+        "l": 64.05000305175781,
+        "c": 64.77999877929688,
+        "v": 30527530
       }
     ],
     "XLF": [
-      {
-        "t": "2026-06-01",
-        "o": 51.22999954223633,
-        "h": 51.599998474121094,
-        "l": 51.189998626708984,
-        "c": 51.43000030517578,
-        "v": 34507600
-      },
       {
         "t": "2026-06-02",
         "o": 51.22999954223633,
@@ -11511,26 +11067,18 @@
         "h": 57.93000030517578,
         "l": 57.689998626708984,
         "c": 57.709999084472656,
-        "v": 25204000
+        "v": 25215700
       },
       {
         "t": "2026-09-01",
-        "o": 57.86000061035156,
-        "h": 57.59000015258789,
-        "l": 57.400001525878906,
-        "c": 57.59000015258789,
-        "v": 1203936
+        "o": 57.61000061035156,
+        "h": 57.97999954223633,
+        "l": 57.130001068115234,
+        "c": 57.209999084472656,
+        "v": 28912954
       }
     ],
     "XLK": [
-      {
-        "t": "2026-06-01",
-        "o": 192.32000732421875,
-        "h": 196.5,
-        "l": 191.14999389648438,
-        "c": 195.75999450683594,
-        "v": 18968800
-      },
       {
         "t": "2026-06-02",
         "o": 196.4499969482422,
@@ -12020,6 +11568,14 @@
         "v": 8136000
       },
       {
+        "t": "2026-08-28",
+        "o": 188.07000732421875,
+        "h": 188.6699981689453,
+        "l": 185.50999450683594,
+        "c": 185.69000244140625,
+        "v": 6300200
+      },
+      {
         "t": "2026-08-31",
         "o": 185.77999877929688,
         "h": 186.64999389648438,
@@ -12029,22 +11585,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 185.77499389648438,
-        "h": 183.8695068359375,
-        "l": 183.27999877929688,
-        "c": 183.7449951171875,
-        "v": 349573
+        "o": 183.6999969482422,
+        "h": 184.9199981689453,
+        "l": 182.6300048828125,
+        "c": 183.67999267578125,
+        "v": 7271912
       }
     ],
     "XLY": [
-      {
-        "t": "2026-06-01",
-        "o": 119.69000244140625,
-        "h": 119.83000183105469,
-        "l": 117.97000122070312,
-        "c": 118.19000244140625,
-        "v": 11012100
-      },
       {
         "t": "2026-06-02",
         "o": 117.5199966430664,
@@ -12534,6 +12082,14 @@
         "v": 5231500
       },
       {
+        "t": "2026-08-28",
+        "o": 116.70999908447266,
+        "h": 117.56999969482422,
+        "l": 116.37999725341797,
+        "c": 117.20999908447266,
+        "v": 4505600
+      },
+      {
         "t": "2026-08-31",
         "o": 116.55999755859375,
         "h": 117.13999938964844,
@@ -12543,22 +12099,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 116.55999755859375,
-        "h": 115.5199966430664,
-        "l": 114.8499984741211,
-        "c": 115.06999969482422,
-        "v": 323486
+        "o": 115.41999816894531,
+        "h": 115.61499786376953,
+        "l": 114.31999969482422,
+        "c": 114.58000183105469,
+        "v": 5641885
       }
     ],
     "XLV": [
-      {
-        "t": "2026-06-01",
-        "o": 148.52000427246094,
-        "h": 148.8800048828125,
-        "l": 147.25999450683594,
-        "c": 147.83999633789062,
-        "v": 12582900
-      },
       {
         "t": "2026-06-02",
         "o": 146.75,
@@ -13065,22 +12613,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 170.25,
+        "o": 172.6199951171875,
         "h": 173.52520751953125,
-        "l": 172.3699951171875,
-        "c": 172.97000122070312,
-        "v": 544636
+        "l": 171.02999877929688,
+        "c": 171.66000366210938,
+        "v": 7216844
       }
     ],
     "XLI": [
-      {
-        "t": "2026-06-01",
-        "o": 171.58999633789062,
-        "h": 172.86000061035156,
-        "l": 170.38999938964844,
-        "c": 172.39999389648438,
-        "v": 8235000
-      },
       {
         "t": "2026-06-02",
         "o": 172.94000244140625,
@@ -13570,6 +13110,14 @@
         "v": 5464700
       },
       {
+        "t": "2026-08-28",
+        "o": 179.44000244140625,
+        "h": 179.52000427246094,
+        "l": 176.64999389648438,
+        "c": 177.13999938964844,
+        "v": 8234400
+      },
+      {
         "t": "2026-08-31",
         "o": 176.08999633789062,
         "h": 176.25999450683594,
@@ -13579,22 +13127,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 176.08999633789062,
+        "o": 174.33999633789062,
         "h": 175.44000244140625,
-        "l": 174.1999969482422,
-        "c": 174.69000244140625,
-        "v": 355812
+        "l": 172.14500427246094,
+        "c": 172.74000549316406,
+        "v": 8708436
       }
     ],
     "XLB": [
-      {
-        "t": "2026-06-01",
-        "o": 50.650001525878906,
-        "h": 51.04999923706055,
-        "l": 50.130001068115234,
-        "c": 50.91999816894531,
-        "v": 24538000
-      },
       {
         "t": "2026-06-02",
         "o": 50.81999969482422,
@@ -14084,6 +13624,14 @@
         "v": 7784600
       },
       {
+        "t": "2026-08-28",
+        "o": 53.65999984741211,
+        "h": 53.79999923706055,
+        "l": 52.84000015258789,
+        "c": 53.18000030517578,
+        "v": 13594400
+      },
+      {
         "t": "2026-08-31",
         "o": 53.15999984741211,
         "h": 53.2599983215332,
@@ -14093,22 +13641,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 53.15999984741211,
+        "o": 52.439998626708984,
         "h": 52.459999084472656,
-        "l": 52.27000045776367,
-        "c": 52.279998779296875,
-        "v": 521580
+        "l": 52.02000045776367,
+        "c": 52.09000015258789,
+        "v": 13826995
       }
     ],
     "XLU": [
-      {
-        "t": "2026-06-01",
-        "o": 43.900001525878906,
-        "h": 43.959999084472656,
-        "l": 43.06999969482422,
-        "c": 43.099998474121094,
-        "v": 31206300
-      },
       {
         "t": "2026-06-02",
         "o": 43.209999084472656,
@@ -14598,6 +14138,14 @@
         "v": 16033500
       },
       {
+        "t": "2026-08-28",
+        "o": 43.34000015258789,
+        "h": 43.380001068115234,
+        "l": 42.560001373291016,
+        "c": 42.72999954223633,
+        "v": 20360500
+      },
+      {
         "t": "2026-08-31",
         "o": 42.0,
         "h": 42.400001525878906,
@@ -14607,22 +14155,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 42.0,
-        "h": 42.560001373291016,
-        "l": 42.27000045776367,
-        "c": 42.35499954223633,
-        "v": 1379906
+        "o": 42.29999923706055,
+        "h": 42.61000061035156,
+        "l": 42.09000015258789,
+        "c": 42.57500076293945,
+        "v": 28481037
       }
     ],
     "XLP": [
-      {
-        "t": "2026-06-01",
-        "o": 82.51000213623047,
-        "h": 82.63999938964844,
-        "l": 81.68000030517578,
-        "c": 82.02999877929688,
-        "v": 20246700
-      },
       {
         "t": "2026-06-02",
         "o": 81.91999816894531,
@@ -15112,6 +14652,14 @@
         "v": 8492100
       },
       {
+        "t": "2026-08-28",
+        "o": 85.5,
+        "h": 85.61000061035156,
+        "l": 85.20999908447266,
+        "c": 85.44999694824219,
+        "v": 6807200
+      },
+      {
         "t": "2026-08-31",
         "o": 85.3499984741211,
         "h": 85.3499984741211,
@@ -15121,22 +14669,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 85.3499984741211,
-        "h": 85.91999816894531,
-        "l": 85.26000213623047,
-        "c": 85.69999694824219,
-        "v": 737385
+        "o": 85.51000213623047,
+        "h": 86.16000366210938,
+        "l": 85.15229797363281,
+        "c": 85.2699966430664,
+        "v": 8973359
       }
     ],
     "XLC": [
-      {
-        "t": "2026-06-01",
-        "o": 115.42500305175781,
-        "h": 116.04499816894531,
-        "l": 114.81500244140625,
-        "c": 115.61000061035156,
-        "v": 5270300
-      },
       {
         "t": "2026-06-02",
         "o": 114.75499725341797,
@@ -15626,6 +15166,14 @@
         "v": 4425600
       },
       {
+        "t": "2026-08-28",
+        "o": 111.87000274658203,
+        "h": 113.52999877929688,
+        "l": 111.83000183105469,
+        "c": 112.98999786376953,
+        "v": 3743500
+      },
+      {
         "t": "2026-08-31",
         "o": 112.4800033569336,
         "h": 112.58999633789062,
@@ -15635,22 +15183,14 @@
       },
       {
         "t": "2026-09-01",
-        "o": 112.4800033569336,
-        "h": 110.81999969482422,
+        "o": 110.55999755859375,
+        "h": 111.62999725341797,
         "l": 110.30999755859375,
-        "c": 110.81999969482422,
-        "v": 120193
+        "c": 110.88999938964844,
+        "v": 5041247
       }
     ],
     "PLTR": [
-      {
-        "t": "2026-06-01",
-        "o": 159.97999572753906,
-        "h": 163.6999969482422,
-        "l": 155.8800048828125,
-        "c": 160.64999389648438,
-        "v": 57654000
-      },
       {
         "t": "2026-06-02",
         "o": 156.69000244140625,
@@ -16153,26 +15693,18 @@
         "h": 187.94000244140625,
         "l": 183.7899932861328,
         "c": 186.3800048828125,
-        "v": 25898200
+        "v": 25941200
       },
       {
         "t": "2026-09-01",
         "o": 182.75,
-        "h": 183.99000549316406,
-        "l": 181.3000030517578,
-        "c": 183.8000030517578,
-        "v": 2079217
+        "h": 186.5500030517578,
+        "l": 179.75,
+        "c": 179.9199981689453,
+        "v": 23826751
       }
     ],
     "ORCL": [
-      {
-        "t": "2026-06-01",
-        "o": 230.5,
-        "h": 250.25,
-        "l": 224.60000610351562,
-        "c": 248.14999389648438,
-        "v": 48390000
-      },
       {
         "t": "2026-06-02",
         "o": 242.8000030517578,
@@ -16675,15 +16207,15 @@
         "h": 151.25999450683594,
         "l": 147.75,
         "c": 149.1199951171875,
-        "v": 16087800
+        "v": 16118900
       },
       {
         "t": "2026-09-01",
-        "o": 149.30999755859375,
+        "o": 146.75,
         "h": 146.77000427246094,
-        "l": 143.38999938964844,
-        "c": 145.72000122070312,
-        "v": 1769914
+        "l": 139.9499969482422,
+        "c": 141.26100158691406,
+        "v": 21970680
       }
     ],
     "GC=F": [
@@ -17203,9 +16735,9 @@
         "t": "2026-09-01",
         "o": 4498.7001953125,
         "h": 4510.5,
-        "l": 4374.10009765625,
-        "c": 4386.0,
-        "v": 113416
+        "l": 4369.7001953125,
+        "c": 4376.2001953125,
+        "v": 185850
       }
     ],
     "CL=F": [
@@ -17724,10 +17256,10 @@
       {
         "t": "2026-09-01",
         "o": 86.30999755859375,
-        "h": 88.37999725341797,
+        "h": 90.63999938964844,
         "l": 86.12999725341797,
-        "c": 88.27999877929688,
-        "v": 111627
+        "c": 90.55000305175781,
+        "v": 286532
       }
     ]
   },

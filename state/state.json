@@ -63,13 +63,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": 137.7,
+      "pnl_pct": 0.0295,
+      "exit_price": 141.27,
+      "closed_at": "2026-09-01T20:02:13+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 137.7,
+      "lesson": "USO long +137.70 (+2.95%) conf=0.84 \u2192 CONFIRMED hypothesis (technical evidence)"
     },
     {
       "trade_id": "XLE-2026-09-01T13:35:47+00:00",
@@ -120,19 +125,63 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": 11.84,
+      "pnl_pct": 0.0025,
+      "exit_price": 64.74,
+      "closed_at": "2026-09-01T20:02:13+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 11.84,
+      "lesson": "XLE long +11.84 (+0.25%) conf=0.83 \u2192 CONFIRMED hypothesis (technical evidence)"
     }
   ],
-  "score_history": [],
-  "streaks": {},
-  "thinking_history": [],
-  "discovered_indicators": [],
+  "score_history": [
+    {
+      "at": "2026-09-01T20:02:14+00:00",
+      "score": 0.6145,
+      "metrics": {
+        "net_pnl": 149.54,
+        "portfolio_return": 0.0015003999999998463,
+        "benchmark_return": -0.0007674382016084058,
+        "alpha": 0.002267838201608252,
+        "sharpe": null,
+        "win_rate": 1.0,
+        "n_trades": 2,
+        "n_open": 0
+      },
+      "components": {
+        "return": 0.515,
+        "alpha": 0.538,
+        "sharpe": null,
+        "win_rate": 1.0
+      },
+      "improved": true
+    }
+  ],
+  "streaks": {
+    "no_improve": 0,
+    "failed_measure": 0
+  },
+  "thinking_history": [
+    {
+      "date": "2026-09-01",
+      "change": "After 2 graded trades (2 wins), the 'technical' signal family confirmed my edge. Composite score 0.615 (improved). I will trust 'technical' evidence tomorrow."
+    }
+  ],
+  "discovered_indicators": [
+    {
+      "note": "technical: evidence direction agreement favored agreement by 74.77/trade (n=4)",
+      "at": "2026-09-01T20:02:14+00:00"
+    },
+    {
+      "note": "commodities: evidence direction agreement favored agreement by 74.77/trade (n=2)",
+      "at": "2026-09-01T20:02:14+00:00"
+    }
+  ],
   "resume": {
     "paused": false,
     "reason": null,
@@ -172,6 +221,14 @@
       "at": "2026-09-01T13:41:45+00:00",
       "hypotheses": 14,
       "week_start": "2026-09-07"
+    },
+    {
+      "type": "close",
+      "at": "2026-09-01T20:02:14+00:00",
+      "closed": 2,
+      "score": 0.6145,
+      "improved": true,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
@@ -183,5 +240,68 @@
     "skipped": [],
     "hypotheses": 26,
     "mode": "alpaca_paper"
+  },
+  "last_metrics": {
+    "net_pnl": 149.54,
+    "portfolio_return": 0.0015003999999998463,
+    "benchmark_return": -0.0007674382016084058,
+    "alpha": 0.002267838201608252,
+    "sharpe": null,
+    "win_rate": 1.0,
+    "n_trades": 2,
+    "n_open": 0
+  },
+  "last_components": {
+    "return": 0.515,
+    "alpha": 0.538,
+    "sharpe": null,
+    "win_rate": 1.0
+  },
+  "last_score": 0.6145,
+  "signal_tracker": {
+    "technical": {
+      "n": 2,
+      "wins": 2,
+      "decay_n": 1.92,
+      "decay_wins": 1.92,
+      "edge_sum": 149.54,
+      "tickers": [
+        "USO",
+        "XLE"
+      ],
+      "last": "2026-09-01T20:02:13+00:00",
+      "win_rate": 1.0,
+      "decay_win_rate": 1.0,
+      "edge": 74.77,
+      "priority": 1.0
+    },
+    "_discoveries": [
+      {
+        "category": "technical",
+        "agree_n": 4,
+        "contra_n": 0,
+        "avg_pnl_when_agree": 74.77,
+        "avg_pnl_when_contra": 0.0,
+        "relationship": "evidence direction agreement favored agreement by 74.77/trade"
+      },
+      {
+        "category": "commodities",
+        "agree_n": 2,
+        "contra_n": 0,
+        "avg_pnl_when_agree": 74.77,
+        "avg_pnl_when_contra": 0.0,
+        "relationship": "evidence direction agreement favored agreement by 74.77/trade"
+      }
+    ]
+  },
+  "lessons": [
+    "Winning trades clustered around 'technical' evidence (2 of 2 winners) \u2014 this signal category is earning its prior.",
+    "USO: long move of +2.95% (vindicated) a 84%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis",
+    "Signal tracker now favors: technical (win rate > 55%)."
+  ],
+  "last_close": {
+    "at": "2026-09-01T20:02:14+00:00",
+    "closed": 2,
+    "pnl": 149.54
   }
 }

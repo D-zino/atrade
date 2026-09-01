@@ -32,3 +32,5 @@
 [2026-09-01T13:41:05Z] [INFO] CHECK-IN done: 0 positions, mode=mock
 [2026-09-01T13:41:26Z] [DEBUG] Telegram not configured — skipping notification
 [2026-09-01T13:41:26Z] [INFO] PREVIEW done: 14 hypotheses for 2026-09-02
+[2026-09-01T13:41:45Z] [DEBUG] Telegram not configured — skipping notification
+[2026-09-01T13:41:45Z] [INFO] WEEK-AHEAD done: 14 hypotheses for week of 2026-09-07

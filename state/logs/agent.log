@@ -30,3 +30,5 @@
 [2026-09-01T13:41:05Z] [WARN] No Alpaca keys found — falling back to MockBroker (dry-run). Add keys to atrade/.env to go live on paper.
 [2026-09-01T13:41:05Z] [DEBUG] Telegram not configured — skipping notification
 [2026-09-01T13:41:05Z] [INFO] CHECK-IN done: 0 positions, mode=mock
+[2026-09-01T13:41:26Z] [DEBUG] Telegram not configured — skipping notification
+[2026-09-01T13:41:26Z] [INFO] PREVIEW done: 14 hypotheses for 2026-09-02

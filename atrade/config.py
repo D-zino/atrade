@@ -100,7 +100,8 @@ def load_env_keys() -> dict:
             k, _, v = line.partition("=")
             keys[k.strip()] = v.strip().strip('"').strip("'")
     # environment variables take precedence
-    for k in ("ALPACA_API_KEY", "ALPACA_SECRET_KEY", "ALPACA_PAPER"):
-        if os.environ.get(k):
-            keys[k] = os.environ[k]
+    for k in ("ALPACA_API_KEY", "ALPACA_SECRET_KEY", "ALPACA_PAPER",
+          "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
+    if os.environ.get(k):
+        keys[k] = os.environ[k]
     return keys

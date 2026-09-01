@@ -1,0 +1,114 @@
+[
+  {
+    "category": "earnings",
+    "tickers": ["NVDA", "AMD"],
+    "title": "NVDA/AMD post-earnings drift setup into late-August tape",
+    "summary": "NVIDIA beat and guided above consensus on AI accelerator demand; AMD guided cautiously but hyperscaler capex commentary supports the semi complex. Post-earnings drift typically extends 5-10 sessions for mega-cap semis.",
+    "direction": "bullish",
+    "strength": 0.75,
+    "source": "agent-research",
+    "date": "2026-08-30",
+    "hypothesis": "AI-capacity buildout remains the dominant trade; semis with fresh beats keep their drift until the next macro shock."
+  },
+  {
+    "category": "fed",
+    "tickers": ["SPY", "QQQ"],
+    "title": "Fed speakers this week: rate-path repricing risk",
+    "summary": "Several FOMC members are scheduled to speak this week. Futures price ~3 cuts by mid-2027. Any hawkish pushback (inflation stickiness, tariff pass-through) would lift the 2Y yield and pressure rate-sensitive longs.",
+    "direction": "bearish",
+    "strength": 0.5,
+    "source": "agent-research",
+    "date": "2026-08-30",
+    "hypothesis": "Rates remain the swing factor; day trades must respect the 9:30-10:30 window when Fed headlines land."
+  },
+  {
+    "category": "commodities",
+    "tickers": ["USO", "XLE"],
+    "title": "Oil: OPEC+ quota headlines vs demand fear",
+    "summary": "WTI consolidating in the low-$70s. OPEC+ has flagged quota flexibility for September-October; China demand data is the swing factor. Energy has been range-bound — treat breakouts as low-confidence unless volume confirms.",
+    "direction": "neutral",
+    "strength": 0.4,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "macro",
+    "tickers": ["SPY", "QQQ", "TLT"],
+    "title": "Friday jobs report ahead: payrolls + NFP expectations",
+    "summary": "Consensus expects ~+120k payrolls. A print above +160k lowers cut odds (bearish for growth); below +90k raises them (bullish for duration/growth). The 10Y sits at the middle of its 2-month range — a break beyond 4.4% or below 4.15% is the day-trade trigger.",
+    "direction": "neutral",
+    "strength": 0.55,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "geopolitics",
+    "tickers": ["SPY", "GLD"],
+    "title": "Geopolitical risk premium moderate; gold bid steady",
+    "summary": "Elevated geopolitical tensions (Middle East shipping, Red Sea rerouting) support gold and oil-supply risk. Gold holds its uptrend while real yields ease — dip-buying in GLD has worked for months; chase-risk is low unless headline escalates.",
+    "direction": "bullish",
+    "strength": 0.45,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "insider",
+    "tickers": [],
+    "title": "Insider activity monitor active",
+    "summary": "No significant insider cluster detected in the last 48h for the universe (normal 10b5-1 noise only). Flagging this so the tracker learns: absence of insider selling is NOT a buy signal.",
+    "direction": "neutral",
+    "strength": 0.2,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "options_flow",
+    "tickers": [],
+    "title": "Options flow: watch for call-buying in AI names at open",
+    "summary": "If NVDA/AMD see early call dominance with volume >1.5x average in the first 30 minutes, treat as confirmation of drift continuation; otherwise fade the gap. This is a discretionary intraday confirmation rule.",
+    "direction": "neutral",
+    "strength": 0.35,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "sentiment",
+    "tickers": ["SPY"],
+    "title": "Retail sentiment: AAII bulls < 40%, still cautious",
+    "summary": "AAII survey continues to show a cautious-to-neutral retail cohort. Contrarian lens: heavy caution is mildly supportive for equities near term, but sentiment is a slow signal — weak day-trade edge unless extreme (>55% bears).",
+    "direction": "bullish",
+    "strength": 0.3,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "tech",
+    "tickers": ["MSFT", "GOOGL", "META"],
+    "title": "AI/tech breakthroughs: enterprise AI capex cycle intact",
+    "summary": "Cloud capex guidance across hyperscalers points to sustained AI infrastructure spend through 2027. Software and cloud names benefit from the same AI buildout narrative as semis. Watch for capex-cut headlines — they hit the whole complex.",
+    "direction": "bullish",
+    "strength": 0.5,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "analyst",
+    "tickers": ["MSFT"],
+    "title": "Analyst moves: MSFT PT raised after Azure commentary",
+    "summary": "At least one sell-side house raised its MSFT price target this week citing Azure momentum. PT raises near highs are low-edge for day trading (often priced in); treat as confluence, not a standalone trigger.",
+    "direction": "bullish",
+    "strength": 0.35,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  },
+  {
+    "category": "historical_analog",
+    "tickers": ["SPY"],
+    "title": "Historical analog: post-Labor-Day first week seasonality",
+    "summary": "September historically has the weakest monthly average return of the year, but the first 2 sessions after Labor Day are often firm as vacation money returns. This week is a low-trust week for trend-following — favor mean-reversion and tight stops.",
+    "direction": "neutral",
+    "strength": 0.35,
+    "source": "agent-research",
+    "date": "2026-08-30"
+  }
+]

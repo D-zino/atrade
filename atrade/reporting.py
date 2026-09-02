@@ -134,9 +134,9 @@ def close_report(state: dict, research: dict, hyps: list[dict], closed: list[dic
     lines = report_header("close", mode)
     m = eval_res.get("metrics") or {}
     lines += _portfolio_table(m, eval_res.get("components") or {}, eval_res.get("score") or 0.0)
-    lines += [f"- **Improvement vs best:** {'YES 🎉 (new best score)' if eval_res.get('improved') else 'no — '
-              f'no-improve streak {eval_res.get("no_improve_streak")}/6'}",
-              ""]
+    improve_txt = ("YES 🎉 (new best score)" if eval_res.get("improved")
+                   else f"no — no-improve streak {eval_res.get('no_improve_streak')}/6")
+    lines += [f"- **Improvement vs best:** {improve_txt}", ""]
     if eval_res.get("pause"):
         lines += ["## ⏸ PAUSED", "",
                   "Pause condition triggered (6 runs without improvement, or 3 failed measurements). "

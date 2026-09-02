@@ -133,8 +133,22 @@ Setup:
 4. Test: `python3 -m atrade.cli notify`
 
 The bot will also alert you if the agent auto-pauses. Skip the keys and it stays silent —
-notifications are purely optional and never block a run. On GitHub Actions, set the same
-two values as repo secrets instead.
+notifications are purely optional and never block a run.
+
+**GitHub Actions:** `.env` is not available on the runner. Set the same two values as
+repository secrets (`Settings → Secrets and variables → Actions`):
+
+- `TELEGRAM_BOT_TOKEN`
+- `TELEGRAM_CHAT_ID`
+
+Then verify with **Actions → atrade → Run workflow → "Send a test Telegram message now"**.
+If the step fails, the log now prints the Bot API error (bad token, wrong chat id, never
+messaged the bot, etc.) instead of going green with a silent no-op.
+
+Telegram troubleshooting:
+- You must message the bot at least once before it can message you back.
+- Group chats have a **negative** chat id (e.g. `-100123...`).
+- Empty / missing secrets used to skip every alert with only a DEBUG log line.
 
 ### 🔭 What does it scan? (it's not just AAPL/META)
 Every run scans a **30-symbol universe** — the 2 demo trades were just the *positions

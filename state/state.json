@@ -137,6 +137,228 @@
       "hypothesis_correct": 1,
       "vs_expected": 11.84,
       "lesson": "XLE long +11.84 (+0.25%) conf=0.83 \u2192 CONFIRMED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "NVDA-2026-09-02T13:42:43+00:00",
+      "symbol": "NVDA",
+      "side": "long",
+      "qty": 34,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-09-02T13:42:43+00:00",
+      "entry_price": 219.69000244140625,
+      "order_id": "8401c5bd-85e7-47b4-9a91-bf9dfc6481a0",
+      "hypothesis": {
+        "thesis": "Go long NVDA today: NVDA/AMD post-earnings drift setup into late-August tape; NVDA technical bullish; NVDA daily move +1.0%. Bull vs bear evidence: 1.83 vs 0.00. Playbook prior for 'technical' is 100% win rate over 2 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "NVDA gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.891,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "earnings",
+            "title": "NVDA/AMD post-earnings drift setup into late-August tape",
+            "summary": "NVIDIA beat and guided above consensus on AI accelerator demand; AMD guided cautiously but hyperscaler capex commentary supports the semi complex. Post-earnings drift typically extends 5-10 sessions for mega-cap semis.",
+            "direction": 1.0,
+            "strength": 0.75,
+            "source": "agent-research",
+            "fresh": 0.73
+          },
+          {
+            "category": "technical",
+            "title": "NVDA technical bullish",
+            "summary": "NVDA: 5d mom +4.8%; above SMA20; above SMA50. close 219.69.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "NVDA daily move +1.0%",
+            "summary": "NVDA +1.03% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.3827814560241755,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "AAPL-2026-09-02T13:42:43+00:00",
+      "symbol": "AAPL",
+      "side": "long",
+      "qty": 23,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-09-02T13:42:43+00:00",
+      "entry_price": 325.1401062011719,
+      "order_id": "a7243641-58e5-4239-800e-e0464c41e93e",
+      "hypothesis": {
+        "thesis": "Go long AAPL today: AAPL technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 100% win rate over 2 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AAPL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.885,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AAPL technical bullish",
+            "summary": "AAPL: 5d mom +3.7%; above SMA20; above SMA50. close 325.14.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLY-2026-09-02T13:42:43+00:00",
+      "symbol": "XLY",
+      "side": "short",
+      "qty": 65,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-09-02T13:42:43+00:00",
+      "entry_price": 114.36000061035156,
+      "order_id": "cfedf8da-e999-42c6-92fd-c7f014c62926",
+      "hypothesis": {
+        "thesis": "Go short XLY today: XLY technical bearish. Bull vs bear evidence: 0.00 vs 0.70. Playbook prior for 'technical' is 100% win rate over 2 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XLY gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.815,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "XLY technical bearish",
+            "summary": "XLY: 5d mom -3.0%; below SMA20; below SMA50. close 114.36.",
+            "direction": -1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLK-2026-09-02T13:42:43+00:00",
+      "symbol": "XLK",
+      "side": "long",
+      "qty": 40,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-09-02T13:42:43+00:00",
+      "entry_price": 183.4499969482422,
+      "order_id": "989b21fb-529a-45bf-9744-4409f00c2294",
+      "hypothesis": {
+        "thesis": "Go long XLK today: Sector rotation: XLE (+3.5%), XLK (+0.9%), XLV (+0.4%). Bull vs bear evidence: 0.50 vs 0.00.",
+        "falsifiers": [
+          "sector ETF breaks the day's range against the thesis",
+          "XLK gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.8,
+        "dominant_category": "sector",
+        "evidence": [
+          {
+            "category": "sector",
+            "title": "Sector rotation: XLE (+3.5%), XLK (+0.9%), XLV (+0.4%)",
+            "summary": "Relative-strength leaders (5d): XLE (+3.5%), XLK (+0.9%), XLV (+0.4%). Rotation favors these sectors today.",
+            "direction": 1.0,
+            "strength": 0.5,
+            "source": "rotation",
+            "fresh": 1.0
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLC-2026-09-02T13:42:43+00:00",
+      "symbol": "XLC",
+      "side": "long",
+      "qty": 65,
+      "warmup_factor": 0.5,
+      "opened_at": "2026-09-02T13:42:43+00:00",
+      "entry_price": 111.80999755859375,
+      "order_id": "bf1e9132-ed52-4c13-808c-9f11bab39e15",
+      "hypothesis": {
+        "thesis": "Go long XLC today: XLC technical bullish; XLC daily move +0.8%. Bull vs bear evidence: 0.97 vs 0.00. Playbook prior for 'technical' is 100% win rate over 2 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XLC gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.79,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "XLC technical bullish",
+            "summary": "XLC: 5d mom -1.2%; above SMA20; above SMA50. close 111.81.",
+            "direction": 1.0,
+            "strength": 0.6,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "XLC daily move +0.8%",
+            "summary": "XLC +0.84% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.3670995907801295,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
     }
   ],
   "score_history": [
@@ -229,13 +451,23 @@
       "score": 0.6145,
       "improved": true,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "open",
+      "at": "2026-09-02T13:42:43+00:00",
+      "opened": 5,
+      "hypotheses": 26,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
-    "at": "2026-09-01T13:35:47+00:00",
+    "at": "2026-09-02T13:42:43+00:00",
     "opened": [
-      "USO",
-      "XLE"
+      "NVDA",
+      "AAPL",
+      "XLY",
+      "XLK",
+      "XLC"
     ],
     "skipped": [],
     "hypotheses": 26,

@@ -24,15 +24,15 @@ DEFAULTS = {
     "max_positions": 5,            # concurrent day trades
     "max_position_pct": 0.15,      # 15% of equity per position at confidence 0.80+
     "conf_to_size": {0.60: 0.09, 0.70: 0.12, 0.80: 0.15},  # interpolated
-    "max_portfolio_pct": 0.75,     # max total deployed
+    "max_portfolio_pct": 0.60,     # max total deployed
     "day_trade_only": True,        # all positions closed at close run
     "min_trade_value": 200.0,
-    "max_trade_value": 20000.0,
+    "max_trade_value": 80000.0,
     # --- risk / loss limits ----------------------------------------------------
-    "intraday_stop_pct": 0.014,      # per-position defensive stop (1.4% adverse)
-    "daily_loss_limit_pct": 0.03,    # halt NEW trades for the day if today's P&L
+    "intraday_stop_pct": 0.02,      # per-position defensive stop (2% adverse)
+    "daily_loss_limit_pct": 0.04,    # halt NEW trades for the day if today's P&L
                                      # (realized + unrealized) falls below -3% of equity
-    "max_drawdown_pct": 0.10,        # auto-pause if equity drops 10% below its peak
+    "max_drawdown_pct": 0.14,        # auto-pause if equity drops 14% below its peak
     # --- evaluation ----------------------------------------------------------
     "weights": {"return": 0.35, "alpha": 0.30, "sharpe": 0.20, "win_rate": 0.15},
     "pause_no_improve_streak": 6,   # pause after 6 consecutive runs w/o improvement

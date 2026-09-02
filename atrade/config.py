@@ -21,10 +21,10 @@ DEFAULTS = {
     "timezone": "America/New_York",
     # --- strategy ------------------------------------------------------------
     "min_confidence": 0.60,        # only open trades with hypothesis confidence >= 60%
-    "max_positions": 2,            # concurrent day trades
-    "max_position_pct": 0.12,      # 12% of equity per position at confidence 0.80+
-    "conf_to_size": {0.60: 0.06, 0.70: 0.09, 0.80: 0.12},  # interpolated
-    "max_portfolio_pct": 0.24,     # max total deployed
+    "max_positions": 5,            # concurrent day trades
+    "max_position_pct": 0.15,      # 15% of equity per position at confidence 0.80+
+    "conf_to_size": {0.60: 0.09, 0.70: 0.12, 0.80: 0.15},  # interpolated
+    "max_portfolio_pct": 0.75,     # max total deployed
     "day_trade_only": True,        # all positions closed at close run
     "min_trade_value": 200.0,
     "max_trade_value": 20000.0,

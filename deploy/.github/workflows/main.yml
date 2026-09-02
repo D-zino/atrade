@@ -64,6 +64,8 @@ jobs:
       - name: Send Telegram test check-in
         if: ${{ github.event.inputs.test_checkin == 'true' }}
         env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: SEND_CHECKIN=1 python deploy/dispatch.py
@@ -71,6 +73,8 @@ jobs:
       - name: Send Telegram test tomorrow-preview
         if: ${{ github.event.inputs.test_preview == 'true' }}
         env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: SEND_PREVIEW=1 python deploy/dispatch.py
@@ -78,6 +82,8 @@ jobs:
       - name: Send Telegram test week-ahead digest
         if: ${{ github.event.inputs.test_week_ahead == 'true' }}
         env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: SEND_WEEK_AHEAD=1 python deploy/dispatch.py

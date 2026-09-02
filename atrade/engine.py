@@ -334,10 +334,18 @@ def checkin_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: b
         price_map = _prices_from_bars(broker, cfg, price_map)
     if hasattr(broker, "seed_prices"):
         broker.seed_prices(price_map, session="checkin")
-    positions = broker.positions() if hasattr(broker, "positions") else []
+    try:
+        positions = broker.positions() if hasattr(broker, "positions") else []
+        if not isinstance(positions, list):
+            positions = []
+    except Exception as e:
+        util.log(f"positions unavailable ({e}); assuming flat", "WARN")
+        positions = []
     notes = summary.get("notes") or []
-    strong = sorted([n for n in notes if (n.get("strength") or 0) >= 0.5],
-                    key=lambda n: -(n.get("strength") or 0))[:4]
+    strong = sorted(
+        [n for n in notes if isinstance(n, dict) and (n.get("strength") or 0) >= 0.5],
+        key=lambda n: -(n.get("strength") or 0),
+    )[:4]
     try:
         from . import telegram
         telegram.send(telegram.format_checkin(util.utc_iso(), mode, positions, strong))

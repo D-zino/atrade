@@ -77,33 +77,74 @@ def main() -> int:
     for k, v in keys.items():
         os.environ.setdefault(k, v)
 
-    from atrade import engine
+    # Import telegram first so a test ping still works if the engine stack
+    # has a problem (the original check-in test never got that far).
+    from atrade import telegram
+
+    if not telegram.configured():
+        print("[dispatch] Telegram not configured — alerts disabled. "
+              "Set repo secrets TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID "
+              "(Settings → Secrets and variables → Actions).")
+
+    def _require_telegram() -> int | None:
+        """Fail Action *test* steps loudly when secrets are missing."""
+        if telegram.configured():
+            return None
+        print("[dispatch] ERROR: Telegram is not configured.")
+        print("Add these as GitHub repo secrets (Settings → Secrets and variables → Actions):")
+        print("  TELEGRAM_BOT_TOKEN   from @BotFather")
+        print("  TELEGRAM_CHAT_ID     from https://api.telegram.org/bot<TOKEN>/getUpdates")
+        print("Message the bot once first, otherwise Telegram will not deliver.")
+        print("Group chats have a negative chat id (e.g. -100123...).")
+        return 1
+
+    def _require_sent(label: str) -> int:
+        if telegram.last_ok:
+            print(f"[dispatch] {label} telegram sent")
+            return 0
+        err = telegram.last_error or "send returned False"
+        print(f"[dispatch] ERROR: {label} telegram was not delivered: {err}")
+        print("Check TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID. You must message the bot once.")
+        return 1
 
     # --- optional: send a Telegram test message -----------------------------
     if os.environ.get("SEND_TEST_TELEGRAM") == "1":
-        from atrade import telegram
-        ok = telegram.send(
-            "<b>✅ A-Trade is LIVE on GitHub Actions</b>\n\n"
-            "Your Telegram alerts are working. You will now receive these messages "
-            "every trading day:\n"
-            "  • 09:25 ET — open run (what it opened + today's watchlist)\n"
-            "  • 10:30 ET — mid-session check-in (positions + events in play)\n"
-            "  • 15:50 ET — close run (P&L, score, lessons, tomorrow's watchlist)\n"
-            "  • 20:00 ET — tomorrow preview (calendar + prior-adjusted watchlist)\n\n"
-            "No more action needed — the bot runs itself.")
-        print("[dispatch] test telegram sent" if ok else "[dispatch] telegram not configured")
-        return 0
+        missing = _require_telegram()
+        if missing:
+            return missing
+        ok = telegram.send(telegram.format_test())
+        return 0 if ok else _require_sent("test")
+
+    from atrade import engine
 
     # --- optional: send check-in / preview / week-ahead now (for testing) ---
     if os.environ.get("SEND_CHECKIN") == "1":
-        engine.checkin_run(os.path.join(ROOT, "state"), force_mock=False, allow_anyday=True)
-        return 0
+        missing = _require_telegram()
+        if missing:
+            return missing
+        r = engine.checkin_run(os.path.join(ROOT, "state"), force_mock=False, allow_anyday=True)
+        print(f"[dispatch] checkin -> {r.get('status')}")
+        if r.get("status") == "paused":
+            print("[dispatch] ERROR: agent is paused — no check-in sent. Resume first.")
+            return 1
+        return _require_sent("check-in")
     if os.environ.get("SEND_PREVIEW") == "1":
-        engine.preview_run(os.path.join(ROOT, "state"), force_mock=False, allow_anyday=True)
-        return 0
+        missing = _require_telegram()
+        if missing:
+            return missing
+        r = engine.preview_run(os.path.join(ROOT, "state"), force_mock=False, allow_anyday=True)
+        print(f"[dispatch] preview -> {r.get('status')}")
+        if r.get("status") == "paused":
+            print("[dispatch] ERROR: agent is paused — no preview sent. Resume first.")
+            return 1
+        return _require_sent("preview")
     if os.environ.get("SEND_WEEK_AHEAD") == "1":
-        engine.week_ahead_run(os.path.join(ROOT, "state"), force_mock=False, allow_anyday=True)
-        return 0
+        missing = _require_telegram()
+        if missing:
+            return missing
+        r = engine.week_ahead_run(os.path.join(ROOT, "state"), force_mock=False, allow_anyday=True)
+        print(f"[dispatch] week-ahead -> {r.get('status')}")
+        return _require_sent("week-ahead")
 
     # --- optional: resume after auto-pause ----------------------------------
     if os.environ.get("RESUME") == "1":

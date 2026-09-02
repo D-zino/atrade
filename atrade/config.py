@@ -136,21 +136,50 @@ def save_config_override(cfg: dict) -> None:
     util.write_json(_state_dir() / "config.json", cfg)
 
 
+def _clean_secret(v) -> str:
+    if v is None:
+        return ""
+    return str(v).strip().strip('"').strip("'")
+
+
+def _is_placeholder(v: str) -> bool:
+    """Reject empty / example values so .env.example never looks like real keys.
+
+    `your_paper_api_key_here` used to make make_broker() think Alpaca was
+    configured, then GitHub Actions check-in crashed on a 401 from positions().
+    """
+    if not v:
+        return True
+    low = v.lower()
+    if low in {"true", "false", "1", "0", "yes", "no"}:
+        return False
+    if low.startswith("your_") or low.endswith("_here") or "example" in low or "changeme" in low:
+        return True
+    return False
+
+
 def load_env_keys() -> dict:
-    """Read Alpaca keys from .env (KEY=value lines) — never from live trading endpoints."""
+    """Read Alpaca/Telegram keys from .env, then overlay real environment variables.
+
+    `.env.example` is a template only and is never loaded. Empty GitHub Actions
+    secrets and placeholder strings are ignored so they cannot masquerade as
+    live credentials.
+    """
     keys = {}
-    for p in [PACKAGE_DIR / ".env", PACKAGE_DIR / ".env.example"]:
-        if not p.exists():
-            continue
-        for line in p.read_text().splitlines():
+    env_path = PACKAGE_DIR / ".env"
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
             line = line.strip()
             if not line or line.startswith("#") or "=" not in line:
                 continue
             k, _, v = line.partition("=")
-            keys[k.strip()] = v.strip().strip('"').strip("'")
+            val = _clean_secret(v)
+            if val and not _is_placeholder(val):
+                keys[k.strip()] = val
     # environment variables take precedence (GitHub Actions secrets land here)
     for k in ("ALPACA_API_KEY", "ALPACA_SECRET_KEY", "ALPACA_PAPER",
               "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
-        if os.environ.get(k):
-            keys[k] = os.environ[k]
+        val = _clean_secret(os.environ.get(k))
+        if val and not _is_placeholder(val):
+            keys[k] = val
     return keys

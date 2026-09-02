@@ -2,9 +2,9 @@
 
 Rules:
   - day-trade only: every position opened at the open-run is closed at the close-run
-  - max N concurrent positions (default 2), max total exposure (default 24% of equity)
+  - max N concurrent positions (default 5), max total exposure (default 60% of equity)
   - position size interpolated from hypothesis confidence (see cfg.conf_to_size)
-  - intraday stop: ~1.4% adverse move (ATR-ish proxy) triggers a defensive close
+  - intraday stop: ~2% adverse move (ATR-ish proxy) triggers a defensive close
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from . import util
 def size_for(cfg: dict, confidence: float, equity: float, symbol_price: float | None) -> float:
     """Dollar size for a position given confidence."""
     conf_to_size = {float(k): float(v) for k, v in cfg.get("conf_to_size",
-                    {0.60: 0.06, 0.70: 0.09, 0.80: 0.12}).items()}
+                    {0.60: 0.09, 0.70: 0.12, 0.80: 0.15}).items()}
     keys = sorted(conf_to_size)
     c = max(keys[0], min(float(confidence), 1.0))
     # linear interpolation between config points
@@ -30,7 +30,7 @@ def size_for(cfg: dict, confidence: float, equity: float, symbol_price: float | 
     if symbol_price and symbol_price > 0:
         qty = max(1, int(dollars / symbol_price))
         dollars = qty * symbol_price
-    return max(cfg.get("min_trade_value", 200.0), min(cfg.get("max_trade_value", 20000.0), dollars))
+    return max(cfg.get("min_trade_value", 200.0), min(cfg.get("max_trade_value", 80000.0), dollars))
 
 
 def warmup_factor(cfg: dict, n_trades: int) -> float:

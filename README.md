@@ -266,6 +266,42 @@ max_trade_value 80000 · intraday_stop_pct 0.02 · daily_loss_limit_pct 0.04 · 
 intentional. On GitHub, create/edit `state/config.json` in the repo (it persists across
 runs via the commit-back step).
 
+## Dynamic universe (Tier 2) — the scan grows with the market
+
+The base 30-symbol watchlist is the floor, not the ceiling. Every research pass also
+sweeps a **~60-symbol candidate pool** and adds names with real, current evidence:
+
+| Setting | Default | What it does |
+|---|---|---|
+| `auto_dynamic_universe` | true | Master switch for discovery + rotation |
+| `max_dynamic_additions` | 12 | Max names added to the scan set per run |
+| `momentum_top_n` | 6 | How many top momentum/volume names are considered |
+| `rotation_bias_top` | 3 | Top sector ETFs whose symbols get a confidence bump |
+| `min_dynamic_volume` | 500000 | Liquidity floor (avg 5d $ volume) for additions |
+| `max_per_cluster` | 2 | Max concurrent positions per correlated cluster (semis, big-tech, …) |
+
+How it works, in order:
+1. **News/SEC discovery** — RSS news + SEC Form 4 filings are scanned for candidate-pool
+   tickers (`extract_ticker_mentions`); mentioned names join the scan.
+2. **Momentum rotation** — candidates ranked by 5-day return (volume as tiebreak);
+   top names join the scan (`momentum_rotation`).
+3. **Sector rotation** — sector ETFs ranked by 5-day return; the top 3 are stored and
+   their symbols get a +3pp confidence bump in `build_hypotheses`.
+4. **Correlation cap** — when opening, positions are grouped into `correlation_clusters`
+   (semis, bigtech_software, consumer_tech, financials, energy, …); a cluster can hold at
+   most `max_per_cluster` positions, so a basket of 5 longs can't silently become 5 chip
+   stocks. Blocked names are logged with the reason (`cluster 'semis' already at 2 positions`).
+5. **Per-symbol learning** — every closed trade is graded per **symbol** (not just per
+   category) in the signal tracker; the playbook shows each symbol's n / wins / win rate /
+   edge and flags `⭐ KEEP` (≥60% win rate) or `⚠️ DEMOTE` (≤35%). Demoted symbols lose
+   their per-symbol bonus. All of it is capped by `max_dynamic_additions` and the 60%
+   confidence gate — additions are *scanned*, only traded if a ≥60% hypothesis forms.
+
+The dynamic additions appear in Telegram (`dynamic adds today: …`) and in the open report
+(`## Dynamic universe additions`). Watch the report's scan size to see it grow: the more
+news/momentum names it finds, the wider the net — and the correlation cap keeps the
+portfolio diversified.
+
 ## Safety rails
 - Paper endpoint hard-coded; live endpoints not implemented.
 - No leverage; shorts allowed but sized the same as longs and only when bearish evidence

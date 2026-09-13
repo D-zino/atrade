@@ -463,6 +463,12 @@
       "type": "preview",
       "at": "2026-09-09T00:06:08+00:00",
       "hypotheses": 14
+    },
+    {
+      "type": "week_ahead",
+      "at": "2026-09-13T21:15:28+00:00",
+      "hypotheses": 14,
+      "week_start": "2026-09-14"
     }
   ],
   "last_open": {

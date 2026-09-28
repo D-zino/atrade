@@ -86,3 +86,27 @@
 [2026-09-09T00:06:08Z] [INFO] PREVIEW done: 14 hypotheses for 2026-09-10
 [2026-09-13T21:15:28Z] [INFO] WEEK-AHEAD done: 14 hypotheses for week of 2026-09-14
 [2026-09-15T00:04:52Z] [INFO] PREVIEW done: 14 hypotheses for 2026-09-16
+[2026-09-28T19:54:28Z] [INFO] Research pass starting...
+[2026-09-28T19:54:48Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10: The read operation timed out
+[2026-09-28T19:55:08Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2: The read operation timed out
+[2026-09-28T19:55:28Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS: The read operation timed out
+[2026-09-28T19:55:48Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE: The read operation timed out
+[2026-09-28T19:56:08Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL: The read operation timed out
+[2026-09-28T19:56:28Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=PPIFID: The read operation timed out
+[2026-09-28T19:56:28Z] [INFO] FRED: 0 series -> 0 notes
+[2026-09-28T19:56:57Z] [INFO] prices: 88/88 symbols (yahoo+stooq)
+[2026-09-28T19:56:57Z] [INFO] RSS: 0 items
+[2026-09-28T19:56:59Z] [INFO] SEC: 18 filings -> 18 notes
+[2026-09-28T19:56:59Z] [INFO] inbox: 11 notes
+[2026-09-28T19:56:59Z] [INFO] dynamic universe: +6 symbols (news 0, momentum 6) → scanning 36
+[2026-09-28T19:57:00Z] [INFO] Research pass done: 36 notes -> summary_2026-09-28.json
+[2026-09-28T19:57:00Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-09-28T19:57:00Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-09-28T19:57:00Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-09-28T19:57:00Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-09-28T19:57:00Z] [INFO] CLOSE LONG 34 NVDA @ 228.69 P&L +306.17 (+4.10%)
+[2026-09-28T19:57:00Z] [INFO] CLOSE LONG 23 AAPL @ 338.45 P&L +306.13 (+4.09%)
+[2026-09-28T19:57:00Z] [INFO] CLOSE SHORT 65 XLY @ 108.98 P&L +349.70 (+4.70%)
+[2026-09-28T19:57:00Z] [INFO] CLOSE LONG 40 XLK @ 194.40 P&L +438.00 (+5.97%)
+[2026-09-28T19:57:00Z] [INFO] CLOSE LONG 65 XLC @ 111.09 P&L -46.47 (-0.64%)
+[2026-09-28T19:57:00Z] [INFO] CLOSE RUN done: 5 closed, score 0.7757, improved=True. Report: close_2026-09-28.md

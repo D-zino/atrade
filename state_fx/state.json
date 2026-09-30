@@ -1,0 +1,16 @@
+{
+  "created_at": "2026-09-30T00:00:00+00:00",
+  "baseline": null,
+  "ledger": [],
+  "score_history": [],
+  "streaks": {},
+  "thinking_history": [],
+  "discovered_indicators": [],
+  "signal_tracker": {},
+  "resume": {
+    "paused": false,
+    "reason": null,
+    "resumed_at": null
+  },
+  "runs": []
+}

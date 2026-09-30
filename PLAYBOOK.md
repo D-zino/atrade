@@ -1,6 +1,6 @@
 # 📘 A-Trade Playbook — living trading rules & signal tracker
 
-*Last updated: 2026-09-28T19:57:00+00:00*
+*Last updated: 2026-09-30T22:20:33+00:00*
 
 This file is rewritten after every close run by the self-improvement loop. It is **not** a fixed rulebook — rules here are provisional hypotheses about what the market rewards, updated from evidence.
 
@@ -31,13 +31,8 @@ This file is rewritten after every close run by the self-improvement loop. It is
 
 ## Lessons learned this run
 
-- Winning trades clustered around 'technical' evidence (3 of 4 winners) — this signal category is earning its prior.
-- Losers were dominated by 'technical' (1 of 1) — reducing prior weight for that category until it demonstrates edge.
-- NVDA: long move of +4.10% (vindicated) a 89%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis
-- AAPL: long move of +4.09% (vindicated) a 88%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis
-- XLY: short move of +4.70% (vindicated) a 82%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis
-- XLK: long move of +5.97% (vindicated) a 80%-confidence thesis. Falsifier used: sector ETF breaks the day's range against the thesis
 - Signal tracker now favors: technical, sector (win rate > 55%).
+- No trades closed this run (no day trades were open) — nothing to grade yet.
 
 ## Per-symbol record (dynamic-universe learning)
 

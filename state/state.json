@@ -428,6 +428,27 @@
         "win_rate": 1.0
       },
       "improved": true
+    },
+    {
+      "at": "2026-09-30T22:20:33+00:00",
+      "score": 0.792,
+      "metrics": {
+        "net_pnl": 1503.07,
+        "portfolio_return": 0.01401320000000017,
+        "benchmark_return": 0.0004263545564491267,
+        "alpha": 0.013586845443551043,
+        "sharpe": 7.613,
+        "win_rate": 0.8571428571428571,
+        "n_trades": 7,
+        "n_open": 0
+      },
+      "components": {
+        "return": 0.64,
+        "alpha": 0.726,
+        "sharpe": 1.0,
+        "win_rate": 1.0
+      },
+      "improved": true
     }
   ],
   "streaks": {
@@ -442,6 +463,10 @@
     {
       "date": "2026-09-28",
       "change": "After 5 graded trades (4 wins), the 'technical' signal family confirmed my edge. Composite score 0.776 (improved). I will trust 'technical' evidence tomorrow."
+    },
+    {
+      "date": "2026-09-30",
+      "change": "No trades closed today; priors unchanged but fresh research was logged. The playbook still lacks outcome evidence for this setup class."
     }
   ],
   "discovered_indicators": [
@@ -536,6 +561,14 @@
       "score": 0.7757,
       "improved": true,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "close",
+      "at": "2026-09-30T22:20:33+00:00",
+      "closed": 0,
+      "score": 0.792,
+      "improved": true,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
@@ -553,9 +586,9 @@
   },
   "last_metrics": {
     "net_pnl": 1503.07,
-    "portfolio_return": 0.01403130000000008,
-    "benchmark_return": 0.003719012730987181,
-    "alpha": 0.010312287269012899,
+    "portfolio_return": 0.01401320000000017,
+    "benchmark_return": 0.0004263545564491267,
+    "alpha": 0.013586845443551043,
     "sharpe": 7.613,
     "win_rate": 0.8571428571428571,
     "n_trades": 7,
@@ -563,11 +596,11 @@
   },
   "last_components": {
     "return": 0.64,
-    "alpha": 0.672,
+    "alpha": 0.726,
     "sharpe": 1.0,
     "win_rate": 1.0
   },
-  "last_score": 0.7757,
+  "last_score": 0.792,
   "signal_tracker": {
     "technical": {
       "n": 6,
@@ -616,17 +649,12 @@
     }
   },
   "lessons": [
-    "Winning trades clustered around 'technical' evidence (3 of 4 winners) \u2014 this signal category is earning its prior.",
-    "Losers were dominated by 'technical' (1 of 1) \u2014 reducing prior weight for that category until it demonstrates edge.",
-    "NVDA: long move of +4.10% (vindicated) a 89%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis",
-    "AAPL: long move of +4.09% (vindicated) a 88%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis",
-    "XLY: short move of +4.70% (vindicated) a 82%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis",
-    "XLK: long move of +5.97% (vindicated) a 80%-confidence thesis. Falsifier used: sector ETF breaks the day's range against the thesis",
-    "Signal tracker now favors: technical, sector (win rate > 55%)."
+    "Signal tracker now favors: technical, sector (win rate > 55%).",
+    "No trades closed this run (no day trades were open) \u2014 nothing to grade yet."
   ],
   "last_close": {
-    "at": "2026-09-28T19:57:00+00:00",
-    "closed": 5,
+    "at": "2026-09-30T22:20:33+00:00",
+    "closed": 0,
     "pnl": 1503.07
   },
   "peak_equity": 101403.13

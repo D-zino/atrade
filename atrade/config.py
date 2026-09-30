@@ -7,6 +7,49 @@ from pathlib import Path
 
 PACKAGE_DIR = Path(__file__).resolve().parent.parent  # .../atrade/
 
+# Separate defaults for the parallel XAUUSD book. It is always paper-only and
+# loads overrides from state_fx/config.json rather than the equity state dir.
+XAUUSD_DEFAULTS = {
+    "symbol": "XAUUSD",
+    "price_feed_primary": "XAUUSD=X",
+    "price_feed_fallback": "GC=F",
+    "max_quote_age_minutes": 30.0,
+    "initial_equity": 100000.0,
+    "risk_pct": 0.01,
+    "min_confidence": 0.60,
+    "max_positions": 2,
+    "max_per_cluster": 2,
+    "cross_book_cluster_check": True,
+    "equity_state_file": None,
+    "no_pyramiding": True,
+    "max_entries_per_fx_day": 1,
+    "spread": 0.30,
+    "slippage_bps": 2.0,
+    "mock_drift_scale": 0.25,
+    "mock_account_filename": "mock_account_fx.json",
+    "atr_period": 14,
+    "initial_stop_atr_mult": 3.0,
+    "trail_atr_mult": 3.0,
+    "structure_pivot_bars": 3,
+    "breakeven_after_1r": False,
+    "take_profit_r": None,
+    "partial_take_profit_r": None,
+    "thesis_horizon": "2-5 sessions",
+    "thesis_horizon_sessions": 5,
+    "flatten_before_weekend": True,
+    "weekend_mode": "flatten",
+    "max_drawdown_pct": 0.14,
+    "red_event_buffer_minutes": 15,
+    "red_events": [],
+    "fred_series": ["DFII10", "DTWEXBGS", "DGS10", "DGS2", "FEDFUNDS"],
+    "rss_queries": [
+        "XAUUSD spot gold price",
+        "gold price outlook real yields dollar",
+        "central bank gold demand",
+        "XAUUSD market news",
+    ],
+}
+
 DEFAULTS = {
     # --- execution / broker -----------------------------------------------
     "broker": "alpaca",          # "alpaca" (paper) or "mock"
@@ -106,6 +149,8 @@ DEFAULTS = {
     "fred_series": ["DGS10", "DGS2", "FEDFUNDS", "UNRATE", "CPIAUCSL", "PPIFID"],
     "sec_enabled": True,
     "sec_user_agent": "TradingResearchAgent/1.0 (educational paper-trading research; contact: agent@example.com)",
+    # Parallel gold swing book. Equity paths do not consume this block.
+    "xauusd": XAUUSD_DEFAULTS,
 }
 
 # Runtime overrides file lives next to the state so different state dirs
@@ -127,6 +172,33 @@ def load_config() -> dict:
             cfg.update(json.loads(over.read_text()))
         except Exception:
             pass
+    return cfg
+
+
+def load_fx_config(state_dir: str | Path | None = None) -> dict:
+    """Load book-local XAUUSD defaults and state_fx/config.json overrides.
+
+    The gold paper book never inherits broker selection or risk overrides from
+    ``state/config.json``; its configuration and mock account stay isolated.
+    Overrides may be flat or nested under ``{"xauusd": {...}}``.
+    """
+    import copy
+
+    cfg = copy.deepcopy(XAUUSD_DEFAULTS)
+    root = Path(state_dir) if state_dir is not None else PACKAGE_DIR / "state_fx"
+    override_path = root / "config.json"
+    if override_path.exists():
+        try:
+            raw = json.loads(override_path.read_text())
+            if isinstance(raw, dict):
+                fx_overrides = raw.get("xauusd", raw)
+                if isinstance(fx_overrides, dict):
+                    cfg.update(fx_overrides)
+        except Exception:
+            pass
+    # Hard safety boundary: this phase cannot be switched to a live broker.
+    cfg["broker"] = "mock"
+    cfg["paper_only"] = True
     return cfg
 
 

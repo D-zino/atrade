@@ -222,3 +222,318 @@ def intraday_stop_check(broker, cfg: dict, ledger: list[dict], positions: list[d
             util.log(f"STOP {sym} @ {px:.2f} P&L {t['pnl']:+.2f}")
             closed.append(t)
     return closed
+
+
+# ---------------------------------------------------------------------------
+# XAUUSD swing-with-stops helpers (additive; equity order paths above unchanged)
+# ---------------------------------------------------------------------------
+
+def _bar_value(bar: dict, *keys: str) -> float | None:
+    for key in keys:
+        try:
+            value = bar.get(key)
+            if value is not None:
+                return float(value)
+        except (TypeError, ValueError):
+            continue
+    return None
+
+
+def atr_24h(bars: list[dict], period: int = 14) -> float | None:
+    """Simple mean true range over completed 24h bars (USD per troy ounce)."""
+    if not bars or period <= 0:
+        return None
+    ranges = []
+    previous_close = None
+    for bar in bars:
+        high = _bar_value(bar, "h", "high")
+        low = _bar_value(bar, "l", "low")
+        close = _bar_value(bar, "c", "close")
+        if high is None or low is None or high < low:
+            continue
+        tr = high - low
+        if previous_close is not None:
+            tr = max(tr, abs(high - previous_close), abs(low - previous_close))
+        ranges.append(tr)
+        if close is not None:
+            previous_close = close
+    if not ranges:
+        return None
+    recent = ranges[-period:]
+    return sum(recent) / len(recent)
+
+
+def latest_confirmed_swing(bars: list[dict], side: str,
+                           pivot_bars: int = 3) -> float | None:
+    """Return the latest confirmed 3-bar swing low/high.
+
+    A pivot is confirmed only after a bar has closed on each side of it. The
+    default is deliberately the 3-bar pivot selected for the XAUUSD book; an
+    unconfirmed latest candle is never used as structure.
+    """
+    if pivot_bars != 3:
+        raise ValueError("XAUUSD initial structure uses confirmed 3-bar pivots")
+    if len(bars or []) < 3 or side not in {"long", "short"}:
+        return None
+    field = ("l", "low") if side == "long" else ("h", "high")
+    for index in range(len(bars) - 2, 0, -1):
+        current = _bar_value(bars[index], *field)
+        before = _bar_value(bars[index - 1], *field)
+        after = _bar_value(bars[index + 1], *field)
+        if current is None or before is None or after is None:
+            continue
+        if side == "long" and current < before and current < after:
+            return current
+        if side == "short" and current > before and current > after:
+            return current
+    return None
+
+
+def swing_initial_stop(entry_price: float, side: str, bars: list[dict],
+                       atr: float | None, atr_mult: float = 3.0,
+                       pivot_bars: int = 3) -> dict | None:
+    """Build a stop from a confirmed structure pivot and 3x 24h ATR.
+
+    For a long, select the higher valid level (closer to entry) from the swing
+    low and ``entry - atr_mult*ATR``. For a short, select the lower valid level
+    from the swing high and ``entry + atr_mult*ATR``. This is the stop rule
+    confirmed for the v1 book; narrative falsifiers remain metadata.
+    """
+    try:
+        entry = float(entry_price)
+        atr_value = float(atr) if atr is not None else 0.0
+        mult = float(atr_mult)
+    except (TypeError, ValueError):
+        return None
+    if entry <= 0 or atr_value <= 0 or mult <= 0 or side not in {"long", "short"}:
+        return None
+    structure = latest_confirmed_swing(bars, side, pivot_bars=pivot_bars)
+    atr_level = entry - mult * atr_value if side == "long" else entry + mult * atr_value
+    candidates = [atr_level]
+    if structure is not None:
+        if (side == "long" and 0 < structure < entry) or (side == "short" and structure > entry):
+            candidates.append(structure)
+    stop = max(candidates) if side == "long" else min(candidates)
+    if (side == "long" and not 0 < stop < entry) or (side == "short" and stop <= entry):
+        return None
+    stop = round(stop, 2)
+    if (side == "long" and not 0 < stop < entry) or (side == "short" and stop <= entry):
+        return None
+    if structure not in candidates:
+        stop_basis = "3x_atr_fallback"
+    elif abs(stop - structure) < 0.0001:
+        stop_basis = "confirmed_3bar_pivot"
+    else:
+        stop_basis = "3x_atr_tighter_than_pivot"
+    return {
+        "stop_price": stop,
+        "structure_price": round(structure, 2) if structure is not None else None,
+        "atr_price": round(atr_level, 2),
+        "stop_basis": stop_basis,
+        "atr": round(atr_value, 4),
+        "atr_mult": mult,
+    }
+
+
+def swing_size(equity: float, risk_pct: float, entry_price: float,
+               stop_price: float, precision: int = 3) -> float:
+    """Risk-size a paper position in fractional troy ounces.
+
+    ``oz = equity * risk_pct / abs(entry - stop)``. Quantity is rounded down
+    to avoid exceeding the requested dollar risk.
+    """
+    try:
+        equity_value = float(equity)
+        risk = float(risk_pct)
+        distance = abs(float(entry_price) - float(stop_price))
+    except (TypeError, ValueError):
+        return 0.0
+    if equity_value <= 0 or risk <= 0 or distance <= 0:
+        return 0.0
+    scale = 10 ** max(0, int(precision))
+    return max(0.0, int((equity_value * risk / distance) * scale) / scale)
+
+
+def _broker_position_qty(broker, symbol: str) -> float | None:
+    if not hasattr(broker, "positions"):
+        return None
+    try:
+        for position in broker.positions() or []:
+            if position.get("symbol") == symbol:
+                return float(position.get("qty") or 0.0)
+        return 0.0
+    except Exception as exc:
+        util.log(f"FX broker position lookup failed for {symbol}: {exc}", "WARN")
+        return None
+
+
+def _close_swing_position(broker, trade: dict, market_price: float,
+                          exit_reason: str, now=None) -> dict | None:
+    symbol = trade.get("symbol") or "XAUUSD"
+    side = trade.get("side")
+    qty = float(trade.get("qty_oz") or trade.get("qty") or 0.0)
+    entry = float(trade.get("entry_price") or 0.0)
+    if side not in {"long", "short"} or qty <= 0 or entry <= 0:
+        return None
+    position_qty = _broker_position_qty(broker, symbol)
+    expected_sign = 1.0 if side == "long" else -1.0
+    if position_qty is not None and (
+        abs(abs(position_qty) - qty) > 0.0005 or position_qty * expected_sign <= 0
+    ):
+        util.log(f"FX close blocked: broker position mismatch for {symbol} "
+                 f"(ledger {expected_sign * qty:.3f}, broker {position_qty:.3f})", "ERROR")
+        return None
+    close_side = "sell" if side == "long" else "buy"
+    try:
+        order = broker.submit_order(symbol, qty, close_side)
+        fill = float(order.get("filled_avg_price") or market_price)
+    except Exception as exc:
+        util.log(f"FX close failed for {symbol}: {exc}", "ERROR")
+        return None
+    sign = 1.0 if side == "long" else -1.0
+    pnl = (fill - entry) * qty * sign
+    pnl_pct = sign * (fill / entry - 1.0)
+    if now is None:
+        closed_at = util.utc_iso()
+    else:
+        closed_at = now.isoformat()
+    trade.update({
+        "status": exit_reason,
+        "exit_reason": exit_reason,
+        "exit_price": round(fill, 4),
+        "closed_at": closed_at,
+        "pnl": round(pnl, 2),
+        "pnl_pct": round(pnl_pct, 6),
+        "stop_hit": exit_reason == "stopped",
+    })
+    notes = trade.setdefault("notes", [])
+    if isinstance(notes, list):
+        notes.append(f"XAUUSD swing exit: {exit_reason}")
+    else:
+        trade["notes"] = [str(notes), f"XAUUSD swing exit: {exit_reason}"]
+    util.log(f"GOLD {exit_reason.upper()} {side.upper()} {qty:.3f} oz @ {fill:.2f} "
+             f"P&L {pnl:+.2f}")
+    return trade
+
+
+def check_stops(broker, cfg: dict, ledger: list[dict], price_map: dict,
+                now=None) -> list[dict]:
+    """Enforce XAUUSD stop/trail/target levels on each dispatcher tick."""
+    closed = []
+    for trade in [t for t in ledger if t.get("status") == "open" and
+                  t.get("symbol") == "XAUUSD"]:
+        try:
+            price = float(price_map.get("XAUUSD"))
+        except (TypeError, ValueError):
+            continue
+        side = trade.get("side")
+        stop_levels = []
+        for key in ("stop_price", "trail_price"):
+            try:
+                level = float(trade.get(key))
+                if level > 0:
+                    stop_levels.append((key, level))
+            except (TypeError, ValueError):
+                pass
+        breached = None
+        if stop_levels:
+            effective = (max(level for _, level in stop_levels) if side == "long"
+                         else min(level for _, level in stop_levels))
+            if (side == "long" and price <= effective) or (side == "short" and price >= effective):
+                kind = "trail" if any(name == "trail_price" and abs(level - effective) < 0.0001
+                                        for name, level in stop_levels) else "initial"
+                breached = ("stopped", kind)
+        if breached is None:
+            try:
+                target = float(trade.get("take_profit"))
+            except (TypeError, ValueError):
+                target = 0.0
+            if target > 0 and ((side == "long" and price >= target) or
+                               (side == "short" and price <= target)):
+                breached = ("target", None)
+        if breached:
+            reason, stop_kind = breached
+            if stop_kind:
+                trade["stop_kind"] = stop_kind
+            result = _close_swing_position(broker, trade, price, reason, now)
+            if result is not None:
+                closed.append(result)
+    return closed
+
+
+def update_entry_extrema(ledger: list[dict], price_map: dict) -> None:
+    """Maintain chandelier high/low watermarks without moving stops on ticks."""
+    try:
+        price = float(price_map.get("XAUUSD"))
+    except (TypeError, ValueError):
+        return
+    for trade in ledger:
+        if trade.get("status") != "open" or trade.get("symbol") != "XAUUSD":
+            continue
+        entry = float(trade.get("entry_price") or price)
+        current = trade.get("entry_extremum")
+        try:
+            current = float(current) if current is not None else entry
+        except (TypeError, ValueError):
+            current = entry
+        trade["entry_extremum"] = max(current, price) if trade.get("side") == "long" else min(current, price)
+
+
+def trail_stops(ledger: list[dict], price_map: dict, atr: float | None,
+                cfg: dict) -> list[dict]:
+    """Ratchet chandelier trails during scheduled risk-checks only."""
+    try:
+        price = float(price_map.get("XAUUSD"))
+        atr_value = float(atr) if atr is not None else 0.0
+    except (TypeError, ValueError):
+        return []
+    if price <= 0 or atr_value <= 0:
+        return []
+    updates = []
+    for trade in ledger:
+        if trade.get("status") != "open" or trade.get("symbol") != "XAUUSD":
+            continue
+        side = trade.get("side")
+        entry = float(trade.get("entry_price") or 0.0)
+        if entry <= 0 or side not in {"long", "short"}:
+            continue
+        extremum = float(trade.get("entry_extremum") or entry)
+        extremum = max(extremum, price) if side == "long" else min(extremum, price)
+        trade["entry_extremum"] = extremum
+        multiplier = float(trade.get("trail_atr_mult") or cfg.get("trail_atr_mult", 3.0))
+        candidate = extremum - multiplier * atr_value if side == "long" else extremum + multiplier * atr_value
+        old = trade.get("trail_price")
+        old_value = float(old) if old is not None else None
+        new_value = candidate if old_value is None else (
+            max(old_value, candidate) if side == "long" else min(old_value, candidate))
+        if cfg.get("breakeven_after_1r"):
+            initial_risk = float(trade.get("initial_risk_per_oz") or 0.0)
+            signed_move = (price - entry) * (1 if side == "long" else -1)
+            if initial_risk > 0 and signed_move >= initial_risk:
+                new_value = max(new_value, entry) if side == "long" else min(new_value, entry)
+        new_value = round(new_value, 2)
+        if old_value is None or abs(new_value - old_value) >= 0.01:
+            trade["trail_price"] = new_value
+            updates.append({"symbol": "XAUUSD", "side": side,
+                            "old": round(old_value, 2) if old_value is not None else None,
+                            "new": new_value, "atr": round(atr_value, 4),
+                            "entry_extremum": round(extremum, 2)})
+    return updates
+
+
+def close_swing_positions(broker, ledger: list[dict], price_map: dict,
+                          exit_reason: str, now=None) -> list[dict]:
+    """Close all XAUUSD swing positions for an explicit policy exit."""
+    if exit_reason not in {"weekend_flat", "thesis_broken", "closed"}:
+        raise ValueError(f"unsupported explicit XAUUSD exit reason: {exit_reason}")
+    try:
+        price = float(price_map.get("XAUUSD"))
+    except (TypeError, ValueError):
+        return []
+    closed = []
+    for trade in [t for t in ledger if t.get("status") == "open" and
+                  t.get("symbol") == "XAUUSD"]:
+        result = _close_swing_position(broker, trade, price, exit_reason, now)
+        if result is not None:
+            closed.append(result)
+    return closed

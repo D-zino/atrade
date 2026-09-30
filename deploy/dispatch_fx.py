@@ -145,7 +145,6 @@ def dispatch_tick(state_dir: str | Path = STATE_DIR, now=None, price=None, *,
     state_dir = Path(state_dir)
     state_dir.mkdir(parents=True, exist_ok=True)
     marker = _load_marker(state_dir, local)
-    marker["last_tick"] = {"at": local.isoformat(timespec="seconds"), "fx_day": label}
     actions: list[dict] = []
 
     # Safety pass runs before any windows/catch-up on every dispatcher tick.
@@ -163,6 +162,13 @@ def dispatch_tick(state_dir: str | Path = STATE_DIR, now=None, price=None, *,
         quote = {"price": tick_result["price"],
                  "symbol": tick_result.get("source") or "dispatch quote",
                  "at": tick_result.get("at") or local.isoformat(timespec="seconds")}
+    elif price is not None:
+        if isinstance(price, dict):
+            quote = dict(price)
+            quote.setdefault("at", local.isoformat(timespec="seconds"))
+        else:
+            quote = {"price": price, "symbol": "dispatch injected",
+                     "at": local.isoformat(timespec="seconds")}
 
     def run(name: str, method: str, *, block=None, catchup=False):
         try:
@@ -218,10 +224,11 @@ def dispatch_tick(state_dir: str | Path = STATE_DIR, now=None, price=None, *,
         if window_contains("preview", local) and not _is_marked(marker, "preview"):
             run("preview", "session_preview_run")
 
-    marker["last_tick"].update({"stop_status": tick_result.get("status"),
-                               "price": tick_result.get("price"),
-                               "source": tick_result.get("source")})
-    _save_marker(state_dir, marker)
+    # Persist only scheduled-run markers. A flat/no-window tick must not
+    # generate a repository commit every 15 minutes; active position state is
+    # persisted by the engine when risk-relevant fields actually change.
+    if actions:
+        _save_marker(state_dir, marker)
     return {"status": "ok" if tick_result.get("status") != "error" else "error",
             "now_et": local.isoformat(timespec="seconds"), "fx_day": label,
             "session": market_fx.fx_session(local), "tick": tick_result,

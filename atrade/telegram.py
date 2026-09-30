@@ -369,11 +369,14 @@ def format_swing_open(asof: str, opened: list, skipped: list | None = None,
             stop = _gold_num(trade.get("stop_price"))
             risk = _gold_num(trade.get("risk_usd"))
             confidence = _as_float(hyp.get("confidence")) * 100
+            stop_basis = str(trade.get("stop_basis") or "structure / ATR").replace("_", " ")
+            target = trade.get("take_profit")
+            target_label = f"${_gold_num(target)}" if target else "off"
             lines.extend([
-                f"<b>XAUUSD { _escape(side) }</b> · {qty} oz @ <code>${entry}</code>",
+                f"<b>XAUUSD {_escape(side)}</b> · {qty} oz @ <code>${entry}</code>",
                 f"Initial stop: <code>${stop}</code> · risk <b>${risk}</b> "
                 f"({confidence:.0f}% thesis confidence)",
-                f"Stop basis: {_escape(trade.get('stop_basis') or 'structure / ATR')} · "
+                f"Stop basis: {_escape(stop_basis)} · "
                 f"ATR(24h): ${_gold_num(atr or trade.get('atr_24h'))}",
                 f"Thesis: {_escape(hyp.get('thesis') or '—')}",
             ])
@@ -381,8 +384,7 @@ def format_swing_open(asof: str, opened: list, skipped: list | None = None,
             if isinstance(falsifiers, str):
                 falsifiers = [falsifiers]
             lines.append(f"Falsifier: {_escape(falsifiers[0] if falsifiers else '—')}")
-            target = trade.get("take_profit")
-            lines.append(f"Target: ${_gold_num(target) if target else 'off'} · "
+            lines.append(f"Target: {target_label} · "
                          "no pyramiding · swing holds across FX days")
     else:
         lines.append("No entry — no XAUUSD hypothesis passed the configured gates.")

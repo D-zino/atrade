@@ -667,7 +667,10 @@ def _fx_broker(st, cfg: dict, quote: dict | None, session: str,
         account_filename=str(cfg.get("mock_account_filename", "mock_account_fx.json")),
         drift_scale=float(cfg.get("mock_drift_scale", 0.25) if drift_scale is None else drift_scale),
     )
-    if quote:
+    # Session/entry simulations advance the deterministic drift step. Stop and
+    # scheduled risk checks use the injected live reference exactly as quoted.
+    if quote and not (session.startswith("tick_stop") or session.startswith("risk_check") or
+                      session == "thesis_broken"):
         paper.seed_prices(prices, session=session)
     return paper
 
@@ -688,6 +691,32 @@ def _fx_research_config(cfg: dict) -> dict:
         "min_confidence": cfg.get("min_confidence", 0.60),
         "sector_of": {},
     }
+
+
+def _fx_append_research_note(notes: list, note: dict) -> None:
+    key = (note.get("source"), note.get("title"), tuple(note.get("tickers") or []))
+    if not any(isinstance(existing, dict) and
+               (existing.get("source"), existing.get("title"),
+                tuple(existing.get("tickers") or [])) == key for existing in notes):
+        notes.append(note)
+
+
+def _fx_completed_bars(bars: list[dict], now) -> list[dict]:
+    """Exclude a same-day partial candle when timestamps are available."""
+    from . import market_fx
+    local_day = market_fx.as_et(now).date().isoformat()
+    dated, has_date = [], False
+    for bar in bars or []:
+        raw = str(bar.get("t") or bar.get("date") or "")
+        if raw:
+            has_date = True
+            if raw[:10] < local_day:
+                dated.append(bar)
+    if has_date:
+        return dated
+    # Unstamped fixtures/feeds: conservatively exclude the last (possibly
+    # still-forming) candle when enough history remains.
+    return list(bars[:-1]) if len(bars or []) > 3 else list(bars or [])
 
 
 def _fx_research(st, cfg: dict, now=None, summary: dict | None = None,
@@ -722,10 +751,10 @@ def _fx_research(st, cfg: dict, now=None, summary: dict | None = None,
     bars = summary.setdefault("bars", {})
     prices = summary.setdefault("prices", {})
     spot_symbol = cfg.get("price_feed_primary", "XAUUSD=X")
-    gold_history = bars.get(spot_symbol) or bars.get("GC=F") or []
+    gold_history = bars.get(spot_symbol) or bars.get("GC=F") or bars.get("XAUUSD") or []
     if gold_history:
         bars["XAUUSD"] = gold_history
-    source_price = prices.get(spot_symbol) or prices.get("GC=F") or {}
+    source_price = prices.get(spot_symbol) or prices.get("GC=F") or prices.get("XAUUSD") or {}
     if source_price:
         prices.setdefault("XAUUSD", dict(source_price))
 
@@ -737,7 +766,7 @@ def _fx_research(st, cfg: dict, now=None, summary: dict | None = None,
     if change is not None:
         change = float(change)
         direction = "bullish" if change > 0.004 else "bearish" if change < -0.004 else "neutral"
-        notes.append({
+        _fx_append_research_note(notes, {
             "category": "commodities", "tickers": ["XAUUSD"],
             "title": f"Gold reference moved {change * 100:+.2f}%",
             "summary": f"Gold reference is {change * 100:+.2f}% to "
@@ -754,7 +783,7 @@ def _fx_research(st, cfg: dict, now=None, summary: dict | None = None,
     real_yield_change = real_yield.get("chg_units")
     if real_yield_change is not None and float(real_yield_change) != 0:
         delta = float(real_yield_change)
-        notes.append({
+        _fx_append_research_note(notes, {
             "category": "rates", "tickers": ["XAUUSD"],
             "title": f"10Y real yield {delta:+.3f}pt",
             "summary": "Rising real yields are a gold headwind; falling real yields are a tailwind.",
@@ -766,7 +795,7 @@ def _fx_research(st, cfg: dict, now=None, summary: dict | None = None,
     usd_change = usd.get("pct_chg")
     if usd_change is not None and float(usd_change) != 0:
         delta = float(usd_change)
-        notes.append({
+        _fx_append_research_note(notes, {
             "category": "fx", "tickers": ["XAUUSD"],
             "title": f"Broad USD {delta * 100:+.2f}%",
             "summary": "A stronger broad USD is a gold headwind; a weaker USD is a tailwind.",
@@ -847,7 +876,8 @@ def _fx_positions(st, price: float | None = None) -> list[dict]:
         side = trade.get("side")
         entry = float(trade.get("entry_price") or 0)
         qty = float(trade.get("qty_oz") or trade.get("qty") or 0)
-        mark = float(price or trade.get("last_mark_price") or entry)
+        prior_mark = (st.data.get("last_market_price") or {}).get("price")
+        mark = float(price or prior_mark or trade.get("last_mark_price") or entry)
         sign = 1 if side == "long" else -1
         rows.append({
             "symbol": "XAUUSD", "side": side, "qty_oz": qty,
@@ -892,6 +922,7 @@ def _fx_cluster_open_count(cfg: dict) -> int:
 
 
 def _fx_regrade_stale(st, cfg: dict, hyps: list[dict], label, now) -> list[str]:
+    from . import market_fx
     notes = []
     for trade in st.ledger:
         if trade.get("symbol") != "XAUUSD" or trade.get("status") != "open":
@@ -1046,30 +1077,39 @@ def _fx_pause_notice(reason: str, equity: float, notify: bool = True) -> None:
 
 def fx_tick(state_dir: str | Path, now=None, price=None, *, notify: bool = True,
             sync_playbook: bool = True) -> dict:
-    """Tick-level quote/stop pass. Dispatcher calls this before every window check."""
+    """Tick-level stop pass. Dispatcher calls this before every window check.
+
+    When flat it is a cheap no-op. With a position, it requires a fresh XAUUSD=X
+    or GC=F quote and compares the market against stop/trail/target on every tick.
+    """
+    import json
     from . import market_fx
     st, cfg = _fx_context(state_dir)
     local = market_fx.as_et(now)
     label = market_fx.fx_day(local).isoformat()
     session = market_fx.fx_session(local)
     if not market_fx.is_fx_open(local):
-        st.data["last_fx_tick"] = {"at": _fx_iso(local), "fx_day": label,
-                                  "session": session, "checked": True,
-                                  "reason": "market closed"}
-        st.save()
         if sync_playbook:
             _fx_sync_playbook(st, cfg, st.data.get("lessons") or [])
-        return {"status": "closed", "session": session, "fx_day": label, "price": None}
+        return {"status": "closed", "session": session, "fx_day": label,
+                "price": None, "closed": []}
+
+    open_positions = [t for t in st.ledger if t.get("symbol") == "XAUUSD" and
+                      t.get("status") == "open"]
+    if not open_positions:
+        # No quote is needed for stop protection while flat. A scheduled open
+        # run obtains its own fresh quote after this idempotent tick pass.
+        if sync_playbook:
+            _fx_sync_playbook(st, cfg, st.data.get("lessons") or [])
+        return {"status": "flat", "session": session, "fx_day": label,
+                "price": None, "closed": []}
 
     quote = _fx_quote(price, now=local) if price is not None else _fetch_fx_quote(cfg, local)
     if quote is None:
-        st.data["last_fx_tick"] = {"at": _fx_iso(local), "fx_day": label,
-                                  "session": session, "checked": True,
-                                  "reason": "no fresh XAUUSD=X or GC=F quote"}
-        open_positions = [t for t in st.ledger if t.get("symbol") == "XAUUSD" and
-                          t.get("status") == "open"]
-        if open_positions and st.data.get("last_fx_quote_alert_day") != label:
+        changed = False
+        if st.data.get("last_fx_quote_alert_day") != label:
             st.data["last_fx_quote_alert_day"] = label
+            changed = True
             if notify:
                 try:
                     from . import telegram
@@ -1078,33 +1118,41 @@ def fx_tick(state_dir: str | Path, now=None, price=None, *, notify: bool = True,
                         "the tick check ran but could not compare/execute stops."))
                 except Exception:
                     pass
-        st.save()
+        if changed:
+            st.save()
         if sync_playbook:
             _fx_sync_playbook(st, cfg, st.data.get("lessons") or [])
         return {"status": "price_unavailable", "session": session,
-                "fx_day": label, "price": None}
+                "fx_day": label, "price": None, "closed": []}
 
+    before = json.dumps(st.data, sort_keys=True, default=str)
+    new_fx_day_mark = st.data.get("last_fx_mark_day") != label
+    old_extrema = {t.get("trade_id"): t.get("entry_extremum") for t in open_positions}
     paper = _fx_broker(st, cfg, quote, "tick_stop", drift_scale=0.0)
     current = float(quote["price"])
     prices = {"XAUUSD": current}
     trading.update_entry_extrema(st.ledger, prices)
+    extremum_changed = any(old_extrema.get(t.get("trade_id")) != t.get("entry_extremum")
+                           for t in open_positions)
     closed = trading.check_stops(paper, cfg, st.ledger, prices, now=local)
     _fx_process_exits(st, cfg, closed, {}, local, notify, sync_playbook)
     equity, pause_reason = _fx_mark_and_drawdown(st, paper, cfg, local,
                                                  realized=bool(closed), price=current)
     if pause_reason:
         _fx_pause_notice(pause_reason, equity, notify)
-    st.data["last_market_price"] = {"symbol": quote.get("symbol"), "price": current,
-                                    "at": quote.get("at"), "fx_day": label}
-    st.data["last_fx_tick"] = {"at": _fx_iso(local), "fx_day": label,
-                               "session": session, "checked": True,
-                               "price": current, "source": quote.get("symbol")}
-    st.save()
+    # Persist the quote at most once per FX day, on an exit, or when a new
+    # chandelier extreme must survive a later scheduled risk-check.
+    if new_fx_day_mark or closed or extremum_changed:
+        st.data["last_market_price"] = {"symbol": quote.get("symbol"), "price": current,
+                                        "at": quote.get("at"), "fx_day": label}
+    after = json.dumps(st.data, sort_keys=True, default=str)
+    if after != before:
+        st.save()
     if sync_playbook:
         _fx_sync_playbook(st, cfg, st.data.get("lessons") or [])
     return {"status": "ok", "session": session, "fx_day": label,
-            "price": current, "source": quote.get("symbol"), "closed": closed,
-            "equity": round(equity, 2)}
+            "price": current, "source": quote.get("symbol"), "at": quote.get("at"),
+            "closed": closed, "equity": round(equity, 2)}
 
 
 def swing_open_run(state_dir: str | Path, now=None, price=None, summary: dict | None = None,
@@ -1158,14 +1206,7 @@ def swing_open_run(state_dir: str | Path, now=None, price=None, summary: dict | 
     bars = (summary.get("bars") or {}).get("XAUUSD") or []
     # Ignore a same-day unfinished daily candle; the pivot/ATR inputs are
     # completed 24h reference bars only.
-    completed_bars = []
-    for bar in bars:
-        bar_day = str(bar.get("t") or bar.get("date") or "")[:10]
-        if bar_day and bar_day >= local.date().isoformat():
-            continue
-        completed_bars.append(bar)
-    if len(completed_bars) < 3:
-        completed_bars = bars[:-1] if len(bars) > 3 else bars
+    completed_bars = _fx_completed_bars(bars, local)
     atr_value = trading.atr_24h(completed_bars, int(cfg.get("atr_period", 14)))
     if not atr_value:
         return {"status": "no_atr", "opened": [], "skipped": [
@@ -1241,6 +1282,13 @@ def swing_open_run(state_dir: str | Path, now=None, price=None, summary: dict | 
         "exit_reason": None, "stop_hit": False, "notes": [],
     }
     st.add_trades([trade])
+    st.data["last_market_price"] = {"symbol": quote.get("symbol"),
+                                    "price": float(quote["price"]),
+                                    "at": quote.get("at"), "fx_day": label.isoformat()}
+    marked_equity, pause_reason = _fx_mark_and_drawdown(
+        st, paper, cfg, local, price=float(quote["price"]))
+    if pause_reason:
+        _fx_pause_notice(pause_reason, marked_equity, notify)
     st.data["last_open_fx"] = {"at": _fx_iso(local), "fx_day": label.isoformat(),
                                "opened": trade_id, "source": quote.get("symbol"),
                                "confidence": hypothesis.get("confidence")}
@@ -1295,11 +1343,7 @@ def risk_check_run(state_dir: str | Path, now=None, price=None, summary: dict | 
     if current is not None:
         trading.update_entry_extrema(st.ledger, price_map)
         bars = (summary.get("bars") or {}).get("XAUUSD") or []
-        completed_bars = [bar for bar in bars
-                          if not (str(bar.get("t") or bar.get("date") or "")[:10] >=
-                                  local.date().isoformat())]
-        if len(completed_bars) < 3:
-            completed_bars = bars[:-1] if len(bars) > 3 else bars
+        completed_bars = _fx_completed_bars(bars, local)
         atr_value = trading.atr_24h(completed_bars, int(cfg.get("atr_period", 14)))
         updates = trading.trail_stops(st.ledger, price_map, atr_value, cfg)
         closed.extend(trading.check_stops(paper, cfg, st.ledger, price_map, now=local))
@@ -1340,6 +1384,10 @@ def risk_check_run(state_dir: str | Path, now=None, price=None, summary: dict | 
 
     rows = _fx_positions(st, current)
     events = upcoming_events(local.date())
+    if quote:
+        st.data["last_market_price"] = {"symbol": quote.get("symbol"),
+                                        "price": current, "at": quote.get("at"),
+                                        "fx_day": label.isoformat()}
     st.data["last_risk_check_fx"] = {"at": _fx_iso(local), "fx_day": label.isoformat(),
                                     "block": block, "price": current,
                                     "quote_source": quote.get("symbol") if quote else None,

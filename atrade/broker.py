@@ -10,7 +10,7 @@ import time as _time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 
 from . import util
 
@@ -20,6 +20,61 @@ MARKET_BASE = "https://data.alpaca.markets"  # not needed for v2 bars w/ paper a
 
 class BrokerError(Exception):
     pass
+
+
+def fetch_yahoo_spot(symbol: str, now: datetime | None = None,
+                     max_age_minutes: float = 30.0) -> dict | None:
+    """Fetch a recent Yahoo chart quote for an FX/commodity reference.
+
+    The FX book calls this for ``XAUUSD=X`` first and ``GC=F`` second. A stale
+    daily close is not treated as a tick: the result must have a market
+    timestamp within ``max_age_minutes``. Returns ``{symbol, price, at}`` or
+    ``None`` on fetch, parse, or freshness failure.
+    """
+    encoded = urllib.parse.quote(symbol, safe="=")
+    url = (f"https://query1.finance.yahoo.com/v8/finance/chart/{encoded}"
+           "?range=1d&interval=1m&includePrePost=true")
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (compatible; A-Trade-paper-book/1.0)"})
+        with urllib.request.urlopen(req, timeout=12) as response:
+            payload = json.loads(response.read().decode("utf-8", "replace"))
+        result = (((payload.get("chart") or {}).get("result") or [None])[0])
+        if not result:
+            return None
+        meta = result.get("meta") or {}
+        timestamps = result.get("timestamp") or []
+        quote = ((result.get("indicators") or {}).get("quote") or [{}])[0]
+        closes = quote.get("close") or []
+        price = meta.get("regularMarketPrice")
+        stamp = meta.get("regularMarketTime")
+        if stamp is None:
+            for ts, close in reversed(list(zip(timestamps, closes))):
+                if close is not None:
+                    stamp, price = ts, price or close
+                    break
+        if price is None or stamp is None:
+            return None
+        price = float(price)
+        if price <= 0:
+            return None
+        quoted_at = datetime.fromtimestamp(float(stamp), tz=timezone.utc)
+        current = now or datetime.now(timezone.utc)
+        if current.tzinfo is None:
+            # This helper is normally passed an aware ET clock; treating a
+            # naive input as ET keeps test/operator clocks consistent.
+            from .market_fx import ET
+            current = current.replace(tzinfo=ET).astimezone(timezone.utc)
+        else:
+            current = current.astimezone(timezone.utc)
+        age_seconds = (current - quoted_at).total_seconds()
+        if age_seconds < -300 or age_seconds > float(max_age_minutes) * 60:
+            util.log(f"Yahoo {symbol} quote stale ({age_seconds / 60:.1f} min)", "WARN")
+            return None
+        return {"symbol": symbol, "price": price, "at": quoted_at.isoformat()}
+    except Exception as exc:
+        util.log(f"Yahoo {symbol} spot fetch failed: {exc}", "WARN")
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -139,16 +194,25 @@ class AlpacaPaper:
 class MockBroker:
     def __init__(self, state_dir, initial_equity: float = 100000.0,
                  slippage_bps: float = 2.0, price_src: dict | None = None,
-                 session: str = "open"):
+                 session: str = "open", *, spread: float = 0.0,
+                 fractional_qty: bool = False,
+                 account_filename: str = "mock_account.json",
+                 drift_scale: float = 1.0):
         from pathlib import Path
         self.state_dir = Path(state_dir)
+        self.state_dir.mkdir(parents=True, exist_ok=True)
         self.initial_equity = float(initial_equity)
-        self.slippage_bps = slippage_bps
+        self.slippage_bps = float(slippage_bps)
         self.session = session  # "open" or "close" — drives pseudo-intraday drift
+        self.spread = max(0.0, float(spread))
+        self.fractional_qty = bool(fractional_qty)
+        self.account_filename = account_filename
+        self.account_path = self.state_dir / self.account_filename
+        self.drift_scale = float(drift_scale)
         # last known reference prices {symbol: price} seeded from research
         self.prices = dict(price_src or {})
         self._orders = []
-        self._snap = util.read_json(state_dir / "mock_account.json") or None
+        self._snap = util.read_json(self.account_path) or None
         if self._snap is not None and "_drift_step" not in self._snap:
             self._snap["_drift_step"] = 0
 
@@ -165,8 +229,9 @@ class MockBroker:
         h = 0
         for ch in key:
             h = (h * 31 + ord(ch)) & 0xFFFF
-        # range roughly -1.2% .. +1.2% per step
-        return ((h % 2400) - 1200) / 1000.0 * 0.012
+        # range roughly -1.2% .. +1.2% per step before instrument scaling.
+        # XAUUSD config uses a smaller drift_scale than the equity mock.
+        return ((h % 2400) - 1200) / 1000.0 * 0.012 * self.drift_scale
 
     def get_price(self, symbol: str) -> float | None:
         base = self.prices.get(symbol)
@@ -181,7 +246,7 @@ class MockBroker:
         return self._snap
 
     def _save(self) -> None:
-        util.write_json(self.state_dir / "mock_account.json", self._snap)
+        util.write_json(self.account_path, self._snap)
 
     def seed_prices(self, prices: dict, session: str | None = None) -> None:
         if session:
@@ -226,13 +291,26 @@ class MockBroker:
         px = self.get_price(symbol)
         if px is None:
             raise BrokerError(f"no reference price for {symbol}")
+        if self.fractional_qty:
+            qty = round(float(qty), 3)
+            if qty <= 0:
+                raise BrokerError(f"quantity must be positive for {symbol}")
         slip = px * self.slippage_bps / 10_000.0
-        fill = px - slip if side == "buy" else px + slip
+        if self.spread:
+            # Adverse paper fills at ask for buys and bid for sells. The
+            # spread is the full quoted spread (XAUUSD default: $0.30).
+            half_spread = self.spread / 2.0
+            fill = px + half_spread + slip if side == "buy" else px - half_spread - slip
+        else:
+            # Keep the historical equity mock's fill convention unchanged.
+            fill = px - slip if side == "buy" else px + slip
         util.log(f"mock order: {side} {qty} {symbol} @ {fill:.4f} (session={self.session})", "DEBUG")
         a = self._acct()
         a["positions"].setdefault(symbol, {"qty": 0, "avg_entry": 0.0})
         p = a["positions"][symbol]
-        if side == "buy":
+        if self.fractional_qty:
+            self._apply_fractional_order(a, symbol, p, qty, side, fill)
+        elif side == "buy":
             total_cost = fill * qty
             a["cash"] -= total_cost
             new_qty = p["qty"] + qty
@@ -252,6 +330,44 @@ class MockBroker:
                  "side": side, "status": "filled", "filled_avg_price": str(round(fill, 4))}
         self._orders.append(order)
         return order
+
+    @staticmethod
+    def _apply_fractional_order(account: dict, symbol: str, position: dict,
+                                 qty: float, side: str, fill: float) -> None:
+        """Apply a fractional order with signed positions (used by FX only)."""
+        old_qty = float(position.get("qty") or 0.0)
+        old_entry = float(position.get("avg_entry") or 0.0)
+        eps = 0.0005
+        if side == "buy":
+            account["cash"] -= fill * qty
+            new_qty = old_qty + qty
+            if abs(new_qty) < eps:
+                account["positions"].pop(symbol, None)
+            elif old_qty < -eps and new_qty > eps:
+                # A buy first covers a short. Any excess starts a new long.
+                position.update(qty=round(new_qty, 3), avg_entry=fill)
+            elif old_qty < -eps:
+                position["qty"] = round(new_qty, 3)
+            else:
+                position["avg_entry"] = ((old_entry * old_qty + fill * qty) / new_qty
+                                          if new_qty > 0 else fill)
+                position["qty"] = round(new_qty, 3)
+        else:
+            account["cash"] += fill * qty
+            new_qty = old_qty - qty
+            if abs(new_qty) < eps:
+                account["positions"].pop(symbol, None)
+            elif old_qty > eps and new_qty < -eps:
+                # A sell first closes a long. Any excess starts a short.
+                position.update(qty=round(new_qty, 3), avg_entry=fill)
+            elif old_qty > eps:
+                position["qty"] = round(new_qty, 3)
+            else:
+                new_short_size = abs(new_qty)
+                old_short_size = abs(old_qty)
+                position["avg_entry"] = ((old_entry * old_short_size + fill * qty) /
+                                          new_short_size if new_short_size else fill)
+                position["qty"] = round(new_qty, 3)
 
     def orders(self, status="all", limit=100) -> list:
         return self._orders[-limit:]

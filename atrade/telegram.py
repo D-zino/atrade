@@ -336,3 +336,224 @@ def format_test() -> str:
         "  • Sun 17:00 ET — week-ahead digest\n\n"
         "No more action needed — the bot runs itself."
     )
+
+
+# ---------------------------------------------------------------------------
+# XAUUSD swing-book messages (isolated formatters; equity Telegram unchanged)
+# ---------------------------------------------------------------------------
+
+def _gold_num(value, digits: int = 2, missing: str = "—") -> str:
+    try:
+        return f"{float(value):,.{digits}f}"
+    except (TypeError, ValueError):
+        return missing
+
+
+def _gold_hypothesis(trade: dict) -> dict:
+    return trade.get("hypothesis") or {}
+
+
+def format_swing_open(asof: str, opened: list, skipped: list | None = None,
+                      *, fx_day: str | None = None, session: str | None = None,
+                      atr: float | None = None) -> str:
+    """Telegram payload for the XAUUSD swing entry and its initial risk."""
+    lines = ["<b>🟢 GOLD — SWING OPEN</b>",
+             f"<i>{_escape(asof)} · FX day {_escape(fx_day or '—')} · "
+             f"{_escape(session or 'session unknown')}</i>", ""]
+    if opened:
+        for trade in opened:
+            hyp = _gold_hypothesis(trade)
+            side = str(trade.get("side") or "").upper()
+            qty = _gold_num(trade.get("qty_oz") or trade.get("qty"), 3)
+            entry = _gold_num(trade.get("entry_price"))
+            stop = _gold_num(trade.get("stop_price"))
+            risk = _gold_num(trade.get("risk_usd"))
+            confidence = _as_float(hyp.get("confidence")) * 100
+            stop_basis = str(trade.get("stop_basis") or "structure / ATR").replace("_", " ")
+            target = trade.get("take_profit")
+            target_label = f"${_gold_num(target)}" if target else "off"
+            lines.extend([
+                f"<b>XAUUSD {_escape(side)}</b> · {qty} oz @ <code>${entry}</code>",
+                f"Initial stop: <code>${stop}</code> · risk <b>${risk}</b> "
+                f"({confidence:.0f}% thesis confidence)",
+                f"Stop basis: {_escape(stop_basis)} · "
+                f"ATR(24h): ${_gold_num(atr or trade.get('atr_24h'))}",
+                f"Thesis: {_escape(hyp.get('thesis') or '—')}",
+            ])
+            falsifiers = hyp.get("falsifiers") or []
+            if isinstance(falsifiers, str):
+                falsifiers = [falsifiers]
+            lines.append(f"Falsifier: {_escape(falsifiers[0] if falsifiers else '—')}")
+            lines.append(f"Target: {target_label} · "
+                         "no pyramiding · swing holds across FX days")
+    else:
+        lines.append("No entry — no XAUUSD hypothesis passed the configured gates.")
+    if skipped:
+        lines.append("")
+        lines.append("<i>Skipped: " + _escape("; ".join(str(x) for x in skipped[:3])) + "</i>")
+    lines.extend(["", "<i>Paper book only · no live broker · no daily flatten.</i>"])
+    return "\n".join(lines)
+
+
+def format_risk_check(asof: str, positions: list, updates: list,
+                      events: list, *, fx_day: str | None = None,
+                      block: str = "risk check", quote_available: bool = True,
+                      stale_notes: list | None = None, paused: bool = False) -> str:
+    """Two-per-FX-day status report: entry, stop/trail, mark P&L, events."""
+    block_label = "LONDON" if block == "checkin_am" else "NY / PRE-BREAK"
+    lines = ["<b>🟡 GOLD — RISK CHECK</b>",
+             f"<i>{_escape(asof)} · FX day {_escape(fx_day or '—')} · {block_label}</i>", ""]
+    if not quote_available:
+        lines.extend(["⚠️ <b>Fresh quote unavailable.</b> Stop check ran, but no reliable "
+                      "XAUUSD=X / GC=F price was available to compare.", ""])
+    if positions:
+        lines.append("<b>Open position(s):</b>")
+        for row in positions:
+            side = str(row.get("side") or "").upper()
+            lines.append(f"• XAUUSD <b>{_escape(side)}</b> "
+                         f"{_gold_num(row.get('qty_oz'), 3)} oz · uP&amp;L "
+                         f"<b>{_as_float(row.get('upnl')):+,.2f}</b>")
+            lines.append(f"  entry ${_gold_num(row.get('entry_price'))} · "
+                         f"stop ${_gold_num(row.get('stop_price'))} · "
+                         f"trail ${_gold_num(row.get('trail_price'))}")
+            lines.append(f"  mark ${_gold_num(row.get('mark_price'))}")
+    else:
+        lines.append("<b>Open position(s):</b> none — book is flat")
+    if updates:
+        lines.extend(["", "<b>Trail adjustments:</b>"])
+        for update in updates[:5]:
+            old = _gold_num(update.get("old"))
+            new = _gold_num(update.get("new"))
+            reason = update.get("reason") or f"chandelier · ATR ${_gold_num(update.get('atr'))}"
+            lines.append(f"• XAUUSD stop {old} → <b>${new}</b> ({_escape(reason)})")
+    if events:
+        lines.extend(["", "<b>Events in play:</b>"])
+        for event in events[:5]:
+            title = event.get("title") if isinstance(event, dict) else event
+            lines.append("• " + _escape(title))
+    else:
+        lines.extend(["", "<b>Events in play:</b> none flagged"])
+    if stale_notes:
+        lines.extend(["", "<b>Thesis re-grade:</b>"])
+        lines.extend("⚠️ " + _escape(note) for note in stale_notes[:3])
+    if paused:
+        lines.extend(["", "⏸ XAUUSD book is auto-paused; stop protection remains active."])
+    lines.extend(["", "<i>Stops are checked every dispatch tick · no daily flatten.</i>"])
+    return "\n".join(lines)
+
+
+def format_exit(trade: dict) -> str:
+    """Stop/target/thesis/weekend exit alert with realized grading."""
+    reason = trade.get("exit_reason") or trade.get("status") or "closed"
+    headline = {
+        "stopped": "🛑 GOLD — STOPPED",
+        "target": "🎯 GOLD — TARGET",
+        "thesis_broken": "⚠️ GOLD — THESIS BROKEN",
+        "weekend_flat": "🌙 GOLD — WEEKEND FLAT",
+    }.get(reason, "⚪ GOLD — CLOSED")
+    side = str(trade.get("side") or "").upper()
+    qty = _gold_num(trade.get("qty_oz") or trade.get("qty"), 3)
+    entry = _gold_num(trade.get("entry_price"))
+    exit_price = _gold_num(trade.get("exit_price"))
+    pnl = _as_float(trade.get("pnl"))
+    pnl_pct = _as_float(trade.get("pnl_pct")) * 100
+    grade = "✅ thesis held" if trade.get("hypothesis_correct") else "❌ thesis refuted"
+    hyp = _gold_hypothesis(trade)
+    lesson = trade.get("lesson") or "No additional lesson recorded."
+    return "\n".join([
+        f"<b>{headline}</b>",
+        f"<i>{_escape(trade.get('closed_at') or '—')} · XAUUSD {side} · {qty} oz</i>",
+        f"Entry <code>${entry}</code> → exit <code>${exit_price}</code>",
+        f"Realized P&amp;L: <b>{pnl:+,.2f} ({pnl_pct:+.2f}%)</b>",
+        f"Thesis grade: {_escape(grade)} · confidence {_as_float(hyp.get('confidence')) * 100:.0f}%",
+        f"Lesson: {_escape(lesson)}",
+        f"Exit reason: {_escape(reason)}",
+    ])
+
+
+def format_session_preview(asof: str, next_session: str, events: list,
+                            hypotheses: list, positions: list, *,
+                            paused: bool = False, price=None) -> str:
+    """Next-session plan and levels, without modifying the swing book."""
+    lines = ["<b>🌙 GOLD — SESSION PREVIEW</b>",
+             f"<i>{_escape(asof)} · next session: {_escape(next_session)}</i>", ""]
+    lines.append(f"Reference: ${_gold_num(price)}" if price else "Reference: quote unavailable")
+    lines.extend(["", "<b>Open risk:</b>"])
+    if positions:
+        for row in positions[:2]:
+            lines.append(f"• {_escape(str(row.get('side', '')).upper())} "
+                         f"{_gold_num(row.get('qty_oz'), 3)} oz · stop "
+                         f"${_gold_num(row.get('stop_price'))} · trail "
+                         f"${_gold_num(row.get('trail_price'))}")
+    else:
+        lines.append("• Flat; no forced entry planned")
+    lines.extend(["", "<b>Calendar:</b>"])
+    lines.extend("• " + _escape(event) for event in (events or ["No high-impact event flagged."])[:8])
+    lines.extend(["", "<b>Plan / levels:</b>"])
+    tradeable = [h for h in hypotheses if h.get("tradeable")]
+    if tradeable:
+        for hyp in tradeable[:3]:
+            lines.append(f"• {_escape(str(hyp.get('side', '')).upper())} · "
+                         f"{_as_float(hyp.get('confidence')) * 100:.0f}% · "
+                         f"{_escape(hyp.get('thesis') or '—')}")
+    else:
+        lines.append("• Wait for a qualifying thesis; initial structure/ATR stop required.")
+    if paused:
+        lines.extend(["", "⏸ Book paused; existing stops remain active."])
+    lines.extend(["", "<i>Research changes do not auto-close positions; stale theses are re-graded.</i>"])
+    return "\n".join(lines)
+
+
+def format_fx_week_ahead(asof: str, week_days: list, events: list,
+                          hypotheses: list, fred: dict | None = None, *,
+                          paused: bool = False, open_positions: list | None = None) -> str:
+    """Sunday gold macro digest with broad USD and real-yield context."""
+    fred = fred or {}
+    positions = open_positions or []
+    if week_days:
+        start, end = week_days[0].strftime("%b %d"), week_days[-1].strftime("%b %d")
+    else:
+        start = end = "—"
+    lines = ["<b>📅 GOLD — WEEK AHEAD</b>", f"<i>{_escape(asof)}</i>", "",
+             f"<b>FX week:</b> {_escape(start)} → {_escape(end)}", "",
+             "<b>Macro backdrop:</b>"]
+    usd = fred.get("DTWEXBGS") or {}
+    real = fred.get("DFII10") or {}
+    nominal = fred.get("DGS10") or {}
+    if usd.get("value") is not None:
+        lines.append(f"• Broad USD (DTWEXBGS): {_as_float(usd.get('value')):.2f}")
+    else:
+        lines.append("• Broad USD: FRED value unavailable")
+    if real.get("value") is not None:
+        lines.append(f"• 10Y real yield (DFII10): {_as_float(real.get('value')):.2f}%")
+    else:
+        lines.append("• 10Y real yield: FRED value unavailable")
+    if nominal.get("value") is not None:
+        lines.append(f"• 10Y nominal yield: {_as_float(nominal.get('value')):.2f}%")
+    lines.extend(["", "<b>Central-bank / macro calendar:</b>"])
+    lines.extend("• " + _escape(event) for event in (events or ["No major release flagged."])[:9])
+    lines.extend(["", "<b>Gold plan:</b>"])
+    tradeable = [h for h in hypotheses if h.get("tradeable")]
+    if tradeable:
+        for hyp in tradeable[:4]:
+            lines.append(f"• {_escape(str(hyp.get('side', '')).upper())} · "
+                         f"{_as_float(hyp.get('confidence')) * 100:.0f}% · "
+                         f"{_escape(hyp.get('thesis') or '—')}")
+            falsifiers = hyp.get("falsifiers") or []
+            if falsifiers:
+                lines.append("  Falsifier: " + _escape(falsifiers[0]))
+    else:
+        lines.append("• No tradeable XAUUSD thesis this pass.")
+    lines.extend(["", "<b>Weekend policy:</b> flat before Friday 17:00 ET by default."])
+    if positions:
+        lines.append("⚠️ Open position remains; review the Friday risk-check policy.")
+    if paused:
+        lines.append("⏸ Book is currently auto-paused; this digest is informational.")
+    lines.extend(["", "<i>Paper only · swap/carry ignored in phase 1.</i>"])
+    return "\n".join(lines)
+
+
+def format_fx_paused(reason: str, stats: str) -> str:
+    return (f"<b>⏸ GOLD — AUTO-PAUSED</b>\n\n{_escape(reason)}\n\n"
+            f"{_escape(stats)}\n\nExisting XAUUSD stops remain active. "
+            "Review before resuming the paper book.")

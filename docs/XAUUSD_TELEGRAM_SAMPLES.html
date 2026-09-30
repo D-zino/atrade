@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XAUUSD Telegram message samples</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:#0e1721;color:#e7edf4}
+*{box-sizing:border-box}body{margin:0;padding:32px 18px 52px;background:radial-gradient(ellipse at top,#172b3b,#0e1721 58%)}
+main{max-width:880px;margin:0 auto}h1{font-size:clamp(1.5rem,4vw,2.4rem);margin:0 0 8px;letter-spacing:-.035em}
+.sub{color:#9eb0c1;margin:0 0 28px;line-height:1.6}.sample{margin:20px 0 26px}.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.13em;color:#89a6bd;margin:0 0 8px 8px}
+.bubble{max-width:680px;background:#182633;border:1px solid #2b4152;border-radius:18px 18px 18px 5px;padding:18px 20px;line-height:1.55;box-shadow:0 12px 34px #0004;overflow-wrap:anywhere}
+.bubble b{color:#fff}.bubble i{color:#aab8c4}.bubble code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#c6e9ff;background:#10202c;padding:1px 4px;border-radius:4px}
+.note{margin-top:30px;padding:14px 16px;border-left:3px solid #5cb7a8;color:#afc1ce;background:#13212c;border-radius:5px}
+</style>
+</head>
+<body><main>
+<h1>Gold book · Telegram previews</h1>
+<p class="sub">Rendered from the production <code>atrade.telegram</code> formatters. Paper-only XAUUSD swing book; escaped HTML and Telegram-supported formatting are shown as delivered.</p>
+<section class="sample">
+  <div class="label">Swing open</div>
+  <div class="bubble"><b>🟢 GOLD — SWING OPEN</b><br><i>2026-09-28T08:30:00-04:00 · FX day 2026-09-28 · overlap</i><br><br><b>XAUUSD LONG</b> · 4.685 oz @ <code>$4,200.15</code><br>Initial stop: <code>$3,986.72</code> · risk <b>$999.92</b> (74% thesis confidence)<br>Stop basis: 3x atr tighter than pivot · ATR(24h): $71.14<br>Thesis: Go long XAUUSD: safe-haven demand and softer real yields support gold.<br>Falsifier: underlying commodity reverses its move by more than 1%<br>Target: off · no pyramiding · swing holds across FX days<br><br><i>Paper book only · no live broker · no daily flatten.</i></div>
+</section>
+<section class="sample">
+  <div class="label">Risk check</div>
+  <div class="bubble"><b>🟡 GOLD — RISK CHECK</b><br><i>2026-09-28T14:15:00-04:00 · FX day 2026-09-28 · NY / PRE-BREAK</i><br><br><b>Open position(s):</b><br>• XAUUSD <b>LONG</b> 4.685 oz · uP&amp;L <b>+45.64</b><br>  entry $4,200.15 · stop $3,986.72 · trail $3,997.44<br>  mark $4,210.00<br><br><b>Trail adjustments:</b><br>• XAUUSD stop — → <b>$3,997.44</b> (chandelier · ATR $71.14)<br><br><b>Events in play:</b><br>• Fri Oct 02 — 08:30 ET Nonfarm Payrolls (NFP) [upcoming]<br><br><i>Stops are checked every dispatch tick · no daily flatten.</i></div>
+</section>
+<section class="sample">
+  <div class="label">Stop exit</div>
+  <div class="bubble"><b>🛑 GOLD — STOPPED</b><br><i>2026-09-29T02:15:00-04:00 · XAUUSD LONG · 4.685 oz</i><br>Entry <code>$4,200.15</code> → exit <code>$3,984.77</code><br>Realized P&amp;L: <b>-1,008.15 (-5.13%)</b><br>Thesis grade: ❌ thesis refuted · confidence 74%<br>Lesson: Gold stopped below the confirmed swing/ATR level; initial risk remained near 1% before gap/slippage.<br>Exit reason: stopped</div>
+</section>
+<section class="sample">
+  <div class="label">Session preview</div>
+  <div class="bubble"><b>🌙 GOLD — SESSION PREVIEW</b><br><i>2026-09-28T18:05:00-04:00 · next session: asia</i><br><br>Reference: $4,215.00<br><br><b>Open risk:</b><br>• LONG 4.685 oz · stop $3,986.72 · trail $3,997.44<br><br><b>Calendar:</b><br>• Tue Sep 29 — No major scheduled release flagged<br><br><b>Plan / levels:</b><br>• LONG · 74% · Gold demand firms while real yields ease.<br><br><i>Research changes do not auto-close positions; stale theses are re-graded.</i></div>
+</section>
+<section class="sample">
+  <div class="label">Week ahead</div>
+  <div class="bubble"><b>📅 GOLD — WEEK AHEAD</b><br><i>2026-09-27T18:05:00-04:00</i><br><br><b>FX week:</b> Sep 28 → Oct 02<br><br><b>Macro backdrop:</b><br>• Broad USD (DTWEXBGS): 120.20<br>• 10Y real yield (DFII10): 1.72%<br>• 10Y nominal yield: 4.03%<br><br><b>Central-bank / macro calendar:</b><br>• Fri Oct 02 — 08:30 ET Nonfarm Payrolls (NFP)<br>• No additional red releases flagged in this deterministic fixture.<br><br><b>Gold plan:</b><br>• LONG · 74% · Gold demand firms while real yields ease.<br>  Falsifier: real yields reverse and gold closes below the swing low<br><br><b>Weekend policy:</b> flat before Friday 17:00 ET by default.<br><br><i>Paper only · swap/carry ignored in phase 1.</i></div>
+</section>
+<section class="sample">
+  <div class="label">Auto-pause</div>
+  <div class="bubble"><b>⏸ GOLD — AUTO-PAUSED</b><br><br>XAUUSD max drawdown exceeded: 14.2% below peak (limit 14.0%).<br><br>XAUUSD paper equity 85,800.00<br><br>Existing XAUUSD stops remain active. Review before resuming the paper book.</div>
+</section>
+<div class="note">All prices, positions, P&amp;L, and macro entries on this page are deterministic preview fixtures—not live recommendations or real trades.</div>
+</main></body></html>

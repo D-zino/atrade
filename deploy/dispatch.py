@@ -36,6 +36,16 @@ open ledger position, no matter when it was opened):
     flattened before the open window adds new ones; gated by its own
     once-per-day `close_catchup` marker so the regular 15:50 close still
     runs for the new session.
+
+No double-open, even if the marker is lost: the once-per-day markers only
+survive between Actions runs while the workflow's "Persist state" step can
+push state/last_dispatch.json. If that push conflicts or fails, the next
+dispatch would re-enter the open window with a fresh marker. As a second
+line of defence, the open window also checks the state ledger: if a
+position opened on the current ET day is still open, the day's open has
+already happened, so open_run is skipped (and the `open` marker is healed
+so later dispatches take the cheap path). FORCE_DISPATCH=1 bypasses both
+guards.
 """
 import json
 import os
@@ -72,7 +82,7 @@ def _marker() -> dict:
 
 
 def _already_ran(run_type: str) -> bool:
-    if os.environ.get("FORCE_DISPATCH") == "1":
+    if _force_dispatch():
         return False
     m = _marker()
     today = datetime.now(ET).date().isoformat()
@@ -101,16 +111,25 @@ def _open_ledger_positions() -> list:
     return [t for t in (data.get("ledger") or []) if t.get("status") == "open"]
 
 
-def _opened_on_prior_day(trade: dict, today) -> bool:
-    """True when the trade was opened on an earlier ET calendar day."""
+def _trade_day(trade: dict):
+    """ET calendar day the trade was opened on, or None if unparseable."""
     raw = trade.get("opened_at") or ""
     try:
         ts = datetime.fromisoformat(raw)
     except ValueError:
-        return False  # unknown age — never treat as stale
+        return None
     if ts.tzinfo is None:
         ts = ts.replace(tzinfo=timezone.utc)
-    return ts.astimezone(ET).date() < today
+    return ts.astimezone(ET).date()
+
+
+def _opened_on_prior_day(trade: dict, today) -> bool:
+    day = _trade_day(trade)
+    return day is not None and day < today  # unknown age — never treat as stale
+
+
+def _force_dispatch() -> bool:
+    return os.environ.get("FORCE_DISPATCH") == "1"
 
 
 def main() -> int:
@@ -240,9 +259,20 @@ def main() -> int:
         if _already_ran("open"):
             print("[dispatch] open run already done today — skip")
         else:
-            print("[dispatch] opening window → running open_run")
-            engine.open_run(STATE_DIR)
-            _mark_ran("open")
+            # Belt and braces: even with the marker missing (state persist
+            # failed), an open ledger position opened today proves the open
+            # already ran — opening again would double the book. FORCE_DISPATCH
+            # deliberately bypasses both once-per-day guards.
+            opened_today = [t for t in open_positions if _trade_day(t) == today]
+            if opened_today and not _force_dispatch():
+                syms = ", ".join(t.get("symbol", "?") for t in opened_today)
+                print(f"[dispatch] positions already open today ({syms}) — "
+                      "open already done today — skip (marker healed)")
+                _mark_ran("open")
+            else:
+                print("[dispatch] opening window → running open_run")
+                engine.open_run(STATE_DIR)
+                _mark_ran("open")
 
     # --- check-in window: 10:30–13:00 ET
     if _in_window(hm, WINDOW_CHECKIN):

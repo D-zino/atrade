@@ -131,3 +131,22 @@
 [2026-09-30T22:20:34Z] [INFO] CLOSE RUN done: 0 closed, score 0.792, improved=True. Report: close_2026-09-30.md
 [2026-10-01T01:19:31Z] [INFO] PREVIEW done: 14 hypotheses for 2026-10-02
 [2026-10-02T01:52:56Z] [INFO] PREVIEW done: 14 hypotheses for 2026-10-05
+[2026-10-02T22:08:17Z] [INFO] Research pass starting...
+[2026-10-02T22:08:37Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10: The read operation timed out
+[2026-10-02T22:08:57Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2: The read operation timed out
+[2026-10-02T22:09:17Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS: The read operation timed out
+[2026-10-02T22:09:37Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE: The read operation timed out
+[2026-10-02T22:09:57Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL: The read operation timed out
+[2026-10-02T22:10:17Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=PPIFID: The read operation timed out
+[2026-10-02T22:10:17Z] [INFO] FRED: 0 series -> 0 notes
+[2026-10-02T22:10:46Z] [INFO] prices: 88/88 symbols (yahoo+stooq)
+[2026-10-02T22:10:46Z] [INFO] RSS: 0 items
+[2026-10-02T22:10:49Z] [INFO] SEC: 17 filings -> 17 notes
+[2026-10-02T22:10:49Z] [INFO] inbox: 11 notes
+[2026-10-02T22:10:49Z] [INFO] dynamic universe: +6 symbols (news 0, momentum 6) → scanning 36
+[2026-10-02T22:10:49Z] [INFO] Research pass done: 35 notes -> summary_2026-10-02.json
+[2026-10-02T22:10:49Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-10-02T22:10:49Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-10-02T22:10:49Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-10-02T22:10:49Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-10-02T22:10:50Z] [INFO] CLOSE RUN done: 0 closed, score 0.746, improved=False. Report: close_2026-10-02.md

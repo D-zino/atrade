@@ -1,6 +1,6 @@
 # 📘 A-Trade Playbook — living trading rules & signal tracker
 
-*Last updated: 2026-09-30T22:20:33+00:00*
+*Last updated: 2026-10-02T22:10:49+00:00*
 
 This file is rewritten after every close run by the self-improvement loop. It is **not** a fixed rulebook — rules here are provisional hypotheses about what the market rewards, updated from evidence.
 

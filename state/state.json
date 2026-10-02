@@ -449,10 +449,31 @@
         "win_rate": 1.0
       },
       "improved": true
+    },
+    {
+      "at": "2026-10-02T22:10:49+00:00",
+      "score": 0.746,
+      "metrics": {
+        "net_pnl": 1503.07,
+        "portfolio_return": 0.01401320000000017,
+        "benchmark_return": 0.009622161789744288,
+        "alpha": 0.004391038210255882,
+        "sharpe": 7.613,
+        "win_rate": 0.8571428571428571,
+        "n_trades": 7,
+        "n_open": 0
+      },
+      "components": {
+        "return": 0.64,
+        "alpha": 0.573,
+        "sharpe": 1.0,
+        "win_rate": 1.0
+      },
+      "improved": false
     }
   ],
   "streaks": {
-    "no_improve": 0,
+    "no_improve": 1,
     "failed_measure": 0
   },
   "thinking_history": [
@@ -466,6 +487,10 @@
     },
     {
       "date": "2026-09-30",
+      "change": "No trades closed today; priors unchanged but fresh research was logged. The playbook still lacks outcome evidence for this setup class."
+    },
+    {
+      "date": "2026-10-02",
       "change": "No trades closed today; priors unchanged but fresh research was logged. The playbook still lacks outcome evidence for this setup class."
     }
   ],
@@ -579,6 +604,14 @@
       "type": "preview",
       "at": "2026-10-02T01:52:56+00:00",
       "hypotheses": 14
+    },
+    {
+      "type": "close",
+      "at": "2026-10-02T22:10:49+00:00",
+      "closed": 0,
+      "score": 0.746,
+      "improved": false,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
@@ -597,8 +630,8 @@
   "last_metrics": {
     "net_pnl": 1503.07,
     "portfolio_return": 0.01401320000000017,
-    "benchmark_return": 0.0004263545564491267,
-    "alpha": 0.013586845443551043,
+    "benchmark_return": 0.009622161789744288,
+    "alpha": 0.004391038210255882,
     "sharpe": 7.613,
     "win_rate": 0.8571428571428571,
     "n_trades": 7,
@@ -606,11 +639,11 @@
   },
   "last_components": {
     "return": 0.64,
-    "alpha": 0.726,
+    "alpha": 0.573,
     "sharpe": 1.0,
     "win_rate": 1.0
   },
-  "last_score": 0.792,
+  "last_score": 0.746,
   "signal_tracker": {
     "technical": {
       "n": 6,
@@ -663,7 +696,7 @@
     "No trades closed this run (no day trades were open) \u2014 nothing to grade yet."
   ],
   "last_close": {
-    "at": "2026-09-30T22:20:33+00:00",
+    "at": "2026-10-02T22:10:49+00:00",
     "closed": 0,
     "pnl": 1503.07
   },

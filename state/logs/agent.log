@@ -130,3 +130,4 @@
 [2026-09-30T22:20:32Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
 [2026-09-30T22:20:34Z] [INFO] CLOSE RUN done: 0 closed, score 0.792, improved=True. Report: close_2026-09-30.md
 [2026-10-01T01:19:31Z] [INFO] PREVIEW done: 14 hypotheses for 2026-10-02
+[2026-10-02T01:52:56Z] [INFO] PREVIEW done: 14 hypotheses for 2026-10-05

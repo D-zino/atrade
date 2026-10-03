@@ -27,7 +27,16 @@ any dispatch that lands inside a window still executes the run:
                        still unset — the whole morning was missed)
   Mon–Fri 10:30–13:00  mid-session check-in
   Mon–Fri 15:50–18:30  close run + self-improvement loop
-  Mon–Fri 20:00–22:30  tomorrow preview
+    Mon–Fri 20:00–22:30  tomorrow preview
+
+Scheduler reality (measured from the workflow's own run history, Sep–Oct
+2026): GitHub Actions does not honour the 10-minute cadence — it fired this
+workflow about four times per weekday, clustered around 12:40–14:40 ET,
+16:00–19:00 ET, 20:50–22:00 ET, plus a useless 02:00–03:30 ET tick. Of 120
+weekday dispatches, exactly ONE landed inside 09:25–12:00 ET (2026-09-02
+09:40 — the last open run that ever executed) while 21 landed in the
+12:00–14:30 catch-up band. On a normal day the catch-up window, not the
+morning window, is what actually gets the open run to execute.
 
 Catch-up close: if the ledger still shows open positions after the close
 window was missed, close_run runs anyway (close_day_trades flattens every

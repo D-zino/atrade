@@ -2,7 +2,7 @@
 (research, close day trades, evaluate, learn, report)."""
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from . import (broker as broker_mod, evaluator, indicators, learning, market,
@@ -126,18 +126,62 @@ def _drawdown_check(st, equity_now: float, cfg: dict) -> tuple[float, bool, str 
     return new_peak, False, None
 
 
+def _today_et():
+    """Which *trading* day is it? Answer in exchange time, never in UTC.
+
+    The runner clock is UTC, so from 20:00 ET to midnight the UTC calendar
+    has already rolled to tomorrow while the US session is still today. Any
+    day-labelling (report filenames, P&L buckets, "next trading day") must
+    use this, or evening runs silently file themselves under the next day.
+    """
+    return datetime.now(market.TZ).date()
+
+
+def _closed_day_et(trade: dict):
+    """ET calendar day a trade was closed on, or None if unparseable."""
+    raw = trade.get("closed_at") or ""
+    if not raw:
+        return None
+    try:
+        ts = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    return ts.astimezone(market.TZ).date()
+
+
 def _daily_pnl(st, existing: list[dict]) -> float:
-    """Today's realized P&L (trades closed today) + unrealized on open positions."""
-    from datetime import date as _date
-    today_iso = _date.today().isoformat()
+    """Today's realized P&L (trades closed today) + unrealized on open positions.
+
+    Buckets realized P&L by the ET trading day instead of string-prefixing the
+    UTC date: a position closed at 20:00 ET belongs to that session's P&L even
+    though the runner's UTC clock has already rolled over to the next date.
+    """
+    today = _today_et()
     realized = sum((t.get("pnl") or 0) for t in st.ledger
-                   if (t.get("closed_at") or "").startswith(today_iso))
+                   if _closed_day_et(t) == today)
     unrealized = sum(float(p.get("unrealized_pl") or 0) for p in existing)
     return realized + unrealized
 
 
+def _research_health(summary: dict | None, price_map: dict | None) -> dict:
+    """Did the research fetch actually return anything usable?
+
+    No notes *and* no prices means the fetch failed (timeouts, DNS, upstream
+    5xx) — any "0 hypotheses" from that run is a measurement failure, not a
+    flat market, and the caller should retry. Notes present but nothing
+    clearing min_confidence is a legitimately quiet tape.
+    """
+    summary = summary or {}
+    notes = summary.get("notes") or []
+    return {"ok": bool(notes) or bool(price_map), "notes": len(notes),
+            "prices": len(price_map or {})}
+
+
 def open_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: bool = False,
-             use_cached: bool = False, report_dir=None, run_tag: str = "") -> dict:
+             use_cached: bool = False, report_dir=None, run_tag: str = "",
+             notify_none: bool = True) -> dict:
     st, cfg = _load_state_and_cfg(state_dir)
     if st.paused:
         util.log("PAUSED — skipping open run (see state.json resume).", "WARN")
@@ -149,6 +193,10 @@ def open_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: bool
 
     summary, price_map, broker, mode, tech, scan_universe = _shared_research(st, cfg, force_mock, session="open",
                                                                              use_cached=use_cached)
+    research = _research_health(summary, price_map)
+    if not research["ok"]:
+        util.log(f"research fetch came back empty ({research['notes']} notes, "
+                 f"{research['prices']} prices) — this run cannot judge the tape", "WARN")
 
     # baseline capture on first run
     if not st.data.get("baseline"):
@@ -181,24 +229,32 @@ def open_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: bool
     try:
         report = reporting.open_report(st.data, summary, hyps, opened, skipped, tech, mode)
         rdir = Path(report_dir) if report_dir else (st.dir / "reports")
-        rpath = rdir / f"{run_tag}open_{date.today().isoformat()}.md"
+        rpath = rdir / f"{run_tag}open_{_today_et().isoformat()}.md"
         rpath.write_text(report)
     except Exception as e:
         util.log(f"open report failed: {e}", "ERROR")
         rpath = Path("")
     st.save()
+    notified = False
     try:
         from . import telegram
         dyn = summary.get("dynamic") or {}
         adds = dyn.get("adds") or []
         msg = telegram.format_open(util.utc_iso(), mode, len(scan_universe),
                                    opened, skipped, hyps, adds=adds)
-        telegram.send(msg)
+        if opened or notify_none:
+            notified = bool(telegram.send(msg))
+        else:
+            # Retried open (research was empty on an earlier attempt): the
+            # "Opened today: none" alert was already delivered today — don't
+            # spam the chat on every retry tick.
+            util.log("open-run 'none' notice already sent today — suppressed", "INFO")
     except Exception as e:
         util.log(f"telegram open notification failed: {e}", "WARN")
     util.log(f"OPEN RUN done: {len(opened)} opened, {len(hyps)} hypotheses. Report: {rpath.name}")
     return {"status": "ok", "opened": opened, "skipped": skipped, "hypotheses": len(hyps),
-            "report_path": str(rpath), "mode": mode, "summary": summary, "hyps": hyps}
+            "report_path": str(rpath), "mode": mode, "summary": summary, "hyps": hyps,
+            "research": research, "notified": notified}
 
 
 def close_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: bool = False,
@@ -273,7 +329,7 @@ def close_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: boo
                                         learn["lessons"], learn["tracker"], eval_res, mode,
                                         st.data.get("last_open", {}).get("opened", []))
         rdir = Path(report_dir) if report_dir else (st.dir / "reports")
-        rpath = rdir / f"{run_tag}close_{date.today().isoformat()}.md"
+        rpath = rdir / f"{run_tag}close_{_today_et().isoformat()}.md"
         rpath.write_text(report)
     except Exception as e:
         util.log(f"close report failed: {e}", "ERROR")
@@ -388,7 +444,10 @@ def preview_run(state_dir: str | Path, force_mock: bool = False, allow_anyday: b
     scan_universe = (summary.get("dynamic") or {}).get("scan_universe") or cfg.get("universe", [])
     hyps = signals.build_hypotheses(summary, tech, tracker, scan_universe, cfg)
     hyps.sort(key=lambda h: -h["confidence"])
-    next_day = market.next_trading_day(date.today())
+    # ET "today": the preview fires 20:00–22:30 ET, when the runner's UTC clock
+    # is already on tomorrow's date — date.today() would then preview the day
+    # AFTER tomorrow (Thu 21:00 ET previewing Mon instead of Fri).
+    next_day = market.next_trading_day(_today_et())
     events = upcoming_events(next_day)
     try:
         from . import telegram
@@ -439,8 +498,9 @@ def week_ahead_run(state_dir: str | Path, force_mock: bool = False, allow_anyday
     scan_universe = (summary.get("dynamic") or {}).get("scan_universe") or cfg.get("universe", [])
     hyps = signals.build_hypotheses(summary, tech, tracker, scan_universe, cfg)
     hyps.sort(key=lambda h: -h["confidence"])
-    # next trading week (Mon–Fri)
-    today = date.today()
+    # next trading week (Mon–Fri), anchored on the ET day: in winter the
+    # Sunday 17:00–19:00 ET window straddles 00:00 UTC.
+    today = _today_et()
     days_ahead = (0 - today.weekday()) % 7
     if days_ahead == 0:
         days_ahead = 7

@@ -193,7 +193,7 @@ class WindowsTests(DispatcherCase):
         rc, out, mk = self.run_dispatch(f"{TUE}T09:26")
         self.assertEqual(self.calls, [])                        # once-per-day
         # 12:00 is no longer a hard stop: with the slot still unset the
-        # catch-up window (12:00–14:30) picks the missed open up
+        # catch-up window (12:00–15:45) picks the missed open up
         rc, out, mk = self.run_dispatch(f"{TUE}T12:01", marker=None)
         self.assertEqual(self.calls, ["open_run", "checkin_run"])
         rc, out, mk = self.run_dispatch(f"{TUE}T12:02")
@@ -387,16 +387,24 @@ class EmptyResearchRetryTests(DispatcherCase):
 
 
 class OpenCatchupTests(DispatcherCase):
-    """12:00–14:30 ET catch-up for days whose whole morning was missed."""
+    """12:00–15:45 ET catch-up for days whose whole morning was missed."""
 
     def test_catchup_window_boundaries(self):
+        # 12:00–15:45 ET: GitHub fires this workflow ~1× in the afternoon
+        # band (measured 12:40–14:40 ET) and never in 09:25–12:00 ET.
         rc, out, mk = self.run_dispatch(f"{TUE}T12:05", marker=None)
         self.assertIn("open_run", self.calls)      # missed morning → catch up
         self.assertTrue(mk.get("open"))
         rc, out, mk = self.run_dispatch(f"{TUE}T14:29", marker=None)
         self.assertEqual(self.calls, ["open_run"])  # still inside (no check-in now)
         rc, out, mk = self.run_dispatch(f"{TUE}T14:31", marker=None)
+        self.assertEqual(self.calls, ["open_run"])  # 14:30 is not a cut-off
+        rc, out, mk = self.run_dispatch(f"{TUE}T15:45", marker=None)
+        self.assertEqual(self.calls, ["open_run"])  # end incl. (5 min before close)
+        rc, out, mk = self.run_dispatch(f"{TUE}T15:46", marker=None)
         self.assertEqual(self.calls, [])            # too late
+        rc, out, mk = self.run_dispatch(f"{TUE}T15:50", marker=None)
+        self.assertEqual(self.calls, ["close_run"])  # close window takes over
 
     def test_catchup_respects_the_marker_and_ledger_guards(self):
         # marker says the open already happened
@@ -412,6 +420,18 @@ class OpenCatchupTests(DispatcherCase):
         rc, out, mk = self.run_dispatch(f"{TUE}T12:05", marker=None, ledger=today_pos,
                                         env={"FORCE_DISPATCH": "1"})
         self.assertIn("open_run", self.calls)
+
+    def test_the_real_missed_day_2026_10_02(self):
+        """Fri 2026-10-02: the workflow's only afternoon tick was 14:07 ET.
+
+        Under the old windows that tick printed "outside run windows" and the
+        day never traded (see state/last_dispatch.json — no `open` key).
+        """
+        rc, out, mk = self.run_dispatch(
+            f"{FRI}T14:07", marker={"date": THU, "close": True, "preview": True})
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertTrue(mk.get("open"))
+        self.assertEqual(mk["date"], FRI)
 
     def test_full_day_open_lands_late_and_still_closes_same_day(self):
         # morning totally missed (cron late): yesterday's marker is still on file

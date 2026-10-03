@@ -23,7 +23,7 @@ Windows (ET) — deliberately wide: cloud cron is often delayed by hours, so
 any dispatch that lands inside a window still executes the run:
   Sun 17:00–19:00  week-ahead digest (Sunday only)
   Mon–Fri 09:25–12:00  open run
-  Mon–Fri 12:00–14:30  open catch-up (only if the day's open slot is
+  Mon–Fri 12:00–15:45  open catch-up (only if the day's open slot is
                        still unset — the whole morning was missed)
   Mon–Fri 10:30–13:00  mid-session check-in
   Mon–Fri 15:50–18:30  close run + self-improvement loop
@@ -34,9 +34,10 @@ Scheduler reality (measured from the workflow's own run history, Sep–Oct
 workflow about four times per weekday, clustered around 12:40–14:40 ET,
 16:00–19:00 ET, 20:50–22:00 ET, plus a useless 02:00–03:30 ET tick. Of 120
 weekday dispatches, exactly ONE landed inside 09:25–12:00 ET (2026-09-02
-09:40 — the last open run that ever executed) while 21 landed in the
-12:00–14:30 catch-up band. On a normal day the catch-up window, not the
-morning window, is what actually gets the open run to execute.
+09:40 — the last open run that ever executed) while 32 landed in the
+12:00–15:45 catch-up band (23 of the 24 weekdays got a tick there). On a
+normal day the catch-up window, not the morning window, is what actually
+gets the open run to execute.
 
 Catch-up close: if the ledger still shows open positions after the close
 window was missed, close_run runs anyway (close_day_trades flattens every
@@ -69,7 +70,7 @@ once, then mark the slot as done.
 
 Open catch-up: if the day's `open` marker is still unset by 12:00 ET (the
 whole morning was missed — GitHub cron was late again), open_run may also
-run until 14:30 ET. Late entries are safe: the 15:50 close plus the next
+run until 15:45 ET. Late entries are safe: the 15:50 close plus the next
 morning's close_catchup flatten everything opened that day.
 """
 import json
@@ -89,7 +90,7 @@ MARKER = os.path.join(ROOT, "state", "last_dispatch.json")
 # Dispatch windows as (start, end) minutes-from-midnight ET, inclusive.
 WINDOW_WEEK_AHEAD = (1020, 1140)   # Sun 17:00–19:00
 WINDOW_OPEN = (565, 720)           # Mon–Fri 09:25–12:00
-WINDOW_OPEN_CATCHUP = (720, 870)   # Mon–Fri 12:00–14:30 (morning open missed)
+WINDOW_OPEN_CATCHUP = (720, 945)   # Mon–Fri 12:00–15:45 (morning open missed)
 WINDOW_CHECKIN = (630, 780)        # Mon–Fri 10:30–13:00
 WINDOW_CLOSE = (950, 1110)         # Mon–Fri 15:50–18:30
 WINDOW_PREVIEW = (1200, 1350)      # Mon–Fri 20:00–22:30
@@ -335,7 +336,7 @@ def main() -> int:
         engine.close_run(STATE_DIR)
         _mark_ran("close_catchup")
 
-    # --- open window: 09:25–12:00 ET (+ 12:00–14:30 catch-up when the
+    # --- open window: 09:25–12:00 ET (+ 12:00–15:45 catch-up when the
     #     morning was missed entirely and the slot is still unset)
     if _in_window(hm, WINDOW_OPEN) or _in_window(hm, WINDOW_OPEN_CATCHUP):
         handled = True

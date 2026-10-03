@@ -200,7 +200,7 @@ re-captured on your first open run.
   preview) with once-per-day idempotency and DST-safe times — no VPS required. Cloud cron
   is often late, so the windows are wide, and two safety nets keep a day from being lost:
   an open whose research fetch came back empty keeps the day's slot for up to 3 retries,
-  and a morning that was missed entirely is caught up from 12:00 until 14:30 ET.
+  and a morning that was missed entirely is caught up from 12:00 until 15:45 ET.
 
 ---
 

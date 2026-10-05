@@ -102,7 +102,12 @@ class PreviewRunTests(EngineDateCase):
         self.assertTrue(res["hypotheses"] >= 1)
         self.assertEqual(len(self.sent), 1)
         self.assertIn("<b>Next trading day:</b> 2026-10-02", self.sent[0])
-        self.assertNotIn("2026-10-05", self.sent[0])
+        # Scope the "not Monday" check to that line: the message header carries
+        # the *real* UTC clock (util.utc_iso), which is not frozen here.
+        day_line = [l for l in self.sent[0].splitlines() if "Next trading day" in l][0]
+        self.assertEqual(day_line, "<b>Next trading day:</b> 2026-10-02")
+        # Fri 2026-10-02 is the month's first Friday → NFP day
+        self.assertIn("Nonfarm Payrolls (NFP)", self.sent[0])
 
     def test_friday_night_preview_labels_monday(self):
         Frozen.when = datetime(2026, 10, 3, 1, 10, tzinfo=UTC)   # Fri 21:10 ET

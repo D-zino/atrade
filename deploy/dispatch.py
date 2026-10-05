@@ -23,9 +23,21 @@ Windows (ET) — deliberately wide: cloud cron is often delayed by hours, so
 any dispatch that lands inside a window still executes the run:
   Sun 17:00–19:00  week-ahead digest (Sunday only)
   Mon–Fri 09:25–12:00  open run
+  Mon–Fri 12:00–15:45  open catch-up (only if the day's open slot is
+                       still unset — the whole morning was missed)
   Mon–Fri 10:30–13:00  mid-session check-in
   Mon–Fri 15:50–18:30  close run + self-improvement loop
-  Mon–Fri 20:00–22:30  tomorrow preview
+    Mon–Fri 20:00–22:30  tomorrow preview
+
+Scheduler reality (measured from the workflow's own run history, Sep–Oct
+2026): GitHub Actions does not honour the 10-minute cadence — it fired this
+workflow about four times per weekday, clustered around 12:40–14:40 ET,
+16:00–19:00 ET, 20:50–22:00 ET, plus a useless 02:00–03:30 ET tick. Of 120
+weekday dispatches, exactly ONE landed inside 09:25–12:00 ET (2026-09-02
+09:40 — the last open run that ever executed) while 32 landed in the
+12:00–15:45 catch-up band (23 of the 24 weekdays got a tick there). On a
+normal day the catch-up window, not the morning window, is what actually
+gets the open run to execute.
 
 Catch-up close: if the ledger still shows open positions after the close
 window was missed, close_run runs anyway (close_day_trades flattens every
@@ -46,6 +58,20 @@ position opened on the current ET day is still open, the day's open has
 already happened, so open_run is skipped (and the `open` marker is healed
 so later dispatches take the cheap path). FORCE_DISPATCH=1 bypasses both
 guards.
+
+Empty research never burns the day's open slot: an open_run whose research
+fetch came back with nothing (no notes, no prices) reports
+`research.ok == False`. That is a measurement failure, not a flat market, so
+the slot stays open for up to MAX_OPEN_EMPTY_ATTEMPTS retries (the
+"Opened today: none" alert is sent at most once a day via its own
+`open_none` marker). A run that *did* see research but found no hypothesis
+at or above min_confidence is a legitimately flat day: run once, notify
+once, then mark the slot as done.
+
+Open catch-up: if the day's `open` marker is still unset by 12:00 ET (the
+whole morning was missed — GitHub cron was late again), open_run may also
+run until 15:45 ET. Late entries are safe: the 15:50 close plus the next
+morning's close_catchup flatten everything opened that day.
 """
 import json
 import os
@@ -64,13 +90,23 @@ MARKER = os.path.join(ROOT, "state", "last_dispatch.json")
 # Dispatch windows as (start, end) minutes-from-midnight ET, inclusive.
 WINDOW_WEEK_AHEAD = (1020, 1140)   # Sun 17:00–19:00
 WINDOW_OPEN = (565, 720)           # Mon–Fri 09:25–12:00
+WINDOW_OPEN_CATCHUP = (720, 945)   # Mon–Fri 12:00–15:45 (morning open missed)
 WINDOW_CHECKIN = (630, 780)        # Mon–Fri 10:30–13:00
 WINDOW_CLOSE = (950, 1110)         # Mon–Fri 15:50–18:30
 WINDOW_PREVIEW = (1200, 1350)      # Mon–Fri 20:00–22:30
 
+# How many times a day an open_run that saw *no research at all* may retry
+# before the day is given up on (a legitimately flat day never retries).
+MAX_OPEN_EMPTY_ATTEMPTS = 3
+
 
 def _in_window(hm: int, window: tuple) -> bool:
     return window[0] <= hm <= window[1]
+
+
+def _today() -> str:
+    """Current ET trading day (the runner clock is UTC)."""
+    return datetime.now(ET).date().isoformat()
 
 
 def _marker() -> dict:
@@ -81,24 +117,71 @@ def _marker() -> dict:
         return {}
 
 
+def _write_marker(m: dict) -> None:
+    os.makedirs(os.path.dirname(MARKER), exist_ok=True)
+    with open(MARKER, "w") as f:
+        json.dump(m, f)
+
+
 def _already_ran(run_type: str) -> bool:
     if _force_dispatch():
         return False
     m = _marker()
-    today = datetime.now(ET).date().isoformat()
-    return m.get("date") == today and bool(m.get(run_type))
+    return m.get("date") == _today() and bool(m.get(run_type))
 
 
-def _mark_ran(run_type: str) -> None:
-    today = datetime.now(ET).date().isoformat()
+def _mark_ran(run_type: str, **extra) -> None:
     m = _marker()
-    if m.get("date") != today:
+    if m.get("date") != _today():
         m = {}  # new ET day: drop yesterday's once-per-day flags
-    m["date"] = today
+    m["date"] = _today()
     m[run_type] = True
-    os.makedirs(os.path.dirname(MARKER), exist_ok=True)
-    with open(MARKER, "w") as f:
-        json.dump(m, f)
+    m.update(extra)
+    _write_marker(m)
+
+
+def _open_attempts() -> int:
+    """Empty-research open attempts already spent on today's ET date."""
+    m = _marker()
+    if m.get("date") != _today():
+        return 0
+    try:
+        return int(m.get("open_attempts") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _note_open_attempt() -> int:
+    """Count one more empty-research open attempt; returns the new total."""
+    n = _open_attempts() + 1
+    m = _marker()
+    if m.get("date") != _today():
+        m = {}
+    m["date"] = _today()
+    m["open_attempts"] = n
+    _write_marker(m)
+    return n
+
+
+def _open_outcome(res) -> str:
+    """Classify an open_run result: 'traded' | 'flat' | 'empty' | 'no_run'.
+
+    - traded : at least one position opened → the day's slot is spent
+    - flat   : research was fine, nothing cleared min_confidence → spent
+    - empty  : research fetch returned nothing → retry, do NOT spend the slot
+    - no_run : paused / skipped / no result → leave the slot alone entirely
+
+    A result without a `research` report (older engine, simulation stub) is
+    treated as `flat`, i.e. the historical behaviour.
+    """
+    if not isinstance(res, dict) or res.get("status") != "ok":
+        return "no_run"
+    if res.get("opened"):
+        return "traded"
+    research = res.get("research")
+    if isinstance(research, dict) and not research.get("ok", True):
+        return "empty"
+    return "flat"
 
 
 def _open_ledger_positions() -> list:
@@ -253,8 +336,9 @@ def main() -> int:
         engine.close_run(STATE_DIR)
         _mark_ran("close_catchup")
 
-    # --- open window: 09:25–12:00 ET
-    if _in_window(hm, WINDOW_OPEN):
+    # --- open window: 09:25–12:00 ET (+ 12:00–15:45 catch-up when the
+    #     morning was missed entirely and the slot is still unset)
+    if _in_window(hm, WINDOW_OPEN) or _in_window(hm, WINDOW_OPEN_CATCHUP):
         handled = True
         if _already_ran("open"):
             print("[dispatch] open run already done today — skip")
@@ -269,10 +353,41 @@ def main() -> int:
                 print(f"[dispatch] positions already open today ({syms}) — "
                       "open already done today — skip (marker healed)")
                 _mark_ran("open")
+            elif not _in_window(hm, WINDOW_OPEN) and _open_attempts() >= MAX_OPEN_EMPTY_ATTEMPTS:
+                print(f"[dispatch] open catch-up window but {_open_attempts()} empty-research "
+                      "attempts already spent today — skip")
             else:
-                print("[dispatch] opening window → running open_run")
-                engine.open_run(STATE_DIR)
-                _mark_ran("open")
+                if _in_window(hm, WINDOW_OPEN):
+                    print("[dispatch] opening window → running open_run")
+                else:
+                    print("[dispatch] open catch-up window (morning open missed) "
+                          "→ running open_run")
+                # Only let the engine send the "Opened today: none" alert on
+                # the first conclusive run of the day, never on a retry tick.
+                allow_notify = not _already_ran("open_none")
+                res = engine.open_run(STATE_DIR, notify_none=allow_notify)
+                outcome = _open_outcome(res)
+                opened_now = bool(isinstance(res, dict) and res.get("opened"))
+                if allow_notify and not opened_now:
+                    # The flat-day notice is now out for today; any retry only
+                    # re-runs the research fetch and stays quiet.
+                    _mark_ran("open_none")
+                if outcome == "empty":
+                    n = _note_open_attempt()
+                    if n >= MAX_OPEN_EMPTY_ATTEMPTS:
+                        print(f"[dispatch] research still empty after {n} attempts — "
+                              "giving up on today's open (slot closed)")
+                        _mark_ran("open")
+                    else:
+                        print(f"[dispatch] research came back empty (attempt "
+                              f"{n}/{MAX_OPEN_EMPTY_ATTEMPTS}) — open slot kept "
+                              "for a retry")
+                elif outcome == "no_run":
+                    print("[dispatch] open run did not execute "
+                          f"({(res or {}).get('status') or 'no result'}) — "
+                          "open slot kept for a retry")
+                else:
+                    _mark_ran("open")
 
     # --- check-in window: 10:30–13:00 ET
     if _in_window(hm, WINDOW_CHECKIN):

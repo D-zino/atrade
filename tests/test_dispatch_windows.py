@@ -38,9 +38,25 @@ ET = ZoneInfo("America/New_York")
 MON = "2026-09-28"  # trading days Tue 09-29, Wed 09-30 follow
 TUE = "2026-09-29"
 WED = "2026-09-30"
+THU = "2026-10-01"
+FRI = "2026-10-02"
 SAT = "2026-10-03"
 SUN = "2026-10-04"
+NEXT_MON = "2026-10-05"
 LABOR_DAY = "2026-09-07"  # NYSE holiday (Mon)
+
+# What open_run reports when the research fetch came back with nothing: no
+# notes, no prices, hence no hypotheses — a measurement failure, not a flat
+# market. (Before this fix such a run still marked the day's open slot as
+# done, so a later tick with good research would never retry it.)
+EMPTY_RESEARCH = {"status": "ok", "opened": [],
+                  "research": {"ok": False, "notes": 0, "prices": 0}}
+# Research was fine, nothing cleared min_confidence: a legitimately flat day.
+FLAT_DAY = {"status": "ok", "opened": [],
+            "research": {"ok": True, "notes": 38, "prices": 88}}
+# A normal open: something was actually bought.
+OPENED_DAY = {"status": "ok", "opened": [{"symbol": "NVDA", "side": "long", "qty": 10}],
+              "research": {"ok": True, "notes": 38, "prices": 88}}
 
 
 class Frozen(datetime):
@@ -53,20 +69,30 @@ class Frozen(datetime):
 
 
 class _EngineStub:
+    """Call recorder.
+
+    `result` controls what every engine call returns: a dict, or a callable
+    taking the run name. `kwargs` records the keyword arguments of each call
+    (used to assert the open_run `notify_none` discipline).
+    """
     def __init__(self):
         self.calls: list[str] = []
+        self.kwargs: list[dict] = []
+        self.result = {"status": "ok"}       # a normal (flat) run by default
         self.raise_close = False
 
     def _rec(self, name):
         def f(*a, **k):
             self.calls.append(name)
+            self.kwargs.append(dict(k))
             if name == "close_run" and self.raise_close:
                 raise RuntimeError("alpaca down")
-            return {"status": "ok"}
+            r = self.result(name) if callable(self.result) else self.result
+            return dict(r) if isinstance(r, dict) else r
         return f
 
     def __getattr__(self, name):
-        if name.startswith("raise_") or name == "calls":
+        if name.startswith("raise_") or name in ("calls", "kwargs", "result"):
             raise AttributeError(name)
         return self._rec(name)
 
@@ -166,8 +192,12 @@ class WindowsTests(DispatcherCase):
         self.assertEqual(self.calls, ["open_run"])              # start incl.
         rc, out, mk = self.run_dispatch(f"{TUE}T09:26")
         self.assertEqual(self.calls, [])                        # once-per-day
+        # 12:00 is no longer a hard stop: with the slot still unset the
+        # catch-up window (12:00–15:45) picks the missed open up
         rc, out, mk = self.run_dispatch(f"{TUE}T12:01", marker=None)
-        self.assertNotIn("open_run", self.calls)                # end passed
+        self.assertEqual(self.calls, ["open_run", "checkin_run"])
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:02")
+        self.assertEqual(self.calls, [])                        # once-per-day
 
     def test_checkin_window_boundaries(self):
         rc, out, mk = self.run_dispatch(f"{TUE}T10:30", marker=None)
@@ -261,6 +291,167 @@ class StaleAndGuardTests(DispatcherCase):
         self.assertEqual(self.calls, ["week_ahead_run"])     # Sunday digest
         rc, out, mk = self.run_dispatch(f"{SUN}T18:00")
         self.assertEqual(self.calls, [])                     # once per week
+
+
+class EmptyResearchRetryTests(DispatcherCase):
+    """An open run that saw no research must not consume the day's slot."""
+
+    def setUp(self):
+        super().setUp()
+        self.engine.result = dict(EMPTY_RESEARCH)
+
+    def _notify_none_flags(self):
+        return [k.get("notify_none") for k in self.engine.kwargs]
+
+    def test_empty_research_keeps_the_slot_open(self):
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:25", marker=None)
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertNotIn("open", mk)               # slot NOT burned
+        self.assertEqual(mk.get("open_attempts"), 1)
+        self.assertTrue(mk.get("open_none"))       # "Opened today: none" sent
+        self.assertEqual(self._notify_none_flags(), [True])
+        # next tick retries — same run, but no second "none" notification
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:35")
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertNotIn("open", mk)
+        self.assertEqual(mk.get("open_attempts"), 2)
+        self.assertEqual(self._notify_none_flags(), [True, False])
+
+    def test_empty_research_retries_are_capped_at_three(self):
+        attempts = []
+        for hhmm in ("09:25", "09:35", "09:45", "09:55"):
+            rc, out, mk = self.run_dispatch(
+                f"{TUE}T{hhmm}", marker=None if hhmm == "09:25" else _unset)
+            attempts.append(self.calls.count("open_run"))
+        self.assertEqual(attempts, [1, 1, 1, 0])   # 3 attempts, then stop
+        self.assertEqual(mk.get("open_attempts"), 3)
+        self.assertTrue(mk.get("open"))            # slot closed for the day
+        # the "Opened today: none" alert went out exactly once
+        self.assertEqual(self._notify_none_flags().count(True), 1)
+        # and the 12:00 catch-up window does not resurrect it either
+        # (the check-in window is open at 12:05 and runs normally)
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05")
+        self.assertEqual(self.calls, ["checkin_run"])
+        rc, out, mk = self.run_dispatch(f"{WED}T09:25", marker=None)
+        self.assertEqual(self.calls, ["open_run"])  # new day, fresh budget
+        self.assertEqual(mk.get("open_attempts"), 1)
+
+    def test_retry_succeeds_on_the_second_attempt(self):
+        seen = {"n": 0}
+
+        def result(name):
+            if name != "open_run":
+                return {"status": "ok"}
+            seen["n"] += 1
+            return dict(EMPTY_RESEARCH) if seen["n"] == 1 else dict(OPENED_DAY)
+
+        self.engine.result = result
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:25", marker=None)
+        self.assertNotIn("open", mk)               # empty: slot preserved
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:35")
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertTrue(mk.get("open"))            # traded: slot spent once
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:45")
+        self.assertEqual(self.calls, [])
+
+    def test_flat_day_runs_once_and_notifies_once(self):
+        self.engine.result = dict(FLAT_DAY)
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:25", marker=None)
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertTrue(mk.get("open"))            # legit flat day: done
+        self.assertTrue(mk.get("open_none"))
+        self.assertIsNone(mk.get("open_attempts"))
+        self.assertEqual(self._notify_none_flags(), [True])
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:35")
+        self.assertEqual(self.calls, [])           # no retry on a flat day
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05")
+        self.assertNotIn("open_run", self.calls)   # and no catch-up either
+
+    def test_successful_open_marks_the_slot_once(self):
+        self.engine.result = dict(OPENED_DAY)
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:25", marker=None)
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertTrue(mk.get("open"))
+        self.assertIsNone(mk.get("open_attempts"))
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:35")
+        self.assertEqual(self.calls, [])
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05")
+        self.assertNotIn("open_run", self.calls)
+
+    def test_paused_open_does_not_burn_the_slot(self):
+        self.engine.result = {"status": "paused"}
+        rc, out, mk = self.run_dispatch(f"{TUE}T09:25", marker=None)
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertNotIn("open", mk)               # resume later today still opens
+        self.assertIsNone(mk.get("open_attempts"))
+
+
+class OpenCatchupTests(DispatcherCase):
+    """12:00–15:45 ET catch-up for days whose whole morning was missed."""
+
+    def test_catchup_window_boundaries(self):
+        # 12:00–15:45 ET: GitHub fires this workflow ~1× in the afternoon
+        # band (measured 12:40–14:40 ET) and never in 09:25–12:00 ET.
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05", marker=None)
+        self.assertIn("open_run", self.calls)      # missed morning → catch up
+        self.assertTrue(mk.get("open"))
+        rc, out, mk = self.run_dispatch(f"{TUE}T14:29", marker=None)
+        self.assertEqual(self.calls, ["open_run"])  # still inside (no check-in now)
+        rc, out, mk = self.run_dispatch(f"{TUE}T14:31", marker=None)
+        self.assertEqual(self.calls, ["open_run"])  # 14:30 is not a cut-off
+        rc, out, mk = self.run_dispatch(f"{TUE}T15:45", marker=None)
+        self.assertEqual(self.calls, ["open_run"])  # end incl. (5 min before close)
+        rc, out, mk = self.run_dispatch(f"{TUE}T15:46", marker=None)
+        self.assertEqual(self.calls, [])            # too late
+        rc, out, mk = self.run_dispatch(f"{TUE}T15:50", marker=None)
+        self.assertEqual(self.calls, ["close_run"])  # close window takes over
+
+    def test_catchup_respects_the_marker_and_ledger_guards(self):
+        # marker says the open already happened
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05",
+                                        marker={"date": TUE, "open": True})
+        self.assertNotIn("open_run", self.calls)
+        # marker lost, but the ledger proves a position was opened today
+        today_pos = [pos("NVDA", f"{TUE}T13:30:00+00:00")]   # 09:30 ET
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05", marker=None, ledger=today_pos)
+        self.assertNotIn("open_run", self.calls)
+        self.assertTrue(mk.get("open"))            # marker healed
+        # FORCE_DISPATCH still bypasses every guard
+        rc, out, mk = self.run_dispatch(f"{TUE}T12:05", marker=None, ledger=today_pos,
+                                        env={"FORCE_DISPATCH": "1"})
+        self.assertIn("open_run", self.calls)
+
+    def test_the_real_missed_day_2026_10_02(self):
+        """Fri 2026-10-02: the workflow's only afternoon tick was 14:07 ET.
+
+        Under the old windows that tick printed "outside run windows" and the
+        day never traded (see state/last_dispatch.json — no `open` key).
+        """
+        rc, out, mk = self.run_dispatch(
+            f"{FRI}T14:07", marker={"date": THU, "close": True, "preview": True})
+        self.assertEqual(self.calls, ["open_run"])
+        self.assertTrue(mk.get("open"))
+        self.assertEqual(mk["date"], FRI)
+
+    def test_full_day_open_lands_late_and_still_closes_same_day(self):
+        # morning totally missed (cron late): yesterday's marker is still on file
+        rc, out, mk = self.run_dispatch(
+            f"{FRI}T12:05", marker={"date": THU, "close": True, "preview": True})
+        self.assertEqual(self.calls, ["open_run", "checkin_run"])
+        self.assertTrue(mk.get("open"))
+        self.assertEqual(mk["date"], FRI)          # flags rolled to today
+        self.assertNotIn("close", mk)              # today's close still owed
+        # ...and the late entry is flattened by the same-day close run
+        opened_today = [pos("NVDA", f"{FRI}T16:05:00+00:00")]   # 12:05 ET
+        rc, out, mk = self.run_dispatch(f"{FRI}T15:50", ledger=opened_today)
+        self.assertEqual(self.calls, ["close_run"])
+        self.assertTrue(mk.get("close"))
+        # flat book after the close window: nothing left to do
+        rc, out, mk = self.run_dispatch(f"{FRI}T18:31", ledger=[])
+        self.assertEqual(self.calls, [])
+        # and even if that close had been missed, the next morning flattens it
+        rc, out, mk = self.run_dispatch(f"{NEXT_MON}T09:30", marker=None, ledger=opened_today)
+        self.assertEqual(self.calls, ["close_run", "open_run"])
 
 
 if __name__ == "__main__":

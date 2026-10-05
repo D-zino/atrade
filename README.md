@@ -196,8 +196,11 @@ re-captured on your first open run.
 - **Important:** a long-running process is not guaranteed to stay alive between sessions —
   a cron/task-scheduler is the reliable way to keep the cadence going.
 - **GitHub Actions (free, recommended):** `deploy/dispatch.py` + the workflow handle all
-  five windows (Sun 17:00 week-ahead; Mon–Fri 09:25/10:30/15:50/20:00) with once-per-day
-  idempotency and DST-safe times — no VPS required.
+  windows (Sun 17:00 week-ahead; Mon–Fri 09:25 open, 10:30 check-in, 15:50 close, 20:00
+  preview) with once-per-day idempotency and DST-safe times — no VPS required. Cloud cron
+  is often late, so the windows are wide, and two safety nets keep a day from being lost:
+  an open whose research fetch came back empty keeps the day's slot for up to 3 retries,
+  and a morning that was missed entirely is caught up from 12:00 until 15:45 ET.
 
 ---
 

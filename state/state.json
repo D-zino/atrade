@@ -384,6 +384,237 @@
       "hypothesis_correct": 0,
       "vs_expected": -46.47,
       "lesson": "XLC long -46.47 (-0.64%) conf=0.79 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "TSLA-2026-10-06T18:44:41+00:00",
+      "symbol": "TSLA",
+      "side": "long",
+      "qty": 30,
+      "warmup_factor": 0.75,
+      "opened_at": "2026-10-06T18:44:41+00:00",
+      "entry_price": 379.4700012207031,
+      "order_id": "5969caca-a2af-4766-943e-2224f835a111",
+      "hypothesis": {
+        "thesis": "Go long TSLA today: TSLA technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 83% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "TSLA gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.915,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "TSLA technical bullish",
+            "summary": "TSLA: 5d mom +7.5%; above SMA20; above SMA50. close 379.47.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "ORCL-2026-10-06T18:44:42+00:00",
+      "symbol": "ORCL",
+      "side": "long",
+      "qty": 78,
+      "warmup_factor": 0.75,
+      "opened_at": "2026-10-06T18:44:42+00:00",
+      "entry_price": 145.5229949951172,
+      "order_id": "fed59a4e-cb78-4ba1-ba8a-4bf62658d1e8",
+      "hypothesis": {
+        "thesis": "Go long ORCL today: ORCL technical bullish; ORCL daily move +2.1%. Bull vs bear evidence: 1.17 vs 0.00. Playbook prior for 'technical' is 83% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "ORCL gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.891,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "ORCL technical bullish",
+            "summary": "ORCL: 5d mom +5.6%; above SMA20; above SMA50. close 145.52.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "ORCL daily move +2.1%",
+            "summary": "ORCL +2.14% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.47085903193861184,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XOM-2026-10-06T18:44:42+00:00",
+      "symbol": "XOM",
+      "side": "long",
+      "qty": 69,
+      "warmup_factor": 0.75,
+      "opened_at": "2026-10-06T18:44:42+00:00",
+      "entry_price": 165.22000122070312,
+      "order_id": "83efd735-5bf5-48d8-aaba-1e4bd2be1b48",
+      "hypothesis": {
+        "thesis": "Go long XOM today: XOM technical bullish; XOM daily move +0.7%. Bull vs bear evidence: 1.06 vs 0.00. Playbook prior for 'technical' is 83% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XOM gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.874,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "XOM technical bullish",
+            "summary": "XOM: 5d mom +2.4%; above SMA20; above SMA50. close 165.22.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "XOM daily move +0.7%",
+            "summary": "XOM +0.74% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.35951225466844433,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLU-2026-10-06T18:44:42+00:00",
+      "symbol": "XLU",
+      "side": "long",
+      "qty": 279,
+      "warmup_factor": 0.75,
+      "opened_at": "2026-10-06T18:44:42+00:00",
+      "entry_price": 40.85499954223633,
+      "order_id": "b349541b-37fd-4b5c-9053-2fd787f9e7ad",
+      "hypothesis": {
+        "thesis": "Go long XLU today: Sector rotation: XLK (+4.1%), XLE (+3.8%), XLU (+2.9%); XLU technical bullish; XLU daily move +2.2%. Bull vs bear evidence: 1.38 vs 0.00. Playbook prior for 'technical' is 83% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XLU gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.873,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "sector",
+            "title": "Sector rotation: XLK (+4.1%), XLE (+3.8%), XLU (+2.9%)",
+            "summary": "Relative-strength leaders (5d): XLK (+4.1%), XLE (+3.8%), XLU (+2.9%). Rotation favors these sectors today.",
+            "direction": 1.0,
+            "strength": 0.5,
+            "source": "rotation",
+            "fresh": 1.0
+          },
+          {
+            "category": "technical",
+            "title": "XLU daily move +2.2%",
+            "summary": "XLU +2.21% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.47713250828219705,
+            "source": "bars",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "XLU technical bullish",
+            "summary": "XLU: 5d mom +2.9%; above SMA20; below SMA50. close 40.85.",
+            "direction": 1.0,
+            "strength": 0.39999999999999997,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "AVGO-2026-10-06T18:44:42+00:00",
+      "symbol": "AVGO",
+      "side": "long",
+      "qty": 30,
+      "warmup_factor": 0.75,
+      "opened_at": "2026-10-06T18:44:42+00:00",
+      "entry_price": 378.5249938964844,
+      "order_id": "f5a4b8db-8511-4697-8de2-e11416e192ce",
+      "hypothesis": {
+        "thesis": "Go long AVGO today: AVGO daily move +4.4%. Bull vs bear evidence: 0.60 vs 0.00. Playbook prior for 'technical' is 83% win rate over 6 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AVGO gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.865,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AVGO daily move +4.4%",
+            "summary": "AVGO +4.42% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.6,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
     }
   ],
   "score_history": [
@@ -622,19 +853,26 @@
       "type": "preview",
       "at": "2026-10-06T01:36:23+00:00",
       "hypotheses": 15
+    },
+    {
+      "type": "open",
+      "at": "2026-10-06T18:44:42+00:00",
+      "opened": 5,
+      "hypotheses": 31,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
-    "at": "2026-09-02T13:42:43+00:00",
+    "at": "2026-10-06T18:44:42+00:00",
     "opened": [
-      "NVDA",
-      "AAPL",
-      "XLY",
-      "XLK",
-      "XLC"
+      "TSLA",
+      "ORCL",
+      "XOM",
+      "XLU",
+      "AVGO"
     ],
     "skipped": [],
-    "hypotheses": 26,
+    "hypotheses": 31,
     "mode": "alpaca_paper"
   },
   "last_metrics": {

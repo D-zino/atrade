@@ -152,3 +152,28 @@
 [2026-10-02T22:10:50Z] [INFO] CLOSE RUN done: 0 closed, score 0.746, improved=False. Report: close_2026-10-02.md
 [2026-10-03T01:08:29Z] [INFO] PREVIEW done: 15 hypotheses for 2026-10-05
 [2026-10-06T01:36:23Z] [INFO] PREVIEW done: 15 hypotheses for 2026-10-06
+[2026-10-06T18:41:56Z] [INFO] Research pass starting...
+[2026-10-06T18:42:16Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10: The read operation timed out
+[2026-10-06T18:42:36Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2: The read operation timed out
+[2026-10-06T18:42:56Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=FEDFUNDS: The read operation timed out
+[2026-10-06T18:43:16Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=UNRATE: The read operation timed out
+[2026-10-06T18:43:36Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL: The read operation timed out
+[2026-10-06T18:43:56Z] [WARN] fetch failed https://fred.stlouisfed.org/graph/fredgraph.csv?id=PPIFID: The read operation timed out
+[2026-10-06T18:43:56Z] [INFO] FRED: 0 series -> 0 notes
+[2026-10-06T18:44:33Z] [INFO] prices: 88/88 symbols (yahoo+stooq)
+[2026-10-06T18:44:38Z] [INFO] RSS: 0 items
+[2026-10-06T18:44:41Z] [INFO] SEC: 20 filings -> 20 notes
+[2026-10-06T18:44:41Z] [INFO] inbox: 11 notes
+[2026-10-06T18:44:41Z] [INFO] dynamic universe: +6 symbols (news 0, momentum 6) → scanning 36
+[2026-10-06T18:44:41Z] [INFO] Research pass done: 38 notes -> summary_2026-10-06.json
+[2026-10-06T18:44:41Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-10-06T18:44:41Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-10-06T18:44:41Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
+[2026-10-06T18:44:41Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
+[2026-10-06T18:44:41Z] [INFO] WARM-UP: 7/12 trades → sizing at 75% of normal
+[2026-10-06T18:44:41Z] [INFO] OPEN LONG 30 TSLA @ 379.47 (conf 0.92, $11384) [cluster consumer_tech]
+[2026-10-06T18:44:42Z] [INFO] OPEN LONG 78 ORCL @ 145.52 (conf 0.89, $11351) [cluster bigtech_software]
+[2026-10-06T18:44:42Z] [INFO] OPEN LONG 69 XOM @ 165.22 (conf 0.87, $11400) [cluster energy]
+[2026-10-06T18:44:42Z] [INFO] OPEN LONG 279 XLU @ 40.85 (conf 0.87, $11399)
+[2026-10-06T18:44:42Z] [INFO] OPEN LONG 30 AVGO @ 378.52 (conf 0.86, $11356) [cluster semis]
+[2026-10-06T18:44:42Z] [INFO] OPEN RUN done: 5 opened, 31 hypotheses. Report: open_2026-10-06.md

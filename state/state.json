@@ -416,13 +416,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": 8.41,
+      "pnl_pct": 0.0007,
+      "exit_price": 379.7502,
+      "closed_at": "2026-10-06T22:50:57+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 8.41,
+      "lesson": "TSLA long +8.41 (+0.07%) conf=0.92 \u2192 CONFIRMED hypothesis (technical evidence)"
     },
     {
       "trade_id": "ORCL-2026-10-06T18:44:42+00:00",
@@ -464,13 +469,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": -31.43,
+      "pnl_pct": -0.0028,
+      "exit_price": 145.12,
+      "closed_at": "2026-10-06T22:50:57+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -31.43,
+      "lesson": "ORCL long -31.43 (-0.28%) conf=0.89 \u2192 REFUTED hypothesis (technical evidence)"
     },
     {
       "trade_id": "XOM-2026-10-06T18:44:42+00:00",
@@ -512,13 +522,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": -51.06,
+      "pnl_pct": -0.0045,
+      "exit_price": 164.48,
+      "closed_at": "2026-10-06T22:50:58+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -51.06,
+      "lesson": "XOM long -51.06 (-0.45%) conf=0.87 \u2192 REFUTED hypothesis (technical evidence)"
     },
     {
       "trade_id": "XLU-2026-10-06T18:44:42+00:00",
@@ -569,13 +584,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": 82.31,
+      "pnl_pct": 0.0072,
+      "exit_price": 41.15,
+      "closed_at": "2026-10-06T22:50:58+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 82.31,
+      "lesson": "XLU long +82.31 (+0.72%) conf=0.87 \u2192 CONFIRMED hypothesis (technical evidence)"
     },
     {
       "trade_id": "AVGO-2026-10-06T18:44:42+00:00",
@@ -608,13 +628,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": -45.75,
+      "pnl_pct": -0.004,
+      "exit_price": 377.0,
+      "closed_at": "2026-10-06T22:50:58+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -45.75,
+      "lesson": "AVGO long -45.75 (-0.40%) conf=0.86 \u2192 REFUTED hypothesis (technical evidence)"
     }
   ],
   "score_history": [
@@ -701,10 +726,31 @@
         "win_rate": 1.0
       },
       "improved": false
+    },
+    {
+      "at": "2026-10-06T22:50:58+00:00",
+      "score": 0.6633,
+      "metrics": {
+        "net_pnl": 1465.55,
+        "portfolio_return": 0.013536299999999946,
+        "benchmark_return": 0.022018790826451307,
+        "alpha": -0.008482490826451361,
+        "sharpe": 3.328,
+        "win_rate": 0.6666666666666666,
+        "n_trades": 12,
+        "n_open": 0
+      },
+      "components": {
+        "return": 0.635,
+        "alpha": 0.359,
+        "sharpe": 1.0,
+        "win_rate": 0.889
+      },
+      "improved": false
     }
   ],
   "streaks": {
-    "no_improve": 1,
+    "no_improve": 2,
     "failed_measure": 0
   },
   "thinking_history": [
@@ -723,6 +769,10 @@
     {
       "date": "2026-10-02",
       "change": "No trades closed today; priors unchanged but fresh research was logged. The playbook still lacks outcome evidence for this setup class."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "After 5 graded trades (2 wins), the 'technical' signal family refuted my edge. Composite score 0.663 (did not improve). I will discount 'technical' evidence tomorrow."
     }
   ],
   "discovered_indicators": [
@@ -737,6 +787,10 @@
     {
       "note": "technical: evidence direction agreement favored agreement by 195.87/trade (n=6)",
       "at": "2026-09-28T19:57:00+00:00"
+    },
+    {
+      "note": "technical: evidence direction agreement favored contradiction by 4.71/trade (n=8)",
+      "at": "2026-10-06T22:50:58+00:00"
     }
   ],
   "resume": {
@@ -860,6 +914,14 @@
       "opened": 5,
       "hypotheses": 31,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "close",
+      "at": "2026-10-06T22:50:58+00:00",
+      "closed": 5,
+      "score": 0.6633,
+      "improved": false,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
@@ -876,51 +938,56 @@
     "mode": "alpaca_paper"
   },
   "last_metrics": {
-    "net_pnl": 1503.07,
-    "portfolio_return": 0.01401320000000017,
-    "benchmark_return": 0.009622161789744288,
-    "alpha": 0.004391038210255882,
-    "sharpe": 7.613,
-    "win_rate": 0.8571428571428571,
-    "n_trades": 7,
+    "net_pnl": 1465.55,
+    "portfolio_return": 0.013536299999999946,
+    "benchmark_return": 0.022018790826451307,
+    "alpha": -0.008482490826451361,
+    "sharpe": 3.328,
+    "win_rate": 0.6666666666666666,
+    "n_trades": 12,
     "n_open": 0
   },
   "last_components": {
-    "return": 0.64,
-    "alpha": 0.573,
+    "return": 0.635,
+    "alpha": 0.359,
     "sharpe": 1.0,
-    "win_rate": 1.0
+    "win_rate": 0.889
   },
-  "last_score": 0.746,
+  "last_score": 0.6633,
   "signal_tracker": {
     "technical": {
-      "n": 6,
-      "wins": 5,
-      "decay_n": 4.9205624832,
-      "decay_wins": 3.9205624832000003,
-      "edge_sum": 1065.07,
+      "n": 11,
+      "wins": 7,
+      "decay_n": 7.504532776428231,
+      "decay_wins": 4.220363253228232,
+      "edge_sum": 1027.55,
       "tickers": [
         "USO",
         "XLE",
         "NVDA",
         "AAPL",
         "XLY",
-        "XLC"
+        "XLC",
+        "TSLA",
+        "ORCL",
+        "XOM",
+        "XLU",
+        "AVGO"
       ],
-      "last": "2026-09-28T19:57:00+00:00",
-      "win_rate": 0.833,
-      "decay_win_rate": 0.797,
-      "edge": 177.51,
-      "priority": 0.63
+      "last": "2026-10-06T22:50:58+00:00",
+      "win_rate": 0.636,
+      "decay_win_rate": 0.562,
+      "edge": 93.41,
+      "priority": 0.198
     },
     "_discoveries": [
       {
         "category": "technical",
-        "agree_n": 6,
+        "agree_n": 8,
         "contra_n": 0,
-        "avg_pnl_when_agree": 195.87,
+        "avg_pnl_when_agree": -4.71,
         "avg_pnl_when_contra": 0.0,
-        "relationship": "evidence direction agreement favored agreement by 195.87/trade"
+        "relationship": "evidence direction agreement favored contradiction by 4.71/trade"
       }
     ],
     "sector": {
@@ -940,13 +1007,14 @@
     }
   },
   "lessons": [
-    "Signal tracker now favors: technical, sector (win rate > 55%).",
-    "No trades closed this run (no day trades were open) \u2014 nothing to grade yet."
+    "Winning trades clustered around 'technical' evidence (2 of 2 winners) \u2014 this signal category is earning its prior.",
+    "Losers were dominated by 'technical' (3 of 3) \u2014 reducing prior weight for that category until it demonstrates edge.",
+    "Signal tracker now favors: technical, sector (win rate > 55%)."
   ],
   "last_close": {
-    "at": "2026-10-02T22:10:49+00:00",
-    "closed": 0,
-    "pnl": 1503.07
+    "at": "2026-10-06T22:50:58+00:00",
+    "closed": 5,
+    "pnl": 1465.55
   },
   "peak_equity": 101403.13
 }

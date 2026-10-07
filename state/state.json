@@ -922,6 +922,11 @@
       "score": 0.6633,
       "improved": false,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "preview",
+      "at": "2026-10-07T01:50:18+00:00",
+      "hypotheses": 14
     }
   ],
   "last_open": {

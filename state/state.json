@@ -640,6 +640,189 @@
       "hypothesis_correct": 0,
       "vs_expected": -45.75,
       "lesson": "AVGO long -45.75 (-0.40%) conf=0.86 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "XLU-2026-10-07T19:10:55+00:00",
+      "symbol": "XLU",
+      "side": "long",
+      "qty": 367,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-07T19:10:55+00:00",
+      "entry_price": 41.244998931884766,
+      "order_id": "f26a52cd-7ba2-43f1-923c-d28786c2e3f8",
+      "hypothesis": {
+        "thesis": "Go long XLU today: Sector rotation: XLU (+4.6%), XLE (+3.3%), XLK (+2.7%); XLU technical bullish. Bull vs bear evidence: 0.90 vs 0.00. Playbook prior for 'sector' is 100% win rate over 1 trades.",
+        "falsifiers": [
+          "sector ETF breaks the day's range against the thesis",
+          "XLU gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.856,
+        "dominant_category": "sector",
+        "evidence": [
+          {
+            "category": "sector",
+            "title": "Sector rotation: XLU (+4.6%), XLE (+3.3%), XLK (+2.7%)",
+            "summary": "Relative-strength leaders (5d): XLU (+4.6%), XLE (+3.3%), XLK (+2.7%). Rotation favors these sectors today.",
+            "direction": 1.0,
+            "strength": 0.5,
+            "source": "rotation",
+            "fresh": 1.0
+          },
+          {
+            "category": "technical",
+            "title": "XLU technical bullish",
+            "summary": "XLU: 5d mom +4.6%; above SMA20; below SMA50. close 41.24.",
+            "direction": 1.0,
+            "strength": 0.39999999999999997,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "AMZN-2026-10-07T19:10:55+00:00",
+      "symbol": "AMZN",
+      "side": "long",
+      "qty": 58,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-07T19:10:55+00:00",
+      "entry_price": 259.5849914550781,
+      "order_id": "4c1d2646-c295-4f86-998c-3cfd39a08e65",
+      "hypothesis": {
+        "thesis": "Go long AMZN today: AMZN technical bullish; AMZN daily move +1.3%. Bull vs bear evidence: 1.10 vs 0.00. Playbook prior for 'technical' is 64% win rate over 11 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AMZN gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.848,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AMZN technical bullish",
+            "summary": "AMZN: 5d mom +4.2%; above SMA20; above SMA50. close 259.58.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AMZN daily move +1.3%",
+            "summary": "AMZN +1.29% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.40285170081700555,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "UNG-2026-10-07T19:10:55+00:00",
+      "symbol": "UNG",
+      "side": "long",
+      "qty": 1375,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-07T19:10:55+00:00",
+      "entry_price": 11.024999618530273,
+      "order_id": "b5334093-4dc6-46ef-b2fd-7c1cdec3994e",
+      "hypothesis": {
+        "thesis": "Go long UNG today: UNG daily move +2.7%. Bull vs bear evidence: 0.51 vs 0.00. Playbook prior for 'technical' is 64% win rate over 11 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "UNG gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.847,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "UNG daily move +2.7%",
+            "summary": "UNG +2.65% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.5122903936579413,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "TSLA-2026-10-07T19:10:55+00:00",
+      "symbol": "TSLA",
+      "side": "long",
+      "qty": 39,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-07T19:10:55+00:00",
+      "entry_price": 380.67999267578125,
+      "order_id": "b7e7f7c0-51da-4639-9857-fc6d01fdca46",
+      "hypothesis": {
+        "thesis": "Go long TSLA today: TSLA technical bullish; TSLA daily move +0.5%. Bull vs bear evidence: 1.04 vs 0.00. Playbook prior for 'technical' is 64% win rate over 11 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "TSLA gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.839,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "TSLA technical bullish",
+            "summary": "TSLA: 5d mom +7.9%; above SMA20; above SMA50. close 380.68.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "TSLA daily move +0.5%",
+            "summary": "TSLA +0.51% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.3411899059042042,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
     }
   ],
   "score_history": [
@@ -927,19 +1110,45 @@
       "type": "preview",
       "at": "2026-10-07T01:50:18+00:00",
       "hypotheses": 14
+    },
+    {
+      "type": "open",
+      "at": "2026-10-07T19:10:55+00:00",
+      "opened": 4,
+      "hypotheses": 28,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
-    "at": "2026-10-06T18:44:42+00:00",
+    "at": "2026-10-07T19:10:55+00:00",
     "opened": [
-      "TSLA",
-      "ORCL",
-      "XOM",
       "XLU",
-      "AVGO"
+      "AMZN",
+      "UNG",
+      "TSLA"
     ],
-    "skipped": [],
-    "hypotheses": 31,
+    "skipped": [
+      "XOM: exposure cap (need 15147, have 477)",
+      "PLTR: exposure cap (need 15075, have 477)",
+      "AAPL: exposure cap (need 14826, have 477)",
+      "XLV: exposure cap (need 14554, have 477)",
+      "XLP: exposure cap (need 14276, have 477)",
+      "XLC: exposure cap (need 14270, have 477)",
+      "IWM: exposure cap (need 14173, have 477)",
+      "SLV: exposure cap (need 14009, have 477)",
+      "XLI: exposure cap (need 13622, have 477)",
+      "GOOGL: exposure cap (need 13262, have 477)",
+      "XLB: exposure cap (need 13441, have 477)",
+      "USO: exposure cap (need 13410, have 477)",
+      "MSFT: exposure cap (need 13271, have 477)",
+      "JPM: exposure cap (need 13158, have 477)",
+      "XLF: exposure cap (need 13119, have 477)",
+      "XLE: exposure cap (need 12765, have 477)",
+      "XLK: exposure cap (need 12266, have 477)",
+      "NVDA: exposure cap (need 11361, have 477)",
+      "AMD: exposure cap (need 10895, have 477)"
+    ],
+    "hypotheses": 28,
     "mode": "alpaca_paper"
   },
   "last_metrics": {

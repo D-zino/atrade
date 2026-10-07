@@ -681,13 +681,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": -26.5,
+      "pnl_pct": -0.0018,
+      "exit_price": 41.1728,
+      "closed_at": "2026-10-07T23:35:57+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -26.5,
+      "lesson": "XLU long -26.50 (-0.18%) conf=0.86 \u2192 REFUTED hypothesis (sector evidence)"
     },
     {
       "trade_id": "AMZN-2026-10-07T19:10:55+00:00",
@@ -729,13 +734,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": 50.19,
+      "pnl_pct": 0.0033,
+      "exit_price": 260.4503,
+      "closed_at": "2026-10-07T23:35:57+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 50.19,
+      "lesson": "AMZN long +50.19 (+0.33%) conf=0.85 \u2192 CONFIRMED hypothesis (technical evidence)"
     },
     {
       "trade_id": "UNG-2026-10-07T19:10:55+00:00",
@@ -768,13 +778,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": 275.0,
+      "pnl_pct": 0.0181,
+      "exit_price": 11.225,
+      "closed_at": "2026-10-07T23:35:57+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 1,
+      "vs_expected": 275.0,
+      "lesson": "UNG long +275.00 (+1.81%) conf=0.85 \u2192 CONFIRMED hypothesis (technical evidence)"
     },
     {
       "trade_id": "TSLA-2026-10-07T19:10:55+00:00",
@@ -816,13 +831,18 @@
         ]
       },
       "hypothesis_id": null,
-      "status": "open",
-      "pnl": null,
-      "pnl_pct": null,
-      "exit_price": null,
-      "closed_at": null,
+      "status": "closed",
+      "pnl": -104.52,
+      "pnl_pct": -0.007,
+      "exit_price": 378.0,
+      "closed_at": "2026-10-07T23:35:57+00:00",
       "stop_hit": false,
-      "notes": []
+      "notes": [
+        "closed at scheduled close run"
+      ],
+      "hypothesis_correct": 0,
+      "vs_expected": -104.52,
+      "lesson": "TSLA long -104.52 (-0.70%) conf=0.84 \u2192 REFUTED hypothesis (technical evidence)"
     }
   ],
   "score_history": [
@@ -930,10 +950,31 @@
         "win_rate": 0.889
       },
       "improved": false
+    },
+    {
+      "at": "2026-10-07T23:35:57+00:00",
+      "score": 0.6745,
+      "metrics": {
+        "net_pnl": 1659.72,
+        "portfolio_return": 0.014388999999999985,
+        "benchmark_return": 0.019565630778555443,
+        "alpha": -0.005176630778555458,
+        "sharpe": 2.493,
+        "win_rate": 0.625,
+        "n_trades": 16,
+        "n_open": 0
+      },
+      "components": {
+        "return": 0.644,
+        "alpha": 0.414,
+        "sharpe": 1.0,
+        "win_rate": 0.833
+      },
+      "improved": false
     }
   ],
   "streaks": {
-    "no_improve": 2,
+    "no_improve": 3,
     "failed_measure": 0
   },
   "thinking_history": [
@@ -956,6 +997,10 @@
     {
       "date": "2026-10-06",
       "change": "After 5 graded trades (2 wins), the 'technical' signal family refuted my edge. Composite score 0.663 (did not improve). I will discount 'technical' evidence tomorrow."
+    },
+    {
+      "date": "2026-10-07",
+      "change": "After 4 graded trades (2 wins), the 'technical' signal family refuted my edge. Composite score 0.674 (did not improve). I will discount 'technical' evidence tomorrow."
     }
   ],
   "discovered_indicators": [
@@ -974,6 +1019,10 @@
     {
       "note": "technical: evidence direction agreement favored contradiction by 4.71/trade (n=8)",
       "at": "2026-10-06T22:50:58+00:00"
+    },
+    {
+      "note": "technical: evidence direction agreement favored agreement by 23.31/trade (n=6)",
+      "at": "2026-10-07T23:35:57+00:00"
     }
   ],
   "resume": {
@@ -1117,6 +1166,14 @@
       "opened": 4,
       "hypotheses": 28,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "close",
+      "at": "2026-10-07T23:35:57+00:00",
+      "closed": 4,
+      "score": 0.6745,
+      "improved": false,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
@@ -1152,29 +1209,29 @@
     "mode": "alpaca_paper"
   },
   "last_metrics": {
-    "net_pnl": 1465.55,
-    "portfolio_return": 0.013536299999999946,
-    "benchmark_return": 0.022018790826451307,
-    "alpha": -0.008482490826451361,
-    "sharpe": 3.328,
-    "win_rate": 0.6666666666666666,
-    "n_trades": 12,
+    "net_pnl": 1659.72,
+    "portfolio_return": 0.014388999999999985,
+    "benchmark_return": 0.019565630778555443,
+    "alpha": -0.005176630778555458,
+    "sharpe": 2.493,
+    "win_rate": 0.625,
+    "n_trades": 16,
     "n_open": 0
   },
   "last_components": {
-    "return": 0.635,
-    "alpha": 0.359,
+    "return": 0.644,
+    "alpha": 0.414,
     "sharpe": 1.0,
-    "win_rate": 0.889
+    "win_rate": 0.833
   },
-  "last_score": 0.6633,
+  "last_score": 0.6745,
   "signal_tracker": {
     "technical": {
-      "n": 11,
-      "wins": 7,
-      "decay_n": 7.504532776428231,
-      "decay_wins": 4.220363253228232,
-      "edge_sum": 1027.55,
+      "n": 14,
+      "wins": 9,
+      "decay_n": 8.610089618611347,
+      "decay_wins": 5.0527462209297855,
+      "edge_sum": 1248.22,
       "tickers": [
         "USO",
         "XLE",
@@ -1186,49 +1243,53 @@
         "ORCL",
         "XOM",
         "XLU",
-        "AVGO"
+        "AVGO",
+        "AMZN",
+        "UNG"
       ],
-      "last": "2026-10-06T22:50:58+00:00",
-      "win_rate": 0.636,
-      "decay_win_rate": 0.562,
-      "edge": 93.41,
-      "priority": 0.198
+      "last": "2026-10-07T23:35:57+00:00",
+      "win_rate": 0.643,
+      "decay_win_rate": 0.587,
+      "edge": 89.16,
+      "priority": 0.23
     },
     "_discoveries": [
       {
         "category": "technical",
-        "agree_n": 8,
+        "agree_n": 6,
         "contra_n": 0,
-        "avg_pnl_when_agree": -4.71,
+        "avg_pnl_when_agree": 23.31,
         "avg_pnl_when_contra": 0.0,
-        "relationship": "evidence direction agreement favored contradiction by 4.71/trade"
+        "relationship": "evidence direction agreement favored agreement by 23.31/trade"
       }
     ],
     "sector": {
-      "n": 1,
+      "n": 2,
       "wins": 1,
-      "decay_n": 1.0,
-      "decay_wins": 1.0,
-      "edge_sum": 438.0,
+      "decay_n": 1.92,
+      "decay_wins": 0.92,
+      "edge_sum": 411.5,
       "tickers": [
-        "XLK"
+        "XLK",
+        "XLU"
       ],
-      "last": "2026-09-28T19:57:00+00:00",
-      "win_rate": 1.0,
-      "decay_win_rate": 1.0,
-      "edge": 438.0,
-      "priority": 1.0
+      "last": "2026-10-07T23:35:57+00:00",
+      "win_rate": 0.5,
+      "decay_win_rate": 0.479,
+      "edge": 205.75,
+      "priority": -0.021
     }
   },
   "lessons": [
     "Winning trades clustered around 'technical' evidence (2 of 2 winners) \u2014 this signal category is earning its prior.",
-    "Losers were dominated by 'technical' (3 of 3) \u2014 reducing prior weight for that category until it demonstrates edge.",
-    "Signal tracker now favors: technical, sector (win rate > 55%)."
+    "Losers were dominated by 'sector' (1 of 2) \u2014 reducing prior weight for that category until it demonstrates edge.",
+    "UNG: long move of +1.81% (vindicated) a 85%-confidence thesis. Falsifier used: price breaks key intraday level (SMA20 / day range) against thesis",
+    "Signal tracker now favors: technical (win rate > 55%)."
   ],
   "last_close": {
-    "at": "2026-10-06T22:50:58+00:00",
-    "closed": 5,
-    "pnl": 1465.55
+    "at": "2026-10-07T23:35:57+00:00",
+    "closed": 4,
+    "pnl": 1659.72
   },
-  "peak_equity": 101403.13
+  "peak_equity": 101438.9
 }

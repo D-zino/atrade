@@ -843,6 +843,216 @@
       "hypothesis_correct": 0,
       "vs_expected": -104.52,
       "lesson": "TSLA long -104.52 (-0.70%) conf=0.84 \u2192 REFUTED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "CVX-2026-10-08T19:07:02+00:00",
+      "symbol": "CVX",
+      "side": "long",
+      "qty": 71,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-08T19:07:02+00:00",
+      "entry_price": 212.06500244140625,
+      "order_id": "cbf792cc-ed47-4b2f-b482-18f399dc4150",
+      "hypothesis": {
+        "thesis": "Go long CVX today: CVX technical bullish; CVX daily move +3.4%. Bull vs bear evidence: 1.27 vs 0.00. Playbook prior for 'technical' is 64% win rate over 14 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "CVX gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.887,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "CVX technical bullish",
+            "summary": "CVX: 5d mom +2.4%; above SMA20; above SMA50. close 212.07.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "CVX daily move +3.4%",
+            "summary": "CVX +3.37% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.5696566902521518,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLE-2026-10-08T19:07:02+00:00",
+      "symbol": "XLE",
+      "side": "long",
+      "qty": 232,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-08T19:07:02+00:00",
+      "entry_price": 65.31999969482422,
+      "order_id": "8dac674c-669f-4386-bc81-a0600808941d",
+      "hypothesis": {
+        "thesis": "Go long XLE today: WTI crude +3.5%; Sector rotation: XLE (+4.2%), XLP (+4.0%), XLU (+3.3%); XLE technical bullish. Bull vs bear evidence: 2.48 vs 0.00. Playbook prior for 'technical' is 64% win rate over 14 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XLE gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.882,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "commodities",
+            "title": "WTI crude +3.5%",
+            "summary": "WTI +3.51% to $91.38. Supply risk / demand strength.",
+            "direction": 1.0,
+            "strength": 0.7309241972801743,
+            "source": "yahoo",
+            "fresh": 1.0
+          },
+          {
+            "category": "technical",
+            "title": "XLE technical bullish",
+            "summary": "XLE: 5d mom +4.2%; above SMA20; above SMA50. close 65.32.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "XLE daily move +3.1%",
+            "summary": "XLE +3.09% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.5474746294939188,
+            "source": "bars",
+            "fresh": 0.7
+          },
+          {
+            "category": "sector",
+            "title": "Sector rotation: XLE (+4.2%), XLP (+4.0%), XLU (+3.3%)",
+            "summary": "Relative-strength leaders (5d): XLE (+4.2%), XLP (+4.0%), XLU (+3.3%). Rotation favors these sectors today.",
+            "direction": 1.0,
+            "strength": 0.5,
+            "source": "rotation",
+            "fresh": 1.0
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "XLP-2026-10-08T19:07:02+00:00",
+      "symbol": "XLP",
+      "side": "long",
+      "qty": 181,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-08T19:07:02+00:00",
+      "entry_price": 83.54499816894531,
+      "order_id": "b3734647-af7b-4521-8382-ddc9bab83e1e",
+      "hypothesis": {
+        "thesis": "Go long XLP today: Sector rotation: XLE (+4.2%), XLP (+4.0%), XLU (+3.3%); XLP technical bullish; XLP daily move +2.3%. Bull vs bear evidence: 1.38 vs 0.00. Playbook prior for 'technical' is 64% win rate over 14 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XLP gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.854,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "sector",
+            "title": "Sector rotation: XLE (+4.2%), XLP (+4.0%), XLU (+3.3%)",
+            "summary": "Relative-strength leaders (5d): XLE (+4.2%), XLP (+4.0%), XLU (+3.3%). Rotation favors these sectors today.",
+            "direction": 1.0,
+            "strength": 0.5,
+            "source": "rotation",
+            "fresh": 1.0
+          },
+          {
+            "category": "technical",
+            "title": "XLP daily move +2.3%",
+            "summary": "XLP +2.26% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.48066108099092836,
+            "source": "bars",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "XLP technical bullish",
+            "summary": "XLP: 5d mom +4.0%; above SMA20; below SMA50. close 83.54.",
+            "direction": 1.0,
+            "strength": 0.39999999999999997,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "DIS-2026-10-08T19:07:02+00:00",
+      "symbol": "DIS",
+      "side": "long",
+      "qty": 141,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-08T19:07:02+00:00",
+      "entry_price": 106.93000030517578,
+      "order_id": "330f3050-caa6-441e-ad75-8a3a9e3c0e21",
+      "hypothesis": {
+        "thesis": "Go long DIS today: DIS daily move +2.1%. Bull vs bear evidence: 0.47 vs 0.00. Playbook prior for 'technical' is 64% win rate over 14 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "DIS gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.826,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "DIS daily move +2.1%",
+            "summary": "DIS +2.08% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.4664916700850245,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
     }
   ],
   "score_history": [
@@ -1174,38 +1384,43 @@
       "score": 0.6745,
       "improved": false,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "open",
+      "at": "2026-10-08T19:07:02+00:00",
+      "opened": 4,
+      "hypotheses": 31,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
-    "at": "2026-10-07T19:10:55+00:00",
+    "at": "2026-10-08T19:07:02+00:00",
     "opened": [
-      "XLU",
-      "AMZN",
-      "UNG",
-      "TSLA"
+      "CVX",
+      "XLE",
+      "XLP",
+      "DIS"
     ],
     "skipped": [
-      "XOM: exposure cap (need 15147, have 477)",
-      "PLTR: exposure cap (need 15075, have 477)",
-      "AAPL: exposure cap (need 14826, have 477)",
-      "XLV: exposure cap (need 14554, have 477)",
-      "XLP: exposure cap (need 14276, have 477)",
-      "XLC: exposure cap (need 14270, have 477)",
-      "IWM: exposure cap (need 14173, have 477)",
-      "SLV: exposure cap (need 14009, have 477)",
-      "XLI: exposure cap (need 13622, have 477)",
-      "GOOGL: exposure cap (need 13262, have 477)",
-      "XLB: exposure cap (need 13441, have 477)",
-      "USO: exposure cap (need 13410, have 477)",
-      "MSFT: exposure cap (need 13271, have 477)",
-      "JPM: exposure cap (need 13158, have 477)",
-      "XLF: exposure cap (need 13119, have 477)",
-      "XLE: exposure cap (need 12765, have 477)",
-      "XLK: exposure cap (need 12266, have 477)",
-      "NVDA: exposure cap (need 11361, have 477)",
-      "AMD: exposure cap (need 10895, have 477)"
+      "XOM: cluster 'energy' already at 2 positions",
+      "PLTR: exposure cap (need 14980, have 266)",
+      "AAPL: exposure cap (need 14993, have 266)",
+      "WMT: exposure cap (need 15097, have 266)",
+      "USO: cluster 'energy' already at 2 positions",
+      "NFLX: exposure cap (need 15153, have 266)",
+      "IWM: exposure cap (need 14955, have 266)",
+      "ORCL: exposure cap (need 14850, have 266)",
+      "XLI: exposure cap (need 14289, have 266)",
+      "SLV: exposure cap (need 13775, have 266)",
+      "META: exposure cap (need 12953, have 266)",
+      "XLV: exposure cap (need 13258, have 266)",
+      "XLU: exposure cap (need 11435, have 266)",
+      "GOOGL: exposure cap (need 10794, have 266)",
+      "TSLA: exposure cap (need 9670, have 266)",
+      "NVDA: exposure cap (need 9446, have 266)",
+      "AMD: exposure cap (need 9229, have 266)"
     ],
-    "hypotheses": 28,
+    "hypotheses": 31,
     "mode": "alpaca_paper"
   },
   "last_metrics": {

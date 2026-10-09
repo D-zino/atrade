@@ -1073,6 +1073,171 @@
       "hypothesis_correct": 1,
       "vs_expected": 15.51,
       "lesson": "DIS long +15.51 (+0.10%) conf=0.83 \u2192 CONFIRMED hypothesis (technical evidence)"
+    },
+    {
+      "trade_id": "XOM-2026-10-09T18:37:33+00:00",
+      "symbol": "XOM",
+      "side": "long",
+      "qty": 89,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-09T18:37:33+00:00",
+      "entry_price": 168.97999572753906,
+      "order_id": "d765b1e8-3bf4-4d89-ad57-a092ac90bf08",
+      "hypothesis": {
+        "thesis": "Go long XOM today: XOM technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 61% win rate over 18 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "XOM gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.872,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "XOM technical bullish",
+            "summary": "XOM: 5d mom +3.0%; above SMA20; above SMA50. close 168.98.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "CVX-2026-10-09T18:37:33+00:00",
+      "symbol": "CVX",
+      "side": "long",
+      "qty": 71,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-09T18:37:33+00:00",
+      "entry_price": 212.3000030517578,
+      "order_id": "8dc42ddd-adaa-4a9b-837d-f4c6c23f74f4",
+      "hypothesis": {
+        "thesis": "Go long CVX today: CVX technical bullish. Bull vs bear evidence: 0.70 vs 0.00. Playbook prior for 'technical' is 61% win rate over 18 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "CVX gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.872,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "CVX technical bullish",
+            "summary": "CVX: 5d mom +2.7%; above SMA20; above SMA50. close 212.30.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "AMZN-2026-10-09T18:37:33+00:00",
+      "symbol": "AMZN",
+      "side": "long",
+      "qty": 58,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-09T18:37:33+00:00",
+      "entry_price": 260.94500732421875,
+      "order_id": "9a675652-fa34-49e8-819d-3ceacad2b05f",
+      "hypothesis": {
+        "thesis": "Go long AMZN today: AMZN technical bullish; AMZN daily move +2.7%. Bull vs bear evidence: 1.22 vs 0.00. Playbook prior for 'technical' is 61% win rate over 18 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "AMZN gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.864,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "AMZN technical bullish",
+            "summary": "AMZN: 5d mom +3.7%; above SMA20; above SMA50. close 260.95.",
+            "direction": 1.0,
+            "strength": 0.7,
+            "source": "technical",
+            "fresh": 0.7
+          },
+          {
+            "category": "technical",
+            "title": "AMZN daily move +2.7%",
+            "summary": "AMZN +2.71% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.5167994908852063,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
+    },
+    {
+      "trade_id": "PDD-2026-10-09T18:37:33+00:00",
+      "symbol": "PDD",
+      "side": "long",
+      "qty": 186,
+      "warmup_factor": 1.0,
+      "opened_at": "2026-10-09T18:37:33+00:00",
+      "entry_price": 81.16999816894531,
+      "order_id": "ae3f74fe-61aa-4123-98ef-22342727def9",
+      "hypothesis": {
+        "thesis": "Go long PDD today: PDD daily move +3.7%. Bull vs bear evidence: 0.60 vs 0.00. Playbook prior for 'technical' is 61% win rate over 18 trades.",
+        "falsifiers": [
+          "price breaks key intraday level (SMA20 / day range) against thesis",
+          "PDD gaps/breaks against the thesis (more than ~0.8% adverse move)",
+          "a stronger opposing catalyst (Fed/macro/earnings) prints during the day"
+        ],
+        "confidence": 0.861,
+        "dominant_category": "technical",
+        "evidence": [
+          {
+            "category": "technical",
+            "title": "PDD daily move +3.7%",
+            "summary": "PDD +3.72% intraday/most-recent session",
+            "direction": 1.0,
+            "strength": 0.5974695582194631,
+            "source": "bars",
+            "fresh": 0.7
+          }
+        ]
+      },
+      "hypothesis_id": null,
+      "status": "open",
+      "pnl": null,
+      "pnl_pct": null,
+      "exit_price": null,
+      "closed_at": null,
+      "stop_hit": false,
+      "notes": []
     }
   ],
   "score_history": [
@@ -1452,36 +1617,44 @@
       "score": 0.6481,
       "improved": false,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "open",
+      "at": "2026-10-09T18:37:33+00:00",
+      "opened": 4,
+      "hypotheses": 33,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
-    "at": "2026-10-08T19:07:02+00:00",
+    "at": "2026-10-09T18:37:33+00:00",
     "opened": [
+      "XOM",
       "CVX",
-      "XLE",
-      "XLP",
-      "DIS"
+      "AMZN",
+      "PDD"
     ],
     "skipped": [
-      "XOM: cluster 'energy' already at 2 positions",
-      "PLTR: exposure cap (need 14980, have 266)",
-      "AAPL: exposure cap (need 14993, have 266)",
-      "WMT: exposure cap (need 15097, have 266)",
-      "USO: cluster 'energy' already at 2 positions",
-      "NFLX: exposure cap (need 15153, have 266)",
-      "IWM: exposure cap (need 14955, have 266)",
-      "ORCL: exposure cap (need 14850, have 266)",
-      "XLI: exposure cap (need 14289, have 266)",
-      "SLV: exposure cap (need 13775, have 266)",
-      "META: exposure cap (need 12953, have 266)",
-      "XLV: exposure cap (need 13258, have 266)",
-      "XLU: exposure cap (need 11435, have 266)",
-      "GOOGL: exposure cap (need 10794, have 266)",
-      "TSLA: exposure cap (need 9670, have 266)",
-      "NVDA: exposure cap (need 9446, have 266)",
-      "AMD: exposure cap (need 9229, have 266)"
+      "TSLA: exposure cap (need 14973, have 231)",
+      "XLV: exposure cap (need 15044, have 231)",
+      "XLU: exposure cap (need 15109, have 231)",
+      "XLP: exposure cap (need 15111, have 231)",
+      "SNOW: exposure cap (need 15028, have 231)",
+      "V: exposure cap (need 15024, have 231)",
+      "GOOGL: exposure cap (need 14756, have 231)",
+      "XLY: exposure cap (need 15002, have 231)",
+      "MA: exposure cap (need 14700, have 231)",
+      "NVDA: exposure cap (need 13550, have 231)",
+      "MSFT: exposure cap (need 13367, have 231)",
+      "XLC: exposure cap (need 13363, have 231)",
+      "XLK: exposure cap (need 12924, have 231)",
+      "PLTR: exposure cap (need 12590, have 231)",
+      "TLT: exposure cap (need 12222, have 231)",
+      "SHOP: exposure cap (need 11969, have 231)",
+      "XLE: cluster 'energy' already at 2 positions",
+      "SPY: exposure cap (need 9343, have 231)"
     ],
-    "hypotheses": 31,
+    "hypotheses": 33,
     "mode": "alpaca_paper"
   },
   "last_metrics": {

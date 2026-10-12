@@ -1,6 +1,6 @@
 # 📘 A-Trade Playbook — living trading rules & signal tracker
 
-*Last updated: 2026-10-09T22:54:07+00:00*
+*Last updated: 2026-10-12T21:31:10+00:00*
 
 This file is rewritten after every close run by the self-improvement loop. It is **not** a fixed rulebook — rules here are provisional hypotheses about what the market rewards, updated from evidence.
 
@@ -31,9 +31,8 @@ This file is rewritten after every close run by the self-improvement loop. It is
 
 ## Lessons learned this run
 
-- Winning trades clustered around 'technical' evidence (2 of 2 winners) — this signal category is earning its prior.
-- Losers were dominated by 'technical' (2 of 2) — reducing prior weight for that category until it demonstrates edge.
 - Signal tracker now favors: technical (win rate > 55%).
+- No trades closed this run (no day trades were open) — nothing to grade yet.
 
 ## Per-symbol record (dynamic-universe learning)
 

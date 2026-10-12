@@ -1428,10 +1428,31 @@
         "win_rate": 0.778
       },
       "improved": false
+    },
+    {
+      "at": "2026-10-12T21:31:10+00:00",
+      "score": 0.6186,
+      "metrics": {
+        "net_pnl": 1694.37,
+        "portfolio_return": 0.014320700000000075,
+        "benchmark_return": 0.020720030777594545,
+        "alpha": -0.00639933077759447,
+        "sharpe": 1.588,
+        "win_rate": 0.5833333333333334,
+        "n_trades": 24,
+        "n_open": 0
+      },
+      "components": {
+        "return": 0.643,
+        "alpha": 0.393,
+        "sharpe": 0.794,
+        "win_rate": 0.778
+      },
+      "improved": false
     }
   ],
   "streaks": {
-    "no_improve": 5,
+    "no_improve": 6,
     "failed_measure": 0
   },
   "thinking_history": [
@@ -1466,6 +1487,10 @@
     {
       "date": "2026-10-09",
       "change": "After 4 graded trades (2 wins), the 'technical' signal family refuted my edge. Composite score 0.583 (did not improve). I will discount 'technical' evidence tomorrow."
+    },
+    {
+      "date": "2026-10-12",
+      "change": "No trades closed today; priors unchanged but fresh research was logged. The playbook still lacks outcome evidence for this setup class."
     }
   ],
   "discovered_indicators": [
@@ -1503,9 +1528,9 @@
     }
   ],
   "resume": {
-    "paused": false,
-    "reason": null,
-    "resumed_at": null
+    "paused": true,
+    "reason": "no_improve_streak=6 | failed_measure=0",
+    "paused_at": "2026-10-12T21:31:10+00:00"
   },
   "runs": [
     {
@@ -1692,6 +1717,14 @@
       "at": "2026-10-11T21:14:16+00:00",
       "hypotheses": 18,
       "week_start": "2026-10-12"
+    },
+    {
+      "type": "close",
+      "at": "2026-10-12T21:31:10+00:00",
+      "closed": 0,
+      "score": 0.6186,
+      "improved": false,
+      "mode": "alpaca_paper"
     }
   ],
   "last_open": {
@@ -1727,21 +1760,21 @@
   },
   "last_metrics": {
     "net_pnl": 1694.37,
-    "portfolio_return": 0.010434999999999972,
-    "benchmark_return": 0.02133662353613275,
-    "alpha": -0.010901623536132776,
+    "portfolio_return": 0.014320700000000075,
+    "benchmark_return": 0.020720030777594545,
+    "alpha": -0.00639933077759447,
     "sharpe": 1.588,
     "win_rate": 0.5833333333333334,
     "n_trades": 24,
     "n_open": 0
   },
   "last_components": {
-    "return": 0.604,
-    "alpha": 0.318,
+    "return": 0.643,
+    "alpha": 0.393,
     "sharpe": 0.794,
     "win_rate": 0.778
   },
-  "last_score": 0.5825,
+  "last_score": 0.6186,
   "signal_tracker": {
     "technical": {
       "n": 22,
@@ -1802,13 +1835,12 @@
     }
   },
   "lessons": [
-    "Winning trades clustered around 'technical' evidence (2 of 2 winners) \u2014 this signal category is earning its prior.",
-    "Losers were dominated by 'technical' (2 of 2) \u2014 reducing prior weight for that category until it demonstrates edge.",
-    "Signal tracker now favors: technical (win rate > 55%)."
+    "Signal tracker now favors: technical (win rate > 55%).",
+    "No trades closed this run (no day trades were open) \u2014 nothing to grade yet."
   ],
   "last_close": {
-    "at": "2026-10-09T22:54:07+00:00",
-    "closed": 4,
+    "at": "2026-10-12T21:31:10+00:00",
+    "closed": 0,
     "pnl": 1694.37
   },
   "peak_equity": 101438.9

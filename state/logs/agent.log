@@ -362,3 +362,4 @@
 [2026-10-12T21:31:09Z] [WARN] bars fetch failed for chunk ['SPY', 'QQQ', 'IWM', 'AAPL', 'MSFT', 'NVDA', 'TSLA', 'AMD', 'META', 'AMZN', 'GOOGL', 'JPM', 'XOM', 'CVX', 'GLD', 'SLV', 'USO', 'TLT', 'XLE', 'XLF']
 [2026-10-12T21:31:09Z] [WARN] bars fetch failed for chunk ['XLK', 'XLY', 'XLV', 'XLI', 'XLB', 'XLU', 'XLP', 'XLC', 'PLTR', 'ORCL']
 [2026-10-12T21:31:11Z] [INFO] CLOSE RUN done: 0 closed, score 0.6186, improved=False. Report: close_2026-10-12.md
+[2026-10-13T19:39:29Z] [WARN] PAUSED — skipping open run (see state.json resume).

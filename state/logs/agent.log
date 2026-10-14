@@ -364,3 +364,4 @@
 [2026-10-12T21:31:11Z] [INFO] CLOSE RUN done: 0 closed, score 0.6186, improved=False. Report: close_2026-10-12.md
 [2026-10-13T19:39:29Z] [WARN] PAUSED — skipping open run (see state.json resume).
 [2026-10-14T17:41:09Z] [WARN] PAUSED — skipping open run (see state.json resume).
+[2026-10-14T20:58:31Z] [WARN] PAUSED — skipping close run.

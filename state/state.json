@@ -1725,6 +1725,12 @@
       "score": 0.6186,
       "improved": false,
       "mode": "alpaca_paper"
+    },
+    {
+      "type": "week_ahead",
+      "at": "2026-10-18T21:00:49+00:00",
+      "hypotheses": 15,
+      "week_start": "2026-10-19"
     }
   ],
   "last_open": {

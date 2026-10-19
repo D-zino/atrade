@@ -371,3 +371,4 @@
 [2026-10-16T19:54:14Z] [WARN] PAUSED — skipping close run.
 [2026-10-18T21:00:49Z] [WARN] Telegram not configured (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing) — skipping notification
 [2026-10-18T21:00:49Z] [INFO] WEEK-AHEAD done: 15 hypotheses for week of 2026-10-19
+[2026-10-19T18:54:10Z] [WARN] PAUSED — skipping open run (see state.json resume).

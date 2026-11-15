@@ -1743,6 +1743,12 @@
       "at": "2026-11-01T22:03:55+00:00",
       "hypotheses": 15,
       "week_start": "2026-11-02"
+    },
+    {
+      "type": "week_ahead",
+      "at": "2026-11-15T23:23:27+00:00",
+      "hypotheses": 15,
+      "week_start": "2026-11-16"
     }
   ],
   "last_open": {
